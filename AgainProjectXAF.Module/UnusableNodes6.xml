@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="PurchaseInvoice_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="PurchaseInvoiceItems_Group">
+            <LayoutItem Id="@92ce7ec6-9e4d-4665-8041-359d94ccd79e" ViewItem="@92ce7ec6-9e4d-4665-8041-359d94ccd79e" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

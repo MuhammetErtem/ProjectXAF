@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="PurchaseInvoice_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalAmount1" Caption="Toplam Tutar" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="PurchaseInvoice">
+              <LayoutItem Id="TotalAmount1" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="PurchaseInvoiceItems_Group">
+            <LayoutGroup Id="Auto75aae098-ba3f-4cb6-9bda-f47ef6357793">
+              <LayoutItem Id="TotalAmount1" ViewItem="TotalAmount1" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

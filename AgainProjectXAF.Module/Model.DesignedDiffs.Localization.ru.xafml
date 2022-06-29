@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Brand" Caption="марка" />
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Product" Caption="Товар" />
+  </BOModel>
+</Application>

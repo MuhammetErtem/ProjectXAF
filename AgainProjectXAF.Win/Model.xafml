@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <NavigationItems>
+    <Items>
+      <Item Id="Default">
+        <Items>
+          <Item Id="ApplicationUser_ListView" Index="-1" Visible="False" />
+          <Item Id="MyDetails" Index="-1" Visible="False" />
+          <Item Id="PermissionPolicyRole_ListView" Index="-1" Visible="False" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="21.1.4.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="21.1.4.0" IsNewNode="True" />
+    <SchemaModule Name="SystemWindowsFormsModule" Version="21.1.4.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="Product_DetailView">
+      <Items>
+        <PropertyEditor Id="Image" ImageSizeMode="Zoom" ImageEditorFixedHeight="100" />
+      </Items>
+    </DetailView>
+    <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView" DetailViewID="" />
+  </Views>
+</Application>

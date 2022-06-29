@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="TotalAmount" Index="-1" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PurchaseInvoiceItem_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalAmount" Removed="True" />
+      </Items>
+    </DetailView>
+    <ListView Id="PurchaseInvoiceItem_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="TotalAmount" SortIndex="0" SortOrder="Ascending" Index="-1" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

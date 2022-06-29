@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.PurchaseInvoice">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="TotalAmount" DataSourcePropertyIsNullMode="SelectNothing" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Views Id="Views">
+    <DetailView Id="PurchaseInvoice_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="PurchaseInvoiceItems_Group">
+            <LayoutItem Id="TotalAmount" ViewItem="TotalAmount" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="PurchaseInvoice">
+              <LayoutItem Id="TotalAmount" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

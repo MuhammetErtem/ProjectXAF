@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="FinancialMovement_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="TotalAmount" Width="114" />
+        <ColumnInfo Id="TotalSalesAmount" Width="119" />
+        <ColumnInfo Id="Result" Width="0" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

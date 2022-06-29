@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView">
+      <HiddenActions Id="HiddenActions">
+        <ActionLink ActionId="New" Removed="True" />
+      </HiddenActions>
+    </ListView>
+  </Views>
+</Application>

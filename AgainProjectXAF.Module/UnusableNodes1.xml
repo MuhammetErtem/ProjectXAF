@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="PurchaseInvoice_PurchaseInvoiceItem_ListView" ShowAutoFilterRow="True" />
+  </Views>
+</Application>

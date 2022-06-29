@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="PurchaseInvoice_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="CustomerSupplier.Code" Index="-1" Removed="True" />
+        <PropertyEditor Id="CustomerSupplier.IsApproved" Index="-1" Removed="True" />
+        <PropertyEditor Id="CustomerSupplier.Name" Index="-1" Removed="True" />
+        <PropertyEditor Id="CustomerSupplier.Oid" Index="-1" Removed="True" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="PurchaseInvoice">
+              <LayoutGroup Id="PurchaseInvoice_col1">
+                <LayoutItem Id="Date" Index="1" />
+                <LayoutItem Id="CustomerSupplierNameAndCode" ViewItem="CustomerSupplierNameAndCode" ShowCaption="" Index="2" />
+                <LayoutItem Id="CustomerSupplier" Index="3" ViewItem="CustomerSupplier" />
+                <LayoutItem Id="CustomerSupplier.Code" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="PurchaseInvoice_col2" Removed="True">
+                <LayoutItem Id="CustomerSupplier.Name" Index="-1" />
+                <LayoutItem Id="CustomerSupplierNameAndCode" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

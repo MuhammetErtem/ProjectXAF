@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.CustomerSupplier">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="TotalAmount" DataSourcePropertyIsNullMode="SelectNothing" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Views Id="Views">
+    <DetailView Id="PurchaseInvoice_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="CustomerSupplier.TotalAmount" PropertyName="CustomerSupplier.TotalAmount" />
+      </Items>
+    </DetailView>
+  </Views>
+</Application>

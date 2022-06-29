@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="UnitSet_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="UnitSetDetail" PropertyName="UnitSetDetail" PropertyEditorType="AgainProjectXAF.Module.BusinessObjects.StockManagement.UnitSetDetail" Index="2" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign>
+    <Actions>
+      <Action Id="Cancel" Caption="İptal Et" />
+      <Action Id="CancelAction" Caption="İptal Et" />
+      <Action Id="Delete" Caption="Sil" />
+      <Action Id="DialogClose" Caption="Kapat" />
+      <Action Id="FullTextSearch" NullValuePrompt="Arama..." />
+      <Action Id="ListViewShowObject" Caption="Aç" />
+      <Action Id="NavigateBack" Caption="Geri" />
+      <Action Id="NavigateForward" Caption="İleri" />
+      <Action Id="New" Caption="Yeni" />
+      <Action Id="NextObject" Caption="Sonraki Kayıt" />
+      <Action Id="PreviousObject" Caption="Önceki Kayıt" />
+      <Action Id="Refresh" Caption="Yenile" />
+      <Action Id="RefreshAction" Caption="Yenile" />
+      <Action Id="ReportViewerDialogControllerV2_Close" Caption="Kapat" />
+      <Action Id="ResetViewSettings" Caption="Görünüm Ayarlarını Sıfırla" />
+      <Action Id="Save" Caption="Kaydet" />
+      <Action Id="SaveAndClose" Caption="Kaydet ve Kapat" />
+      <Action Id="SaveAndNew" Caption="Kaydet ve Yenisini Aç" />
+      <Action Id="ShowAllContexts" Caption="Doğrula" />
+    </Actions>
+    <ActionToContainerMapping>
+      <ActionContainer Id="Edit" Caption="Düzenleme" />
+      <ActionContainer Id="FullTextSearch" Caption="Arama" />
+      <ActionContainer Id="RecordsNavigation" Caption="Kayıtlarda Gezinme" />
+      <ActionContainer Id="Save" Caption="Kaydet" />
+      <ActionContainer Id="View" Caption="Görünüm" />
+    </ActionToContainerMapping>
+  </ActionDesign>
+  <BOModel>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.ApplicationUserLoginInfo">
+      <OwnMembers>
+        <Member Name="User" Caption="Kullanıcı" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.CustomerSupplier" Caption="Cari">
+      <OwnMembers>
+        <Member Name="Code" Caption="Kod" />
+        <Member Name="CustomerSupplierNameAndCode" Caption="Cari" />
+        <Member Name="IsApproved" Caption="Onaylandı" />
+        <Member Name="Name" Caption="Ad" />
+        <Member Name="PurchaseInvoices" Caption="Satın Alma Faturası" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.FinancialMovement" Caption="Finansal Hareketler" />
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.PurchaseInvoice" Caption="Satın Alma Faturası">
+      <OwnMembers>
+        <Member Name="CustomerSupplier" Caption="Müşteri/Satıcı" />
+        <Member Name="Date" Caption="Tarih" />
+        <Member Name="DocumentId" Caption="Belge No" />
+        <Member Name="PurchaseInvoiceItems" Caption="Belge Satırları" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.PurchaseInvoiceItem" Caption="Satın Alma Fatura Satırları">
+      <OwnMembers>
+        <Member Name="Amount" Caption="Tutar" />
+        <Member Name="Discount" EditMask="\d{0,5}" />
+        <Member Name="Product" Caption="Malzeme Kodu" />
+        <Member Name="ProductName" Caption="Malzeme Adı" />
+        <Member Name="PurchaseInvoice" Caption="Müşteri/Satıcı" />
+        <Member Name="Quantity" Caption="Miktar" />
+        <Member Name="Tax" Caption="Vergi" />
+        <Member Name="UnitPrice" Caption="Birim Fiyat" />
+        <Member Name="UnitSetDetail" Caption="Birim Fiyat Detay" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.SalesInvoice" Caption="Satış Faturası">
+      <OwnMembers>
+        <Member Name="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <Member Name="Date" Caption="Tarih" />
+        <Member Name="DocumentId" Caption="Belge No" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.SalesInvoiceItem" Caption="Satış Fatura Detayı" />
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Brand" Caption="Marka">
+      <OwnMembers>
+        <Member Name="Code" Caption="Kod" />
+        <Member Name="Name" Caption="Ad" />
+        <Member Name="Products" Caption="Malzemeler" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Product" Caption="Malzeme">
+      <OwnMembers>
+        <Member Name="Brand" Caption="Marka" />
+        <Member Name="Code" Caption="Kod" />
+        <Member Name="Image" Caption="Görsel" />
+        <Member Name="IsApproved" Caption="Onaylandı" />
+        <Member Name="Name" Caption="Ad" />
+        <Member Name="Price" Caption="Fiyat" />
+        <Member Name="PurchaseInvoiceItems" Caption="Satın Alma Fatura Satırları" />
+        <Member Name="TaxRate" Caption="Vergi Oranı" />
+        <Member Name="UnitSet" Caption="Birim Set" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.UnitSet" Caption="Birim Set">
+      <OwnMembers>
+        <Member Name="Code" Caption="Kod" />
+        <Member Name="Name" Caption="Ad" />
+        <Member Name="Products" Caption="Malzemeler" />
+        <Member Name="UnitSetDetails" Caption="Birim Set Detay" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.UnitSetDetail" Caption="Birim Set Detay">
+      <OwnMembers>
+        <Member Name="Code" Caption="Kod" />
+        <Member Name="IsMaınUnit" Caption="Ana Birim" />
+        <Member Name="Name" Caption="Ad" />
+        <Member Name="PurchaseInvoiceItems" Caption="Satın Alma Fatura Satırı" />
+        <Member Name="UnitSet" Caption="Birim Set" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.ExpressApp.Security.ProceedMember">
+      <OwnMembers>
+        <Member Name="Name" Caption="Ad" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.ExpressApp.SystemModule.DashboardCreationInfo">
+      <OwnMembers>
+        <Member Name="DashboardName" Caption="Ad" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.ExpressApp.SystemModule.DashboardName">
+      <OwnMembers>
+        <Member Name="Name" Caption="Ad" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.ExpressApp.SystemModule.ViewDashboardOrganizationItem" Caption="Görünüm">
+      <OwnMembers>
+        <Member Name="ViewDescriptor" Caption="Görünüm" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.Base.SecuredActionDescriptor">
+      <OwnMembers>
+        <Member Name="Category" Caption="Kategori" />
+        <Member Name="Image" Caption="Görsel" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.BaseImpl.HCategory">
+      <OwnMembers>
+        <Member Name="Name" Caption="Ad" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.BaseImpl.ModelDifferenceAspect">
+      <OwnMembers>
+        <Member Name="Name" Caption="Ad" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyActionPermissionObject">
+      <OwnMembers>
+        <Member Name="Category" Caption="Kategori" />
+        <Member Name="Image" Caption="Görsel" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyRoleBase">
+      <OwnMembers>
+        <Member Name="Name" Caption="Ad" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.Validation.IRuleBaseProperties">
+      <OwnMembers>
+        <Member Name="Name" Caption="Ad" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.Validation.RuleBaseProperties">
+      <OwnMembers>
+        <Member Name="Name" Caption="Ad" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Localization>
+    <LocalizationGroup Name="DashboardOrganizationItems">
+      <LocalizationItem Name="StaticImage" Value="Görsel" />
+    </LocalizationGroup>
+    <LocalizationGroup Name="DialogButtons">
+      <LocalizationItem Name="Close" Value="Kapat" />
+    </LocalizationGroup>
+  </Localization>
+  <Validation>
+    <ErrorMessageTemplates>
+      <RuleRequiredField MessageTemplateMustNotBeEmpty="&quot;{TargetPropertyName}&quot; alanı boş olmamalıdır!" />
+    </ErrorMessageTemplates>
+  </Validation>
+  <Views>
+    <ListView Id="DashboardCreationInfo_ListView">
+      <Columns>
+        <ColumnInfo Id="DashboardName" Caption="Ad" />
+      </Columns>
+    </ListView>
+    <ListView Id="FinancialMovement_ListView">
+      <Columns>
+        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri/Satıcı" />
+        <ColumnInfo Id="Product" Caption="Ürün" />
+        <ColumnInfo Id="PurchaseInvoiceDocumentID" Caption="Belge No" />
+        <ColumnInfo Id="SalesInvoiceDocumentID" Caption="Belge No" />
+        <ColumnInfo Id="Date" Caption="Tarih" />
+        <ColumnInfo Id="PurchaseInvoiceAmount" Caption="Tutar" />
+        <ColumnInfo Id="SalesInvoiceAmount" Caption="Tutar" />
+      </Columns>
+    </ListView>
+    <ListView Id="ModelDifference_Aspects_ListView">
+      <Columns>
+        <ColumnInfo Id="DisplayName" Caption="Ad" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Product_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Product">
+              <LayoutGroup Id="Product_col2" Caption="Product_col2" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView">
+      <Columns>
+        <ColumnInfo Id="Discount" DisplayFormat="% {0:N0}" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesInvoice_ListView">
+      <Columns>
+        <ColumnInfo Id="DocumentId" Caption="Belge No" />
+        <ColumnInfo Id="Date" Caption="Tarih" />
+        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesInvoice_SalesInvoiceItems_ListView">
+      <Columns>
+        <ColumnInfo Id="Product" Caption="Malzeme Kodu" />
+        <ColumnInfo Id="ProductName" Caption="Malzeme Adı" />
+        <ColumnInfo Id="Quantity" Caption="Miktar" />
+        <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
+        <ColumnInfo Id="UnitPrice" Caption="Birim Fiyat" />
+        <ColumnInfo Id="Discount" Caption="İndirim" />
+        <ColumnInfo Id="DiscountedPrice" Caption="İndirimli Fiyatı" />
+        <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" />
+        <ColumnInfo Id="Tax" Caption="Vergi" />
+        <ColumnInfo Id="Amount" Caption="Tutar" />
+      </Columns>
+    </ListView>
+    <ListView Id="ViewDashboardOrganizationItem_ListView" Caption="Görünüm" />
+  </Views>
+</Application>

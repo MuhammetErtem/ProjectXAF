@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <NavigationItems>
+    <Items>
+      <Item Id="Default">
+        <Items>
+          <Item Id="Brand_ListView" Index="0" />
+          <Item Id="Product_ListView" Index="1" />
+          <Item Id="UnitSet_ListView" Index="2" />
+          <Item Id="CustomerSupplier_ListView" Index="3" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="21.1.4.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="21.1.4.0" IsNewNode="True" />
+    <SchemaModule Name="SystemWindowsFormsModule" Version="21.1.4.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="PurchaseInvoiceItem_ListView" NewItemRowPosition="Top" AllowEdit="True" MasterDetailMode="ListViewOnly" UseAsyncLoading="False" />
+  </Views>
+</Application>
