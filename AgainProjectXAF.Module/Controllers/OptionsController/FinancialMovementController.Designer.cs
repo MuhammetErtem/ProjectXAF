@@ -53,7 +53,7 @@ namespace AgainProjectXAF.Module.Controllers.OptionsController
             this.popupWindowShowAction1.ConfirmationMessage = null;
             this.popupWindowShowAction1.Id = "bbc7f082-17ec-4141-946c-81a5fbf2fa4a";
             this.popupWindowShowAction1.ToolTip = null;
-            this.popupWindowShowAction1.Execute += new DevExpress.ExpressApp.Actions.PopupWindowShowActionExecuteEventHandler(this.popupWindowShowAction1_Execute);
+            this.popupWindowShowAction1.CustomizePopupWindowParams += new DevExpress.ExpressApp.Actions.CustomizePopupWindowParamsEventHandler(this.popupWindowShowAction1_Execute);
             // 
             // FinancialMovement
             // 

@@ -50,10 +50,14 @@ namespace AgainProjectXAF.Module.Controllers.OptionsController
             //e.ShowViewParameters.CreatedView = xpView;
         }
 
-        private void popupWindowShowAction1_Execute(object sender, PopupWindowShowActionExecuteEventArgs e)
+        private void popupWindowShowAction1_Execute(object sender, CustomizePopupWindowParamsEventArgs e)
         {
             //IObjectSpace objectSpace = Application.CreateObjectSpace(typeof(FinancialMovement));
             //e.ShowViewParameters.CreatedView = Application.CreateListView(objectSpace, typeof(FinancialMovement), true);
+
+            IObjectSpace objectSpace = Application.CreateObjectSpace();
+            e.View = Application.CreateListView(Application.FindListViewId(typeof(PurchaseInvoice)),
+                new CollectionSource(objectSpace, typeof(PurchaseInvoice)), true);
         }
     }
 }
