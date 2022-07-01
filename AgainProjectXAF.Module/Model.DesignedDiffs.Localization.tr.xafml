@@ -192,12 +192,13 @@
     <ListView Id="FinancialMovement_ListView">
       <Columns>
         <ColumnInfo Id="CustomerSupplier" Caption="Müşteri/Satıcı" />
-        <ColumnInfo Id="Product" Caption="Ürün" />
-        <ColumnInfo Id="PurchaseInvoiceDocumentID" Caption="Belge No" />
-        <ColumnInfo Id="SalesInvoiceDocumentID" Caption="Belge No" />
+        <ColumnInfo Id="PurchaseInvoice" Caption="Satın Alma Faturası" />
+        <ColumnInfo Id="SalesInvoice" Caption="Satış Faturası" />
+        <ColumnInfo Id="PurchaseInvoiceDocumentID" Caption="Satın Alma Belge No" />
+        <ColumnInfo Id="SalesInvoiceDocumentID" Caption="Satış Belge No" />
         <ColumnInfo Id="Date" Caption="Tarih" />
-        <ColumnInfo Id="PurchaseInvoiceAmount" Caption="Tutar" />
-        <ColumnInfo Id="SalesInvoiceAmount" Caption="Tutar" />
+        <ColumnInfo Id="PurchaseInvoiceAmount" Caption="Satın Alma Toplam Tutar" />
+        <ColumnInfo Id="SalesInvoiceAmount" Caption="Satış Toplam Tutar" />
       </Columns>
     </ListView>
     <ListView Id="ModelDifference_Aspects_ListView">

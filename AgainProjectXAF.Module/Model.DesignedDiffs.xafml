@@ -3,6 +3,7 @@
   <ActionDesign>
     <Actions>
       <Action Id="New" PaintStyle="CaptionAndImage" ValidationContexts="" SelectionDependencyType="Independent" ImageName="Action_ChooseSkin" />
+      <Action Id="simpleAction1" TargetObjectsCriteriaMode="TrueAtLeastForOne" />
     </Actions>
   </ActionDesign>
   <BOModel>
@@ -82,7 +83,8 @@
     <ListView Id="FinancialMovement_ListView">
       <Columns>
         <ColumnInfo Id="CustomerSupplier" Width="0" Index="0" PropertyName="CustomerSupplier.Name" />
-        <ColumnInfo Id="Product" Width="0" LookupProperty="Code" />
+        <ColumnInfo Id="PurchaseInvoice" Width="0" />
+        <ColumnInfo Id="SalesInvoice" Width="0" />
         <ColumnInfo Id="PurchaseInvoiceDocumentID" Width="0" />
         <ColumnInfo Id="SalesInvoiceDocumentID" Width="0" />
         <ColumnInfo Id="Date" Width="0" />
@@ -167,13 +169,6 @@
               <LayoutItem Id="TotalAmount" RelativeSize="27.272727272727273" Removed="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <LayoutGroup Id="PurchaseInvoiceItems_Group" Direction="Vertical" RelativeSize="83.461538461538467" Caption="Belge Satırları">
-            <LayoutItem Id="PurchaseInvoiceItems" RelativeSize="90.523690773067329" />
-            <LayoutGroup Id="Auto75aae098-ba3f-4cb6-9bda-f47ef6357793" ShowCaption="False" Caption="Auto75aae098-ba3f-4cb6-9bda-f47ef6357793(10)" Direction="Horizontal" Index="1" RelativeSize="9.4763092269326688" IsNewNode="True">
-              <LayoutItem Id="Item1" Index="0" RelativeSize="49.8567335243553" IsNewNode="True" />
-              <LayoutItem Id="TotalAmount" ViewItem="TotalAmount" Index="1" RelativeSize="50.1432664756447" IsNewNode="True" />
-            </LayoutGroup>
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -226,13 +221,6 @@
               <LayoutItem Id="Date" RelativeSize="27.906976744186046" />
               <LayoutItem Id="CustomerSupplier" RelativeSize="34.883720930232556" />
               <LayoutItem Id="TotalAmount" RelativeSize="27.272727272727273" Removed="True" />
-            </LayoutGroup>
-          </LayoutGroup>
-          <LayoutGroup Id="SalesInvoiceItems_Group" Direction="Vertical" RelativeSize="82.555780933062877" Caption="Sales Invoice Items">
-            <LayoutItem Id="SalesInvoiceItems" RelativeSize="91.443850267379673" />
-            <LayoutGroup Id="Auto3b4c801e-699d-4a12-8925-aebb0de373c0" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="8.5561497326203213" IsNewNode="True">
-              <LayoutItem Id="Item1" Index="0" RelativeSize="50" IsNewNode="True" />
-              <LayoutItem Id="TotalAmount" ViewItem="TotalAmount" Index="1" RelativeSize="50" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
         </LayoutGroup>

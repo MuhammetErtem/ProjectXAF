@@ -33,25 +33,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
                 {
                     if (!IsLoading && !IsSaving)
                     {
-                    }
-                }
-            }
-        }
-
-        private Product _Product;
-        [Association("Product-FinancialMovements")]
-        /// <summary>
-        ///
-        /// </summary>
-        public Product Product
-        {
-            get { return _Product; }
-            set
-            {
-                if (SetPropertyValue<Product>(nameof(Product), ref _Product, value))
-                {
-                    if (!IsLoading && !IsSaving)
-                    {
 
                     }
                 }
@@ -73,8 +54,27 @@ namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
                 {
                     if (!IsLoading && !IsSaving)
                     {
-                        PurchaseInvoiceAmount = PurchaseInvoice.TotalAmount;
-                        PurchaseInvoiceDocumentID = PurchaseInvoice.DocumentId;
+                       
+                    }
+                }
+            }
+        }
+        private SalesInvoice _SalesInvoice;
+        [Association("SalesInvoice-FinancialMovements")]
+
+        /// <summary>
+        ///
+        /// </summary>
+        public SalesInvoice SalesInvoice
+        {
+            get { return _SalesInvoice; }
+            set
+            {
+                if (SetPropertyValue<SalesInvoice>(nameof(SalesInvoice), ref _SalesInvoice, value))
+                {
+                    if (!IsLoading && !IsSaving)
+                    {
+                       
                     }
                 }
             }
@@ -185,7 +185,5 @@ namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
                 }
             }
         }
-
     }
-
 }

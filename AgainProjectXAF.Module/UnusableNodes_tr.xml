@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application>
   <Views Id="Views">
-    <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView">
+    <ListView Id="FinancialMovement_ListView">
       <Columns Id="Columns">
-        <ColumnInfo Id="TotalAmount1" SortIndex="0" SortOrder="Ascending" Index="-1" />
+        <ColumnInfo Id="Product" Caption="Ürün" />
       </Columns>
     </ListView>
   </Views>

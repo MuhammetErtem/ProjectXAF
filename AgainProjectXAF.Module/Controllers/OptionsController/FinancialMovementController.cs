@@ -1,6 +1,8 @@
 ﻿using AgainProjectXAF.Module.BusinessObjects.PuchaseManagament;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
+using DevExpress.Persistent.Base;
+using System;
 
 namespace AgainProjectXAF.Module.Controllers.OptionsController
 {
@@ -27,11 +29,31 @@ namespace AgainProjectXAF.Module.Controllers.OptionsController
         {
             IObjectSpace objectSpace = View.ObjectSpace;
             CustomerSupplier customerSupplier = View.CurrentObject as CustomerSupplier;
-            var ıd = customerSupplier.Oid;
+            var id = customerSupplier.Oid;
 
-            IObjectSpace objectSpace1 = Application.CreateObjectSpace(typeof(PurchaseInvoice));
-            e.ShowViewParameters.CreatedView = Application.CreateListView(objectSpace1, typeof(PurchaseInvoice), true);
+            PopupWindowShowAction showDetailViewAction = new PopupWindowShowAction(this, "CustomerSupplier", PredefinedCategory.Edit);
+            showDetailViewAction.SelectionDependencyType = SelectionDependencyType.RequireSingleObject;
+            showDetailViewAction.TargetObjectsCriteria = "FinancialMovement.CustomerSupplier.Oid == id";
+            ////    showDetailViewAction.CustomizePopupWindowParams += showDetailViewAction_CustomizePopupWindowParams;
+            ////}
+            ////void showDetailViewAction_CustomizePopupWindowParams(object sender, CustomizePopupWindowParamsEventArgs e)
+            ////{
+            ////    IObjectSpace newObjectSpace = Application.CreateObjectSpace(View.ObjectTypeInfo.Type);
+            ////    Object objectToShow = newObjectSpace.GetObject(View.CurrentObject);
+            ////    if (objectToShow != null)
+            ////    {
+            ////        DetailView createdView = Application.CreateDetailView(newObjectSpace, objectToShow);
+            ////        createdView.ViewEditMode = ViewEditMode.Edit;
+            ////        e.View = createdView;
+            ////    }
+            ////}
+            //e.ShowViewParameters.CreatedView = xpView;
+        }
 
+        private void popupWindowShowAction1_Execute(object sender, PopupWindowShowActionExecuteEventArgs e)
+        {
+            //IObjectSpace objectSpace = Application.CreateObjectSpace(typeof(FinancialMovement));
+            //e.ShowViewParameters.CreatedView = Application.CreateListView(objectSpace, typeof(FinancialMovement), true);
         }
     }
 }

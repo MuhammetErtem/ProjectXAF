@@ -36,7 +36,24 @@ namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
                 //                                                  //Bunun kodunu tekrardan bakıp düzeltmem gerekiyor.
             }
             Date = DateTime.Now; //Bilgisayarın tarihini alıp yazıyor.
+            
         }
+
+        //protected override void OnSaved()
+        //{
+        //    base.OnSaved();
+
+        //    FinancialMovement fm = new FinancialMovement(Session);
+        //    fm.Date = Date;
+        //    fm.CustomerSupplier = CustomerSupplier;
+        //    fm.PurchaseInvoiceAmount = TotalAmount;
+        //    fm.PurchaseInvoice = this;
+        //    fm.PurchaseInvoiceDocumentID = DocumentId;
+        //    fm.Save();
+
+        //}
+
+
 
         private string _DocumentId;
         [RuleRequiredField("RuleRequiredField for PurchaseInvoice.DocumentId", DefaultContexts.Save)]
@@ -52,7 +69,10 @@ namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
+                        if (!IsSaving)
+                        {
+                            
+                        }
                     }
                 }
             }
@@ -72,8 +92,9 @@ namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
+                        
                     }
+                    
                 }
             }
         }
@@ -123,5 +144,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
         {
             get { return GetCollection<FinancialMovement>("FinancialMovements"); }
         }
+
+        
     }
 }

@@ -113,5 +113,11 @@ namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
         {
             get { return Convert.ToDecimal(EvaluateAlias(nameof(TotalAmount))); }
         }
+
+        [Association("SalesInvoice-FinancialMovements"), DevExpress.ExpressApp.DC.Aggregated]
+        public XPCollection<FinancialMovement> FinancialMovements
+        {
+            get { return GetCollection<FinancialMovement>("FinancialMovements"); }
+        }
     }
 }

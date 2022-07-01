@@ -203,15 +203,5 @@ namespace AgainProjectXAF.Module.BusinessObjects.StockManagement
             }
         }
 
-        /// <summary>
-        ///             COLLECTİON
-        /// </summary>
-        [Association("Product-FinancialMovements"), Aggregated]
-        public XPCollection<FinancialMovement> FinancialMovements
-        {
-            get { return GetCollection<FinancialMovement>(nameof(FinancialMovements)); }
-
-        }
-
     }
 }
