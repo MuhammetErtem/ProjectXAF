@@ -1,12 +1,12 @@
-﻿using AgainProjectXAF.Module.BusinessObjects.StockManagement;
+﻿using AgainProjectXAF.Module.BusinessObjects.SalesManagement;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Xpo;
 using System;
 
-namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
+namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
 {
-    [DefaultClassOptions]
+    //[DefaultClassOptions]
     public class FinancialMovement : BaseObject
     {
         public FinancialMovement(Session session)
@@ -82,44 +82,21 @@ namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
 
 
 
-        //PurchaseInvoice.DocumentId
-        private string _PurchaseInvoiceDocumentID;
+        private string _DocumentID;
 
         /// <summary>
         ///
         /// </summary>
-        public string PurchaseInvoiceDocumentID
+        public string DocumentID
         {
-            get { return _PurchaseInvoiceDocumentID; }
+            get { return _DocumentID; }
             set
             {
-                if (SetPropertyValue<string>(nameof(PurchaseInvoiceDocumentID), ref _PurchaseInvoiceDocumentID, value))
+                if (SetPropertyValue<string>(nameof(DocumentID), ref _DocumentID, value))
                 {
                     if (!IsLoading && !IsSaving)
                     {
                         
-                    }
-                }
-            }
-        }
-
-
-
-        //SalesInvoice.DocumentId
-        private string _SalesInvoiceDocumentID;
-        /// <summary>
-        ///
-        /// </summary>
-        public string SalesInvoiceDocumentID
-        {
-            get { return _SalesInvoiceDocumentID; }
-            set
-            {
-                if (SetPropertyValue<string>(nameof(SalesInvoiceDocumentID), ref _SalesInvoiceDocumentID, value))
-                {
-                    if (!IsLoading && !IsSaving)
-                    {
-
                     }
                 }
             }
@@ -185,5 +162,26 @@ namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
                 }
             }
         }
+
+
+        private string _Invoice;
+        /// <summary>
+        ///
+        /// </summary>
+        public string Invoice
+        {
+            get { return _Invoice; }
+            set
+            {
+                if (SetPropertyValue<string>(nameof(Invoice), ref _Invoice, value))
+                {
+                    if (!IsLoading && !IsSaving)
+                    {
+
+                    }
+                }
+            }
+        }
+
     }
 }

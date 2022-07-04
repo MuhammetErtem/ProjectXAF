@@ -6,12 +6,12 @@ using DevExpress.Xpo;
 using System;
 using System.ComponentModel;
 
-namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
+namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
 {
     //[RuleCombinationOfPropertiesIsUnique("OneIsMainUnit", DefaultContexts.Save, "UnitSet, IsMainUnit", TargetCriteria = "IsMainUnit==True")] 
     //Yanlızca bir tane veri true olabilir yaptık.
 
-    [DefaultClassOptions] // Kaldırdığımızda menüde görünmesini engelliyoruz.
+    //[DefaultClassOptions] // Kaldırdığımızda menüde görünmesini engelliyoruz.
     [ImageName("BO_Contact")]
     public class PurchaseInvoiceItem : BaseObject
     {

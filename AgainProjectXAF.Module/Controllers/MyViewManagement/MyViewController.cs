@@ -1,4 +1,4 @@
-﻿using AgainProjectXAF.Module.BusinessObjects.PuchaseManagament;
+﻿using AgainProjectXAF.Module.BusinessObjects.PurchaseManagament;
 using DevExpress.ExpressApp;
 using DevExpress.Xpo;
 using System.ComponentModel;
@@ -15,15 +15,15 @@ namespace AgainProjectXAF.Module.Controllers.MyViewManagement
         private void ObjectSpace_Committing(object sender, CancelEventArgs e)
         {
             IObjectSpace objectSpace = View.ObjectSpace;
-            PurchaseInvoice purchase = View.CurrentObject as PurchaseInvoice; 
-            FinancialMovement fm = objectSpace.CreateObject<FinancialMovement>();
+            PurchaseInvoice purchaseInvoice = View.CurrentObject as PurchaseInvoice; 
+            FinancialMovement financialMovement = objectSpace.CreateObject<FinancialMovement>();
 
-            fm.Date = purchase.Date;
-            fm.CustomerSupplier = purchase.CustomerSupplier;
-            fm.PurchaseInvoiceAmount = purchase.TotalAmount;
-            fm.PurchaseInvoice = purchase;
-            fm.PurchaseInvoiceDocumentID = purchase.DocumentId;
-            
+            financialMovement.Date = purchaseInvoice.Date;
+            financialMovement.CustomerSupplier = purchaseInvoice.CustomerSupplier;
+            financialMovement.PurchaseInvoiceAmount = purchaseInvoice.TotalAmount;
+            financialMovement.PurchaseInvoice = purchaseInvoice;
+            financialMovement.DocumentID = purchaseInvoice.DocumentId;
+            financialMovement.Invoice = purchaseInvoice.ClassInfo.ClassType.Name;
         }
         protected override void OnDeactivated()
         {

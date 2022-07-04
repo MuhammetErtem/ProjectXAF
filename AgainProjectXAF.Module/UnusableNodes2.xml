@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.FinancialMovement" ImageName="EnableSearch" />
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.PurchaseInvoiceItem" DefaultListViewMasterDetailMode="ListViewOnly" DefaultDetailView="PurchaseInvoiceItem_DetailView">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Discount" EditMaskType="RegEx" EditMask="%\d{0,5}" DisplayFormat="% {0:N0}" />
+        <Member Name="Quantity" DisplayFormat="{0:N0}" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.SalesInvoice">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Date" AllowEdit="False" />
+        <Member Name="DocumentId" AllowEdit="False" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Views Id="Views">
+    <DetailView Id="CustomerSupplier_DetailView_FinMovs" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.CustomerSupplier" AllowEdit="False" AllowDelete="False" AllowNew="False">
+      <Items Id="Items">
+        <PropertyEditor Id="Code" PropertyName="Code" AllowEdit="False" />
+        <PropertyEditor Id="CustomerSupplierNameAndCode" PropertyName="CustomerSupplierNameAndCode" />
+        <PropertyEditor Id="FinancialMovements" PropertyName="FinancialMovements" View="CustomerSupplier_FinancialMovements_ListView" />
+        <PropertyEditor Id="IsApproved" PropertyName="IsApproved" />
+        <PropertyEditor Id="Name" PropertyName="Name" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" />
+        <PropertyEditor Id="PurchaseInvoices" PropertyName="PurchaseInvoices" View="CustomerSupplier_PurchaseInvoices_ListView" />
+        <PropertyEditor Id="SalesInvoices" PropertyName="SalesInvoices" View="CustomerSupplier_SalesInvoices_ListView" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False">
+          <TabbedGroup Id="Tabs" Index="1">
+            <LayoutGroup Id="FinancialMovements" Index="2" ShowCaption="True">
+              <LayoutItem Id="FinancialMovements" ViewItem="FinancialMovements" ShowCaption="False" Index="0" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="FinancialMovement_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PurchaseInvoiceDocumentID" Caption="Satın Alma Belge No" />
+        <ColumnInfo Id="SalesInvoiceDocumentID" Caption="Satış Belge No" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

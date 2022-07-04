@@ -3,23 +3,9 @@
   <ActionDesign>
     <Actions>
       <Action Id="New" PaintStyle="CaptionAndImage" ValidationContexts="" SelectionDependencyType="Independent" ImageName="Action_ChooseSkin" />
-      <Action Id="simpleAction1" TargetObjectsCriteriaMode="TrueAtLeastForOne" />
     </Actions>
   </ActionDesign>
   <BOModel>
-    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.FinancialMovement" ImageName="EnableSearch" />
-    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.PurchaseInvoiceItem" DefaultListViewMasterDetailMode="ListViewOnly" DefaultDetailView="PurchaseInvoiceItem_DetailView">
-      <OwnMembers>
-        <Member Name="Discount" EditMaskType="RegEx" EditMask="%\d{0,5}" DisplayFormat="% {0:N0}" />
-        <Member Name="Quantity" DisplayFormat="{0:N0}" />
-      </OwnMembers>
-    </Class>
-    <Class Name="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.SalesInvoice">
-      <OwnMembers>
-        <Member Name="Date" AllowEdit="False" />
-        <Member Name="DocumentId" AllowEdit="False" />
-      </OwnMembers>
-    </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Brand" IsVisibleInReports="True" />
     <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Product">
       <OwnMembers>
@@ -55,9 +41,37 @@
         <PropertyEditor Id="Code" AllowEdit="False" />
       </Items>
     </DetailView>
+    <DetailView Id="CustomerSupplier_DetailView_FinMovs" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.CustomerSupplier" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="Code" PropertyName="Code" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="CustomerSupplierNameAndCode" PropertyName="CustomerSupplierNameAndCode" IsNewNode="True" />
+        <PropertyEditor Id="FinancialMovements" PropertyName="FinancialMovements" View="CustomerSupplier_FinancialMovements_ListView" IsNewNode="True" />
+        <PropertyEditor Id="IsApproved" PropertyName="IsApproved" IsNewNode="True" />
+        <PropertyEditor Id="Name" PropertyName="Name" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="PurchaseInvoices" PropertyName="PurchaseInvoices" View="CustomerSupplier_PurchaseInvoices_ListView" IsNewNode="True" />
+        <PropertyEditor Id="SalesInvoices" PropertyName="SalesInvoices" View="CustomerSupplier_SalesInvoices_ListView" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" IsNewNode="True">
+          <TabbedGroup Id="Tabs" Index="1" IsNewNode="True">
+            <LayoutGroup Id="FinancialMovements" Index="2" ShowCaption="True" IsNewNode="True">
+              <LayoutItem Id="FinancialMovements" ViewItem="FinancialMovements" ShowCaption="False" Index="0" IsNewNode="True" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <ListView Id="CustomerSupplier_FinancialMovements_ListView">
       <Columns>
-        <ColumnInfo Id="SalesInvoiceDocumentID" Width="88" />
+        <ColumnInfo Id="PurchaseInvoice" Index="-1" />
+        <ColumnInfo Id="SalesInvoice" Index="-1" />
+        <ColumnInfo Id="CustomerSupplier" Index="0" Caption="Müşteri / Satıcı" Width="0" />
+        <ColumnInfo Id="Invoice" Index="1" />
+        <ColumnInfo Id="DocumentID" Index="2" />
+        <ColumnInfo Id="Date" Index="3" Width="0" />
+        <ColumnInfo Id="PurchaseInvoiceAmount" Index="4" Width="0" />
+        <ColumnInfo Id="SalesInvoiceAmount" Index="5" Width="0" />
       </Columns>
     </ListView>
     <ListView Id="CustomerSupplier_ListView" ShowAutoFilterRow="True">
@@ -80,16 +94,16 @@
         <PropertyEditor Id="CustomerSupplier" LookupProperty="Code" />
       </Items>
     </DetailView>
-    <ListView Id="FinancialMovement_ListView">
+    <ListView Id="FinancialMovement_ListView" ShowAutoFilterRow="True">
       <Columns>
+        <ColumnInfo Id="PurchaseInvoice" Width="138" Index="-1" />
+        <ColumnInfo Id="SalesInvoice" Width="0" Index="-1" />
         <ColumnInfo Id="CustomerSupplier" Width="0" Index="0" PropertyName="CustomerSupplier.Name" />
-        <ColumnInfo Id="PurchaseInvoice" Width="0" />
-        <ColumnInfo Id="SalesInvoice" Width="0" />
-        <ColumnInfo Id="PurchaseInvoiceDocumentID" Width="0" />
-        <ColumnInfo Id="SalesInvoiceDocumentID" Width="0" />
-        <ColumnInfo Id="Date" Width="0" />
-        <ColumnInfo Id="PurchaseInvoiceAmount" Width="0" />
-        <ColumnInfo Id="SalesInvoiceAmount" Width="0" />
+        <ColumnInfo Id="Invoice" Index="1" />
+        <ColumnInfo Id="Date" Width="0" Index="2" />
+        <ColumnInfo Id="DocumentID" Index="3" />
+        <ColumnInfo Id="PurchaseInvoiceAmount" Width="0" Index="4" />
+        <ColumnInfo Id="SalesInvoiceAmount" Width="0" Index="5" />
       </Columns>
     </ListView>
     <DetailView Id="Product_DetailView">
@@ -173,15 +187,6 @@
       </Layout>
     </DetailView>
     <ListView Id="PurchaseInvoice_ListView" ShowAutoFilterRow="True" />
-    <ListView Id="PurchaseInvoice_ListView_Copy" ClassName="AgainProjectXAF.Module.BusinessObjects.PuchaseManagament.PurchaseInvoice" ShowAutoFilterRow="True" IsNewNode="True">
-      <Columns IsNewNode="True">
-        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
-        <ColumnInfo Id="DocumentId" PropertyName="DocumentId" Index="0" IsNewNode="True" />
-        <ColumnInfo Id="Date" PropertyName="Date" Index="1" IsNewNode="True" />
-        <ColumnInfo Id="CustomerSupplier" PropertyName="CustomerSupplier" Index="2" IsNewNode="True" />
-        <ColumnInfo Id="TotalAmount" PropertyName="TotalAmount" Index="3" IsNewNode="True" />
-      </Columns>
-    </ListView>
     <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView" AllowEdit="True" NewItemRowPosition="Top" Criteria="" GroupSummary="Toplam" DetailViewID="" MasterDetailView="">
       <Columns>
         <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" />
@@ -212,6 +217,7 @@
     <DetailView Id="SalesInvoice_DetailView">
       <Items>
         <PropertyEditor Id="CustomerSupplier" LookupProperty="CustomerSupplierNameAndCode" />
+        <PropertyEditor Id="SalesInvoiceItems" AllowEdit="False" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">

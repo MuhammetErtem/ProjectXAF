@@ -8,7 +8,7 @@ using System;
 using System.Collections;
 using System.Linq;
 
-namespace AgainProjectXAF.Module.BusinessObjects.PuchaseManagament
+namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
 {
     [DefaultClassOptions]
     [ImageName("BO_Invoice")]
