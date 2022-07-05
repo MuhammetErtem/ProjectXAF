@@ -8,9 +8,9 @@ using System;
 namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
 {
     [ImageName("BO_Contact")]
-    //[DefaultClassOptions]
+    [DefaultClassOptions]
     public class SalesInvoiceItem : BaseObject
-    { 
+    {
         public SalesInvoiceItem(Session session)
             : base(session)
         {
@@ -57,8 +57,8 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-                        //UnitPrice = Product.Price; // Ürünü set ettiğimizde UnitPrice alanına ürünün fiyatını yazıyor.
-                        //Kod patlıyor. Buna bakılacak ? 
+                        // UnitPrice = (Product.Price)*(UnitSetDetail.Quantity)*(Quantity);*/ // Ürünü set ettiğimizde UnitPrice alanına ürünün fiyatını yazıyor.
+                                                                                              //Kod patlıyor. Buna bakılacak ? 
                     }
                 }
             }
@@ -87,7 +87,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
         }
 
         private UnitSetDetail _UnitSetDetail;
-
         [RuleRequiredField("RuleRequiredField for SalesInvoiceItem.UnitSetDetail", DefaultContexts.Save)]
         [Association("UnitSetDetail-SalesInvoiceItems")]
         [VisibleInListView(false)]
@@ -108,28 +107,47 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
             }
         }
 
-        [Persistent("Tutar")]
-        private decimal fAmount;
+        private decimal _Amount;
         [ImmediatePostData]
         public decimal Amount
         {
-            get { return fAmount = DiscountedPrice + Tax; }
+            get { return _Amount = DiscountedPrice + Tax; }
         }
-
-
-
-
 
 
 
         [PersistentAlias("(Product.Price)*(UnitSetDetail.Quantity)*(Quantity)")]
-        [RuleRequiredField("RuleRequiredField for SalesInvoiceItem.UnitPrice", DefaultContexts.Save)]
         [ImmediatePostData]
         public decimal UnitPrice
         {
-            get { return Convert.ToDecimal(EvaluateAlias(nameof(UnitPrice))); } //Açıklaması bakılacak. 
+            get { return Convert.ToDecimal(EvaluateAlias(nameof(UnitPrice))); }
+
+            //Açıklaması bakılacak. 
             //Sadece get olduğu için okunabilir olur. Set kaldırılmasının nedeni ,yazılabilir bir veri istemediğimizdendir.
         }
+
+
+
+
+        //private decimal _UnitPrice;
+        ///// <summary>
+        /////
+        ///// </summary>
+        //public decimal UnitPrice
+        //{
+        //    get { return _UnitPrice; }
+        //    set
+        //    {
+        //        if (SetPropertyValue<decimal>(nameof(UnitPrice), ref _UnitPrice, value))
+        //        {
+        //            if (!IsLoading && !IsSaving)
+        //            {
+
+        //            }
+        //        }
+        //    }
+        //}
+
 
         [ImmediatePostData]
         [PersistentAlias("(Product.Name)")]

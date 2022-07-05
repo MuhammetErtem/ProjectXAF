@@ -11,7 +11,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
     //[RuleCombinationOfPropertiesIsUnique("OneIsMainUnit", DefaultContexts.Save, "UnitSet, IsMainUnit", TargetCriteria = "IsMainUnit==True")] 
     //Yanlızca bir tane veri true olabilir yaptık.
 
-    //[DefaultClassOptions] // Kaldırdığımızda menüde görünmesini engelliyoruz.
+    [DefaultClassOptions] // Kaldırdığımızda menüde görünmesini engelliyoruz.
     [ImageName("BO_Contact")]
     public class PurchaseInvoiceItem : BaseObject
     {
@@ -114,12 +114,13 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
             }
         }
 
-        private decimal fAmount;
+        private decimal _Amount;
         [Persistent("Tutar")]
         [ImmediatePostData]
         public decimal Amount
         {
-            get { return fAmount = DiscountedPrice + Tax;}
+            get { return _Amount = DiscountedPrice + Tax;}
+            set { }
         }
 
 
@@ -164,7 +165,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
         private int _Discount;
         [ImmediatePostData]
         [NonPersistent]
-
         /// <summary>
         ///
         /// </summary>

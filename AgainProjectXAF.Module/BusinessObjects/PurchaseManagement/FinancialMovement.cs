@@ -1,12 +1,14 @@
-﻿using AgainProjectXAF.Module.BusinessObjects.SalesManagement;
+﻿using AgainProjectXAF.Module.BusinessObjects.PurchaseManagement;
+using AgainProjectXAF.Module.BusinessObjects.SalesManagement;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
+using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
 using System;
 
 namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
 {
-    //[DefaultClassOptions]
+    [DefaultClassOptions]
     public class FinancialMovement : BaseObject
     {
         public FinancialMovement(Session session)
@@ -39,68 +41,85 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
             }
         }
 
-        private PurchaseInvoice _PurchaseInvoice;
-        [Association("PurchaseInvoice-FinancialMovements")]
-
+        private Invoice _Invoice;
+        [Association("Invoice-FinancialMovements")]
         /// <summary>
         ///
         /// </summary>
-        public PurchaseInvoice PurchaseInvoice
+        public Invoice Invoice
         {
-            get { return _PurchaseInvoice; }
+            get { return _Invoice; }
             set
             {
-                if (SetPropertyValue<PurchaseInvoice>(nameof(PurchaseInvoice), ref _PurchaseInvoice, value))
+                if (SetPropertyValue<Invoice>(nameof(Invoice), ref _Invoice, value))
                 {
                     if (!IsLoading && !IsSaving)
                     {
-                       
-                    }
-                }
-            }
-        }
-        private SalesInvoice _SalesInvoice;
-        [Association("SalesInvoice-FinancialMovements")]
 
-        /// <summary>
-        ///
-        /// </summary>
-        public SalesInvoice SalesInvoice
-        {
-            get { return _SalesInvoice; }
-            set
-            {
-                if (SetPropertyValue<SalesInvoice>(nameof(SalesInvoice), ref _SalesInvoice, value))
-                {
-                    if (!IsLoading && !IsSaving)
-                    {
-                       
                     }
                 }
             }
         }
 
 
-
-        private string _DocumentID;
-
+        private decimal _Debt;
         /// <summary>
         ///
         /// </summary>
-        public string DocumentID
+        public decimal Debt
         {
-            get { return _DocumentID; }
+            get { return _Debt; }
             set
             {
-                if (SetPropertyValue<string>(nameof(DocumentID), ref _DocumentID, value))
+                if (SetPropertyValue<decimal>(nameof(Debt), ref _Debt, value))
                 {
                     if (!IsLoading && !IsSaving)
                     {
-                        
+
                     }
                 }
             }
         }
+
+
+        private decimal _Credit;
+        /// <summary>
+        ///
+        /// </summary>
+        public decimal Credit
+        {
+            get { return _Credit; }
+            set
+            {
+                if (SetPropertyValue<decimal>(nameof(Credit), ref _Credit, value))
+                {
+                    if (!IsLoading && !IsSaving)
+                    {
+
+                    }
+                }
+            }
+        }
+
+        //private string _DocumentID;
+
+        ///// <summary>
+        /////
+        ///// </summary>
+        //public string DocumentID
+        //{
+        //    get { return _DocumentID; }
+        //    set
+        //    {
+        //        if (SetPropertyValue<string>(nameof(DocumentID), ref _DocumentID, value))
+        //        {
+        //            if (!IsLoading && !IsSaving)
+        //            {
+
+        //            }
+        //        }
+        //    }
+        //}
 
 
         //PurchaseInvoice.Date
@@ -123,65 +142,46 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
             }
         }
 
-        //PurchaseInvoiceItem.Amount
-        private decimal _PurchaseInvoiceAmount;
-        /// <summary>
-        ///
-        /// </summary>
-        public decimal PurchaseInvoiceAmount
-        {
-            get { return _PurchaseInvoiceAmount; }
-            set
-            {
-                if (SetPropertyValue<decimal>(nameof(PurchaseInvoiceAmount), ref _PurchaseInvoiceAmount, value))
-                {
-                    if (!IsLoading && !IsSaving)
-                    {
-                        
-                    }
-                }
-            }
-        }
+        ////PurchaseInvoiceItem.Amount
+        //private decimal _PurchaseInvoiceAmount;
+        ///// <summary>
+        /////
+        ///// </summary>
+        //public decimal PurchaseInvoiceAmount
+        //{
+        //    get { return _PurchaseInvoiceAmount; }
+        //    set
+        //    {
+        //        if (SetPropertyValue<decimal>(nameof(PurchaseInvoiceAmount), ref _PurchaseInvoiceAmount, value))
+        //        {
+        //            if (!IsLoading && !IsSaving)
+        //            {
 
-        //SalesInvoiceItem.Amount
-        private decimal _SalesInvoiceAmount;
-        /// <summary>
-        ///
-        /// </summary>
-        public decimal SalesInvoiceAmount
-        {
-            get { return _SalesInvoiceAmount; }
-            set
-            {
-                if (SetPropertyValue<decimal>(nameof(SalesInvoiceAmount), ref _SalesInvoiceAmount, value))
-                {
-                    if (!IsLoading && !IsSaving)
-                    {
+        //            }
+        //        }
+        //    }
+        //}
 
-                    }
-                }
-            }
-        }
+        ////SalesInvoiceItem.Amount
+        //private decimal _SalesInvoiceAmount;
+        ///// <summary>
+        /////
+        ///// </summary>
+        //public decimal SalesInvoiceAmount
+        //{
+        //    get { return _SalesInvoiceAmount; }
+        //    set
+        //    {
+        //        if (SetPropertyValue<decimal>(nameof(SalesInvoiceAmount), ref _SalesInvoiceAmount, value))
+        //        {
+        //            if (!IsLoading && !IsSaving)
+        //            {
 
+        //            }
+        //        }
+        //    }
+        //}
 
-        private string _Invoice;
-        /// <summary>
-        ///
-        /// </summary>
-        public string Invoice
-        {
-            get { return _Invoice; }
-            set
-            {
-                if (SetPropertyValue<string>(nameof(Invoice), ref _Invoice, value))
-                {
-                    if (!IsLoading && !IsSaving)
-                    {
-
-                    }
-                }
-            }
-        }
 
     }
 }

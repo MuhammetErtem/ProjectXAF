@@ -49,8 +49,6 @@
         <PropertyEditor Id="IsApproved" PropertyName="IsApproved" IsNewNode="True" />
         <PropertyEditor Id="Name" PropertyName="Name" IsNewNode="True" />
         <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
-        <PropertyEditor Id="PurchaseInvoices" PropertyName="PurchaseInvoices" View="CustomerSupplier_PurchaseInvoices_ListView" IsNewNode="True" />
-        <PropertyEditor Id="SalesInvoices" PropertyName="SalesInvoices" View="CustomerSupplier_SalesInvoices_ListView" IsNewNode="True" />
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" IsNewNode="True">
@@ -64,14 +62,11 @@
     </DetailView>
     <ListView Id="CustomerSupplier_FinancialMovements_ListView">
       <Columns>
-        <ColumnInfo Id="PurchaseInvoice" Index="-1" />
-        <ColumnInfo Id="SalesInvoice" Index="-1" />
-        <ColumnInfo Id="CustomerSupplier" Index="0" Caption="Müşteri / Satıcı" Width="0" />
-        <ColumnInfo Id="Invoice" Index="1" />
-        <ColumnInfo Id="DocumentID" Index="2" />
+        <ColumnInfo Id="Invoice" Index="1" Width="0" LookupProperty="DocumentId" />
+        <ColumnInfo Id="CustomerSupplier" Index="2" Caption="Müşteri / Satıcı" Width="0" />
         <ColumnInfo Id="Date" Index="3" Width="0" />
-        <ColumnInfo Id="PurchaseInvoiceAmount" Index="4" Width="0" />
-        <ColumnInfo Id="SalesInvoiceAmount" Index="5" Width="0" />
+        <ColumnInfo Id="Debt" Index="4" Width="0" />
+        <ColumnInfo Id="Credit" Index="5" Width="0" />
       </Columns>
     </ListView>
     <ListView Id="CustomerSupplier_ListView" ShowAutoFilterRow="True">
@@ -87,23 +82,43 @@
         <ColumnInfo Id="Name" Index="1" Width="0" />
       </Columns>
     </ListView>
-    <ListView Id="CustomerSupplier_PurchaseInvoices_ListView" NewItemRowPosition="Top" AllowEdit="True" />
-    <ListView Id="CustomerSupplier_SalesInvoices_ListView" NewItemRowPosition="Top" AllowEdit="True" />
     <DetailView Id="FinancialMovement_DetailView">
       <Items>
         <PropertyEditor Id="CustomerSupplier" LookupProperty="Code" />
+        <PropertyEditor Id="Invoice" LookupProperty="DocumentId" />
       </Items>
     </DetailView>
     <ListView Id="FinancialMovement_ListView" ShowAutoFilterRow="True">
       <Columns>
-        <ColumnInfo Id="PurchaseInvoice" Width="138" Index="-1" />
-        <ColumnInfo Id="SalesInvoice" Width="0" Index="-1" />
-        <ColumnInfo Id="CustomerSupplier" Width="0" Index="0" PropertyName="CustomerSupplier.Name" />
-        <ColumnInfo Id="Invoice" Index="1" />
-        <ColumnInfo Id="Date" Width="0" Index="2" />
-        <ColumnInfo Id="DocumentID" Index="3" />
-        <ColumnInfo Id="PurchaseInvoiceAmount" Width="0" Index="4" />
-        <ColumnInfo Id="SalesInvoiceAmount" Width="0" Index="5" />
+        <ColumnInfo Id="Invoice" Index="1" Width="0" LookupProperty="DocumentId" />
+        <ColumnInfo Id="CustomerSupplier" Width="0" Index="2" PropertyName="CustomerSupplier.Name" />
+        <ColumnInfo Id="Date" Width="0" Index="3" />
+        <ColumnInfo Id="Debt" Index="4" Width="0" />
+        <ColumnInfo Id="Credit" Index="5" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="FinancialMovement_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Invoice" Index="1" Width="0" LookupProperty="DocumentId" />
+        <ColumnInfo Id="CustomerSupplier" Index="2" Width="0" />
+        <ColumnInfo Id="Date" Index="3" Width="0" />
+        <ColumnInfo Id="Debt" Index="4" Width="0" />
+        <ColumnInfo Id="Credit" Index="5" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="Invoice_FinancialMovements_ListView">
+      <Columns>
+        <ColumnInfo Id="Invoice" Index="1" LookupProperty="DocumentId" Width="0" />
+        <ColumnInfo Id="CustomerSupplier" Index="2" Width="0" />
+        <ColumnInfo Id="Date" SortIndex="-1" SortOrder="None" Index="3" Width="0" />
+        <ColumnInfo Id="Debt" Index="4" Width="0" />
+        <ColumnInfo Id="Credit" Index="5" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="Invoice_ListView">
+      <Columns>
+        <ColumnInfo Id="CustomerSupplier" Index="1" />
+        <ColumnInfo Id="Date" Index="2" />
       </Columns>
     </ListView>
     <DetailView Id="Product_DetailView">
@@ -177,16 +192,28 @@
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" RelativeSize="16.53846153846154">
             <LayoutGroup Id="PurchaseInvoice" RelativeSize="100">
-              <LayoutItem Id="DocumentId" RelativeSize="37.2093023255814" />
-              <LayoutItem Id="Date" RelativeSize="27.906976744186046" />
-              <LayoutItem Id="CustomerSupplier" RelativeSize="34.883720930232556" />
               <LayoutItem Id="TotalAmount" RelativeSize="27.272727272727273" Removed="True" />
             </LayoutGroup>
           </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="PurchaseInvoice_ListView" ShowAutoFilterRow="True" />
+    <ListView Id="PurchaseInvoice_ListView" ShowAutoFilterRow="True">
+      <Columns>
+        <ColumnInfo Id="DocumentId" Index="0" Width="0" />
+        <ColumnInfo Id="CustomerSupplier" Index="1" Width="0" />
+        <ColumnInfo Id="Date" Index="2" Width="0" />
+        <ColumnInfo Id="TotalAmount" Width="0" Index="3" />
+      </Columns>
+    </ListView>
+    <ListView Id="PurchaseInvoice_LookupListView">
+      <Columns>
+        <ColumnInfo Id="DocumentId" Index="0" />
+        <ColumnInfo Id="CustomerSupplier" Index="1" />
+        <ColumnInfo Id="Date" Index="2" />
+        <ColumnInfo Id="TotalAmount" Width="194" Index="3" />
+      </Columns>
+    </ListView>
     <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView" AllowEdit="True" NewItemRowPosition="Top" Criteria="" GroupSummary="Toplam" DetailViewID="" MasterDetailView="">
       <Columns>
         <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" />
@@ -204,41 +231,67 @@
     <DetailView Id="PurchaseInvoiceItem_DetailView" AllowEdit="False" />
     <ListView Id="PurchaseInvoiceItem_ListView" DetailViewID="PurchaseInvoiceItem_DetailView">
       <Columns>
-        <ColumnInfo Id="ProductName" Width="104" SortIndex="-1" SortOrder="None" />
-        <ColumnInfo Id="Amount">
+        <ColumnInfo Id="Amount" Index="-1" Width="0">
           <Summary>
             <ColumnSummaryItem Id="@201fd1e4-f2de-401e-b2e6-9a5a998c3dec" SummaryType="Sum" IsNewNode="True" />
           </Summary>
         </ColumnInfo>
-        <ColumnInfo Id="UnitCost" Width="98" />
-        <ColumnInfo Id="Discount" DisplayFormat="{0:N0}" />
+        <ColumnInfo Id="Product" Width="0" Index="0" LookupProperty="Code" />
+        <ColumnInfo Id="ProductName" Width="0" SortIndex="-1" SortOrder="None" Index="1" />
+        <ColumnInfo Id="PurchaseInvoice" Width="0" Index="2" LookupProperty="DocumentId" />
+        <ColumnInfo Id="UnitPrice" Index="3" Width="0" />
+        <ColumnInfo Id="Quantity" Index="4" Width="0" />
+        <ColumnInfo Id="Discount" DisplayFormat="{0:N0}" Index="5" Width="0" />
+        <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
+        <ColumnInfo Id="Tax" Index="7" Width="0" />
+        <ColumnInfo Id="UnitCost" Width="0" Index="8" />
       </Columns>
     </ListView>
     <DetailView Id="SalesInvoice_DetailView">
       <Items>
-        <PropertyEditor Id="CustomerSupplier" LookupProperty="CustomerSupplierNameAndCode" />
-        <PropertyEditor Id="SalesInvoiceItems" AllowEdit="False" />
+        <PropertyEditor Id="CustomerSupplier" LookupProperty="CustomerSupplierNameAndCode" AllowEdit="True" />
+        <PropertyEditor Id="Date" AllowEdit="False" />
+        <PropertyEditor Id="DocumentId" AllowEdit="False" />
+        <PropertyEditor Id="SalesInvoiceItems" AllowEdit="True" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" RelativeSize="17.444219066937119">
             <LayoutGroup Id="SalesInvoice" RelativeSize="100">
-              <LayoutItem Id="DocumentId" RelativeSize="37.2093023255814" />
-              <LayoutItem Id="Date" RelativeSize="27.906976744186046" />
-              <LayoutItem Id="CustomerSupplier" RelativeSize="34.883720930232556" />
               <LayoutItem Id="TotalAmount" RelativeSize="27.272727272727273" Removed="True" />
             </LayoutGroup>
           </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="SalesInvoice_ListView" ShowAutoFilterRow="True" AllowEdit="False" NewItemRowPosition="None" />
-    <ListView Id="SalesInvoice_SalesInvoiceItems_ListView" AllowEdit="True" ShowAutoFilterRow="False" NewItemRowPosition="Top">
+    <ListView Id="SalesInvoice_ListView" ShowAutoFilterRow="True" AllowEdit="False" NewItemRowPosition="None">
       <Columns>
-        <ColumnInfo Id="Product" Index="0" Width="0" />
+        <ColumnInfo Id="DocumentId" Index="0" Width="0" />
+        <ColumnInfo Id="Date" Index="1" Width="0" />
+        <ColumnInfo Id="CustomerSupplier" Index="2" Width="0" />
+        <ColumnInfo Id="TotalAmount" Index="3" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesInvoice_SalesInvoiceItems_ListView" AllowEdit="True" ShowAutoFilterRow="False" NewItemRowPosition="Top" DetailViewID="">
+      <Columns>
+        <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" />
         <ColumnInfo Id="ProductName" Index="1" Width="0" />
         <ColumnInfo Id="Quantity" Index="2" Width="0" />
         <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" />
+        <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
+        <ColumnInfo Id="Discount" Index="5" Width="0" />
+        <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
+        <ColumnInfo Id="UnitCost" Index="7" Width="0" />
+        <ColumnInfo Id="Tax" Index="8" Width="0" />
+        <ColumnInfo Id="Amount" Index="9" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesInvoiceItem_ListView">
+      <Columns>
+        <ColumnInfo Id="Product" Index="0" LookupProperty="Code" Width="0" />
+        <ColumnInfo Id="ProductName" Index="1" Width="0" />
+        <ColumnInfo Id="SalesInvoice" Index="2" Width="0" LookupProperty="DocumentId" />
+        <ColumnInfo Id="Quantity" Width="0" />
         <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
         <ColumnInfo Id="Discount" Index="5" Width="0" />
         <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />

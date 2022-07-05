@@ -20,10 +20,12 @@ namespace AgainProjectXAF.Module.Controllers.MyViewManagement
 
             financialMovement.Date = salesInvoice.Date;
             financialMovement.CustomerSupplier = salesInvoice.CustomerSupplier;
-            financialMovement.SalesInvoiceAmount = salesInvoice.TotalAmount;
-            financialMovement.SalesInvoice = salesInvoice;
-            financialMovement.DocumentID = salesInvoice.DocumentId;
-            financialMovement.Invoice = salesInvoice.ClassInfo.TableName;
+            financialMovement.Credit = salesInvoice.TotalAmount;
+            financialMovement.Invoice = salesInvoice;
+
+
+            //financialMovement.DocumentID = salesInvoice.DocumentId;
+            //financialMovement.Invoice = salesInvoice.ClassInfo.TableName; 
 
         }
         protected override void OnDeactivated()

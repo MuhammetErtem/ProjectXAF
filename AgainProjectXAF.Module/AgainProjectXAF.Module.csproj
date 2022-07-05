@@ -129,6 +129,7 @@
   <ItemGroup>
     <Compile Include="BusinessObjects\PurchaseManagement\CustomerSupplier.cs" />
     <Compile Include="BusinessObjects\PurchaseManagement\FinancialMovement.cs" />
+    <Compile Include="BusinessObjects\PurchaseManagement\Invoice.cs" />
     <Compile Include="BusinessObjects\PurchaseManagement\PurchaseInvoice.cs" />
     <Compile Include="BusinessObjects\PurchaseManagement\PurchaseInvoiceItem.cs" />
     <Compile Include="BusinessObjects\SalesManagement\SalesInvoice.cs" />
@@ -217,54 +218,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Welcome.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UnusableNodes.xml">
-      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UnusableNodes_tr.xml">
-      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UnusableNodes1.xml">
-      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UnusableNodes2.xml">
-      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UnusableNodes1_tr.xml">
-      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UnusableNodes3.xml">
-      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UnusableNodes2_tr.xml">
-      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UnusableNodes3_tr.xml">
-      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

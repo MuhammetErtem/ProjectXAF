@@ -1,4 +1,5 @@
-﻿using AgainProjectXAF.Module.BusinessObjects.SalesManagement;
+﻿using AgainProjectXAF.Module.BusinessObjects.PurchaseManagement;
+using AgainProjectXAF.Module.BusinessObjects.SalesManagement;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
@@ -97,20 +98,12 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
         /// <summary>
         ///                 COLLECTİON
         /// </summary>
-        [Association("CustomerSupplier-PurchaseInvoices"), DevExpress.ExpressApp.DC.Aggregated]
-        public XPCollection<PurchaseInvoice> PurchaseInvoices
+        [Association("CustomerSupplier-Invoices"), DevExpress.ExpressApp.DC.Aggregated]
+        public XPCollection<Invoice> Invoices
         {
-            get { return GetCollection<PurchaseInvoice>("PurchaseInvoices"); }
+            get { return GetCollection<Invoice>("Invoices"); }
         }
 
-        /// <summary>
-        ///                 COLLECTİON
-        /// </summary>
-        [Association("CustomerSupplier-SalesInvoices"), DevExpress.ExpressApp.DC.Aggregated]
-        public XPCollection<SalesInvoice> SalesInvoices
-        {
-            get { return GetCollection<SalesInvoice>("SalesInvoices"); }
-        }
 
         [Association("CustomerSupplier-FinancialMovements"), DevExpress.ExpressApp.DC.Aggregated]
         public XPCollection<FinancialMovement> FinancialMovements

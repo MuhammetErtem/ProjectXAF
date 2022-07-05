@@ -39,29 +39,22 @@
     <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.CustomerSupplier" Caption="Müşteri / Satıcı">
       <OwnMembers>
         <Member Name="Code" Caption="Kod" />
+        <Member Name="FinancialMovements" Caption="Finansal Hareketler" />
         <Member Name="IsApproved" Caption="Onaylandı" />
         <Member Name="Name" Caption="Ad" />
-        <Member Name="PurchaseInvoices" Caption="Satın Alma Faturası" />
-        <Member Name="SalesInvoices" Caption="Satış Faturası" />
       </OwnMembers>
     </Class>
-    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.FinancialMovement" Caption="Satın Alma Faturası">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.FinancialMovement" Caption="Finansal Hareketler">
       <OwnMembers>
+        <Member Name="Credit" Caption="Alacak" />
         <Member Name="CustomerSupplier" Caption="Müşteri / Satıcı" />
-        <Member Name="DocumentID" Caption="Belge No" />
+        <Member Name="Date" Caption="Tarih" />
+        <Member Name="Debt" Caption="Borç" />
         <Member Name="Invoice" Caption="Fatura Bilgisi" />
-        <Member Name="PurchaseInvoice" Caption="Satın Alma Faturası" />
-        <Member Name="PurchaseInvoiceAmount" Caption="Satın Alma Fatura Tutarı" />
-        <Member Name="SalesInvoice" Caption="Satış Faturası" />
-        <Member Name="SalesInvoiceAmount" Caption="Satış Faturası Tutarı" />
       </OwnMembers>
     </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.PurchaseInvoice" Caption="Satın Alma Faturası">
       <OwnMembers>
-        <Member Name="CustomerSupplier" Caption="Müşteri / Satıcı" />
-        <Member Name="Date" Caption="Tarih" />
-        <Member Name="DocumentId" Caption="Belge No" />
-        <Member Name="FinancialMovements" Caption="Finansal Hareketler" />
         <Member Name="TotalAmount" Caption="Toplam Tutar" />
       </OwnMembers>
     </Class>
@@ -79,12 +72,17 @@
         <Member Name="UnitPrice" Caption="Birim Fiyat" />
       </OwnMembers>
     </Class>
-    <Class Name="AgainProjectXAF.Module.BusinessObjects.SalesManagement.SalesInvoice" Caption="Satış Faturası">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.Invoice" Caption="Fatura">
       <OwnMembers>
         <Member Name="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <Member Name="Date" Caption="Tarih" />
         <Member Name="DocumentId" Caption="Belge No" />
         <Member Name="FinancialMovements" Caption="Finansal Hareketler" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.SalesManagement.SalesInvoice" Caption="Satış Faturası">
+      <OwnMembers>
+        <Member Name="SalesInvoiceItems" Caption="Satış Fatura Satırları" />
         <Member Name="TotalAmount" Caption="Toplam Tutar" />
       </OwnMembers>
     </Class>
@@ -118,6 +116,7 @@
         <Member Name="Name" Caption="Ad" />
         <Member Name="Price" Caption="Fiyat" />
         <Member Name="PurchaseInvoiceItems" Caption="Satın Alma Fatura Satırları" />
+        <Member Name="SalesInvoiceItems" Caption="Satış Fatura Satırları" />
         <Member Name="TaxRate" Caption="Vergi Oranı" />
         <Member Name="UnitSet" Caption="Birim Set" />
       </OwnMembers>
@@ -136,6 +135,7 @@
         <Member Name="IsMaınUnit" Caption="Ana Birim" />
         <Member Name="Name" Caption="Ad" />
         <Member Name="PurchaseInvoiceItems" Caption="Satın Alma Fatura Satırı" />
+        <Member Name="SalesInvoiceItems" Caption="Satış Fatura Satırları" />
         <Member Name="UnitSet" Caption="Birim Set" />
       </OwnMembers>
     </Class>
@@ -208,6 +208,15 @@
       <LocalizationItem Name="Close" Value="Kapat" />
     </LocalizationGroup>
   </Localization>
+  <NavigationItems>
+    <Items>
+      <Item Id="Default">
+        <Items>
+          <Item Id="FinancialMovement_ListView" Caption="Finansal Hareketler" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
   <Validation>
     <ErrorMessageTemplates>
       <RuleRequiredField MessageTemplateMustNotBeEmpty="&quot;{TargetPropertyName}&quot; alanı boş olmamalıdır!" />
@@ -216,17 +225,40 @@
   <Views>
     <DetailView Id="CustomerSupplier_DetailView" Caption="Müşteri / Satıcı">
       <Items>
+        <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
         <PropertyEditor Id="Name" Caption="Ad" />
       </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="FinancialMovements" Caption="Finansal Hareketler" />
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
     </DetailView>
-    <DetailView Id="CustomerSupplier_DetailView_FinMovs" Caption="Müşteri / Satıcı" />
-    <ListView Id="CustomerSupplier_FinancialMovements_ListView" Caption="Satın Alma Faturası">
+    <DetailView Id="CustomerSupplier_DetailView_FinMovs" Caption="Müşteri / Satıcı">
+      <Items>
+        <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="FinancialMovements" Caption="Finansal Hareketler" />
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="CustomerSupplier_FinancialMovements_ListView" Caption="Finansal Hareketler">
       <Columns>
         <ColumnInfo Id="Invoice" Caption="Fatura Bilgisi" />
-        <ColumnInfo Id="DocumentID" Caption="Belge No" />
         <ColumnInfo Id="Date" Caption="Tarih" />
-        <ColumnInfo Id="PurchaseInvoiceAmount" Caption="Borç" />
-        <ColumnInfo Id="SalesInvoiceAmount" Caption="Alacak" />
+      </Columns>
+    </ListView>
+    <ListView Id="CustomerSupplier_Invoices_ListView">
+      <Columns>
+        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <ColumnInfo Id="DocumentId" Caption="Belge No" />
+        <ColumnInfo Id="Date" Caption="Tarih" />
       </Columns>
     </ListView>
     <ListView Id="CustomerSupplier_ListView" Caption="Müşteri / Satıcı" />
@@ -236,37 +268,64 @@
         <ColumnInfo Id="DashboardName" Caption="Ad" />
       </Columns>
     </ListView>
-    <DetailView Id="FinancialMovement_DetailView" Caption="Satın Alma Faturası">
+    <DetailView Id="FinancialMovement_DetailView" Caption="Finansal Hareketler">
       <Items>
         <PropertyEditor Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
-        <PropertyEditor Id="DocumentID" Caption="Belge No" />
+        <PropertyEditor Id="Date" Caption="Tarih" />
         <PropertyEditor Id="Invoice" Caption="Fatura Bilgisi" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main">
           <LayoutGroup Id="SimpleEditors">
-            <LayoutGroup Id="FinancialMovement" Caption="Satın Alma Faturası" />
+            <LayoutGroup Id="FinancialMovement" Caption="Finansal Hareketler" />
           </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="FinancialMovement_ListView" Caption="Satın Alma Faturası">
+    <ListView Id="FinancialMovement_ListView" Caption="Finansal Hareketler">
       <Columns>
-        <ColumnInfo Id="PurchaseInvoice" Caption="Satın Alma Faturası" />
-        <ColumnInfo Id="SalesInvoice" Caption="Satış Faturası" />
-        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri/Satıcı" />
         <ColumnInfo Id="Invoice" Caption="Fatura Bilgisi" />
+        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri/Satıcı" />
         <ColumnInfo Id="Date" Caption="Tarih" />
-        <ColumnInfo Id="DocumentID" Caption="Belge No" />
-        <ColumnInfo Id="PurchaseInvoiceAmount" Caption="Satın Alma Toplam Tutar" />
-        <ColumnInfo Id="SalesInvoiceAmount" Caption="Satış Toplam Tutar" />
       </Columns>
     </ListView>
-    <ListView Id="FinancialMovement_LookupListView" Caption="Satın Alma Faturası">
+    <ListView Id="FinancialMovement_LookupListView" Caption="Finansal Hareketler">
       <Columns>
-        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
-        <ColumnInfo Id="DocumentID" Caption="Belge No" />
         <ColumnInfo Id="Invoice" Caption="Fatura Bilgisi" />
+        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <ColumnInfo Id="Date" Caption="Tarih" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Invoice_DetailView">
+      <Items>
+        <PropertyEditor Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <PropertyEditor Id="Date" Caption="Tarih" />
+        <PropertyEditor Id="DocumentId" Caption="Belge No" />
+        <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="FinancialMovements_Group" Caption="Finansal Hareketler" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Invoice_FinancialMovements_ListView">
+      <Columns>
+        <ColumnInfo Id="Date" Caption="Tarih" />
+      </Columns>
+    </ListView>
+    <ListView Id="Invoice_ListView">
+      <Columns>
+        <ColumnInfo Id="DocumentId" Caption="Belge No" />
+        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <ColumnInfo Id="Date" Caption="Tarih" />
+      </Columns>
+    </ListView>
+    <ListView Id="Invoice_LookupListView">
+      <Columns>
+        <ColumnInfo Id="DocumentId" Caption="Belge No" />
+        <ColumnInfo Id="Date" Caption="Tarih" />
+        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
       </Columns>
     </ListView>
     <ListView Id="ModelDifference_Aspects_ListView">
@@ -286,20 +345,35 @@
       </Layout>
     </DetailView>
     <DetailView Id="PurchaseInvoice_DetailView">
+      <Items>
+        <PropertyEditor Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <PropertyEditor Id="Date" Caption="Tarih" />
+        <PropertyEditor Id="DocumentId" Caption="Belge No" />
+        <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
+      </Items>
       <Layout>
         <LayoutGroup Id="Main">
           <LayoutGroup Id="SimpleEditors">
             <LayoutGroup Id="PurchaseInvoice" Caption="Satın Alma Faturası" />
           </LayoutGroup>
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="FinancialMovements" Caption="Finansal Hareketler" />
+          </TabbedGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="PurchaseInvoice_FinancialMovements_ListView" Caption="Satın Alma Faturası">
+    <ListView Id="PurchaseInvoice_ListView">
       <Columns>
+        <ColumnInfo Id="DocumentId" Caption="Belge No" />
         <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
-        <ColumnInfo Id="DocumentID" Caption="Belge No" />
         <ColumnInfo Id="Date" Caption="Tarih" />
-        <ColumnInfo Id="Invoice" Caption="Fatura Bilgisi" />
+      </Columns>
+    </ListView>
+    <ListView Id="PurchaseInvoice_LookupListView">
+      <Columns>
+        <ColumnInfo Id="DocumentId" Caption="Belge No" />
+        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <ColumnInfo Id="Date" Caption="Tarih" />
       </Columns>
     </ListView>
     <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView">
@@ -316,28 +390,41 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <ListView Id="PurchaseInvoiceItem_ListView">
+      <Columns>
+        <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" />
+      </Columns>
+    </ListView>
     <DetailView Id="SalesInvoice_DetailView">
+      <Items>
+        <PropertyEditor Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <PropertyEditor Id="Date" Caption="Tarih" />
+        <PropertyEditor Id="DocumentId" Caption="Belge No" />
+        <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
+      </Items>
       <Layout>
         <LayoutGroup Id="Main">
           <LayoutGroup Id="SimpleEditors">
             <LayoutGroup Id="SalesInvoice" Caption="Satış Faturası" />
           </LayoutGroup>
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="FinancialMovements" Caption="Finansal Hareketler" />
+          </TabbedGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="SalesInvoice_FinancialMovements_ListView" Caption="Satın Alma Faturası">
-      <Columns>
-        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
-        <ColumnInfo Id="DocumentID" Caption="Belge No" />
-        <ColumnInfo Id="Date" Caption="Tarih" />
-        <ColumnInfo Id="Invoice" Caption="Fatura Bilgisi" />
-      </Columns>
-    </ListView>
     <ListView Id="SalesInvoice_ListView">
       <Columns>
         <ColumnInfo Id="DocumentId" Caption="Belge No" />
         <ColumnInfo Id="Date" Caption="Tarih" />
         <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesInvoice_LookupListView">
+      <Columns>
+        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <ColumnInfo Id="Date" Caption="Tarih" />
+        <ColumnInfo Id="DocumentId" Caption="Belge No" />
       </Columns>
     </ListView>
     <ListView Id="SalesInvoice_SalesInvoiceItems_ListView">
@@ -363,6 +450,11 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <ListView Id="SalesInvoiceItem_ListView">
+      <Columns>
+        <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" />
+      </Columns>
+    </ListView>
     <ListView Id="ViewDashboardOrganizationItem_ListView" Caption="Görünüm" />
   </Views>
 </Application>
