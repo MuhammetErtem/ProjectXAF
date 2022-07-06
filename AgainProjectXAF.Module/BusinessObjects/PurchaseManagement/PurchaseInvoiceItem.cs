@@ -4,14 +4,13 @@ using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
 using System;
-using System.ComponentModel;
 
 namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
 {
     //[RuleCombinationOfPropertiesIsUnique("OneIsMainUnit", DefaultContexts.Save, "UnitSet, IsMainUnit", TargetCriteria = "IsMainUnit==True")] 
     //Yanlızca bir tane veri true olabilir yaptık.
 
-    [DefaultClassOptions] // Kaldırdığımızda menüde görünmesini engelliyoruz.
+    //[DefaultClassOptions] // Kaldırdığımızda menüde görünmesini engelliyoruz.
     [ImageName("BO_Contact")]
     public class PurchaseInvoiceItem : BaseObject
     {
@@ -64,8 +63,20 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
                 {
                     if (!IsLoading && !IsSaving)
                     {
-                        //UnitPrice = Product.Price; // Ürünü set ettiğimizde UnitPrice alanına ürünün fiyatını yazıyor.
-                        //Kod patlıyor. Buna bakılacak ? 
+
+                        foreach (var item in value.UnitSet.UnitSetDetails)
+                        {
+                            if (item != null)
+                            {
+                                if (item.IsMaınUnit)
+                                {
+                                    UnitSetDetail = item;
+                                }
+                            }
+                        }
+
+                        Quantity = 1;
+
                     }
                 }
             }
@@ -75,6 +86,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
         [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.Quantity", DefaultContexts.Save)]
         [Persistent("Miktar")]
         [ImmediatePostData]
+        [RuleValueComparison("AdditionalCost.Price.GreaterThanZero", DefaultContexts.Save, ValueComparisonType.GreaterThanOrEqual, 1)]
         /// <summary>
         ///
         /// </summary>
@@ -87,13 +99,12 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
+                        UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
                     }
                 }
             }
         }
         private UnitSetDetail _UnitSetDetail;
-
         [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.UnitSetDetail", DefaultContexts.Save)]
         [Association("UnitSetDetail-PurchaseInvoiceItems")]
         [VisibleInListView(false)]
@@ -108,6 +119,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
                 {
                     if (!IsLoading && !IsSaving)
                     {
+                        _UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
 
                     }
                 }
@@ -120,15 +132,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
         public decimal Amount
         {
             get { return _Amount = DiscountedPrice + Tax;}
-            set { }
         }
-
-
-
-
-
-
-
 
         [PersistentAlias("(UnitPrice)*((Product.TaxRate)*(0.01))")]
         [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.Tax", DefaultContexts.Save)]
@@ -138,15 +142,35 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
             get { return Convert.ToDecimal(EvaluateAlias(nameof(Tax))); }
         }
 
-        [PersistentAlias("(Product.Price)*(UnitSetDetail.Quantity)*(Quantity)")]
-        [ImmediatePostData]
+        //[PersistentAlias("(Product.Price)*(UnitSetDetail.Quantity)*(Quantity)")]
+        //[ImmediatePostData]
+        //public decimal UnitPrice
+        //{
+        //    get { return Convert.ToDecimal(EvaluateAlias(nameof(UnitPrice))); } //Açıklaması bakılacak. 
+        //    //Sadece get olduğu için okunabilir olur. Set kaldırılmasının nedeni ,yazılabilir bir veri istemediğimizdendir.
+        //}
+        private decimal _UnitPrice;
+        /// <summary>
+        ///
+        /// </summary>
         public decimal UnitPrice
         {
-            get { return Convert.ToDecimal(EvaluateAlias(nameof(UnitPrice))); } //Açıklaması bakılacak. 
-            //Sadece get olduğu için okunabilir olur. Set kaldırılmasının nedeni ,yazılabilir bir veri istemediğimizdendir.
+            get { return _UnitPrice; }
+            set
+            {
+                if (SetPropertyValue<decimal>(nameof(UnitPrice), ref _UnitPrice, value))
+                {
+                    if (!IsLoading && !IsSaving)
+                    {
+
+                    }
+                }
+            }
         }
 
-        [PersistentAlias("(DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity)")] //UnitSetDetail.Quantity
+
+        [PersistentAlias("(DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity)")]
+        //[PersistentAlias("iif(Quantity == 0)(UnitCost = 0) (DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity)")]
         [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.UnitCost", DefaultContexts.Save)]
         [ImmediatePostData]
         public decimal UnitCost
@@ -164,7 +188,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
 
         private int _Discount;
         [ImmediatePostData]
-        [NonPersistent]
         /// <summary>
         ///
         /// </summary>
@@ -191,8 +214,5 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
         {
             get { return Convert.ToDecimal(EvaluateAlias(nameof(DiscountedPrice))); }
         }
-
-
-
     }
 }

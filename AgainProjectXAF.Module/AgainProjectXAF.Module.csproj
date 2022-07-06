@@ -96,6 +96,7 @@
     <Reference Include="DevExpress.Xpo.v21.1">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.XtraBars.v21.1, Version=21.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v21.1, Version=21.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v21.1">
       <SpecificVersion>False</SpecificVersion>
@@ -141,6 +142,30 @@
     <Compile Include="Controllers\MyViewManagement\MyViewController.cs" />
     <Compile Include="Controllers\MyViewManagement\MyViewController.Designer.cs">
       <DependentUpon>MyViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\NewActionViewManagement\BrandNewActionViewController.cs" />
+    <Compile Include="Controllers\NewActionViewManagement\BrandNewActionViewController.Designer.cs">
+      <DependentUpon>BrandNewActionViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\NewActionViewManagement\CustomerSupplierActionViewController.cs" />
+    <Compile Include="Controllers\NewActionViewManagement\CustomerSupplierActionViewController.Designer.cs">
+      <DependentUpon>CustomerSupplierActionViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\NewActionViewManagement\ProductNewActionViewController.cs" />
+    <Compile Include="Controllers\NewActionViewManagement\ProductNewActionViewController.Designer.cs">
+      <DependentUpon>ProductNewActionViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\NewActionViewManagement\PurchaseInvoiceActionViewController.cs" />
+    <Compile Include="Controllers\NewActionViewManagement\PurchaseInvoiceActionViewController.Designer.cs">
+      <DependentUpon>PurchaseInvoiceActionViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\NewActionViewManagement\SalesInvoiceActionViewController.cs" />
+    <Compile Include="Controllers\NewActionViewManagement\SalesInvoiceActionViewController.Designer.cs">
+      <DependentUpon>SalesInvoiceActionViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\NewActionViewManagement\UnitSetActionViewController.cs" />
+    <Compile Include="Controllers\NewActionViewManagement\UnitSetActionViewController.Designer.cs">
+      <DependentUpon>UnitSetActionViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\OptionsController\CtrlViewNested.cs" />
     <Compile Include="Controllers\OptionsController\CtrlViewNested.Designer.cs">
@@ -219,6 +244,13 @@
   <ItemGroup>
     <None Include="Welcome.html" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes_tr.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

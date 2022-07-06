@@ -2,10 +2,15 @@
 <Application Title="AgainProjectXAF" PreferredLanguage="tr">
   <ActionDesign>
     <Actions>
-      <Action Id="New" PaintStyle="CaptionAndImage" ValidationContexts="" SelectionDependencyType="Independent" ImageName="Action_ChooseSkin" />
+      <Action Id="New" PaintStyle="CaptionAndImage" ValidationContexts="" SelectionDependencyType="Independent" ImageName="Action_ChooseSkin" DefaultItemMode="FirstActiveItem" QuickAccess="False" ShowItemsOnClick="False" />
     </Actions>
   </ActionDesign>
   <BOModel>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.PurchaseInvoiceItem">
+      <OwnMembers>
+        <Member Name="Amount" EditMaskType="RegEx" />
+      </OwnMembers>
+    </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Brand" IsVisibleInReports="True" />
     <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Product">
       <OwnMembers>
@@ -35,7 +40,7 @@
         <ColumnInfo Id="Name" Index="1" Width="0" />
       </Columns>
     </ListView>
-    <ListView Id="Brand_Products_ListView" ShowAutoFilterRow="True" AllowEdit="True" NewItemRowPosition="Top" />
+    <ListView Id="Brand_Products_ListView" ShowAutoFilterRow="True" AllowEdit="True" NewItemRowPosition="Top" AllowUnlink="False" AllowLink="False" AllowDelete="False" />
     <DetailView Id="CustomerSupplier_DetailView">
       <Items>
         <PropertyEditor Id="Code" AllowEdit="False" />
@@ -60,7 +65,7 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="CustomerSupplier_FinancialMovements_ListView">
+    <ListView Id="CustomerSupplier_FinancialMovements_ListView" AllowLink="False" AllowDelete="False">
       <Columns>
         <ColumnInfo Id="Invoice" Index="1" Width="0" LookupProperty="DocumentId" />
         <ColumnInfo Id="CustomerSupplier" Index="2" Caption="Müşteri / Satıcı" Width="0" />
@@ -69,6 +74,7 @@
         <ColumnInfo Id="Credit" Index="5" Width="0" />
       </Columns>
     </ListView>
+    <ListView Id="CustomerSupplier_Invoices_ListView" AllowNew="True" AllowUnlink="False" AllowLink="False" AllowDelete="False" />
     <ListView Id="CustomerSupplier_ListView" ShowAutoFilterRow="True">
       <Columns>
         <ColumnInfo Id="Code" Index="0" Width="0" />
@@ -106,7 +112,7 @@
         <ColumnInfo Id="Credit" Index="5" Width="0" />
       </Columns>
     </ListView>
-    <ListView Id="Invoice_FinancialMovements_ListView">
+    <ListView Id="Invoice_FinancialMovements_ListView" AllowLink="False" AllowDelete="False">
       <Columns>
         <ColumnInfo Id="Invoice" Index="1" LookupProperty="DocumentId" Width="0" />
         <ColumnInfo Id="CustomerSupplier" Index="2" Width="0" />
@@ -167,7 +173,7 @@
       </Filters>
     </ListView>
     <ListView Id="Product_LookupListView" ShowAutoFilterRow="True" />
-    <ListView Id="Product_PurchaseInvoiceItems_ListView" NewItemRowPosition="Top" AllowEdit="True">
+    <ListView Id="Product_PurchaseInvoiceItems_ListView" NewItemRowPosition="Top" AllowEdit="True" AllowDelete="False" AllowLink="False" AllowUnlink="False">
       <Columns>
         <ColumnInfo Id="PurchaseInvoice" Index="-1" />
         <ColumnInfo Id="Product" Index="0" Width="0" />
@@ -179,6 +185,7 @@
         <ColumnInfo Id="Amount" Index="6" Width="0" />
       </Columns>
     </ListView>
+    <ListView Id="Product_SalesInvoiceItems_ListView" AllowDelete="False" AllowLink="False" />
     <DetailView Id="PurchaseInvoice_DetailView">
       <Items>
         <PropertyEditor Id="CustomerSupplier" LookupProperty="CustomerSupplierNameAndCode" />
@@ -191,10 +198,27 @@
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" RelativeSize="16.53846153846154">
-            <LayoutGroup Id="PurchaseInvoice" RelativeSize="100">
+            <LayoutGroup Id="Invoice" Index="0" RelativeSize="100">
+              <LayoutItem Id="DocumentId" RelativeSize="37.2093023255814" />
+              <LayoutItem Id="Date" RelativeSize="27.906976744186046" />
+              <LayoutItem Id="CustomerSupplier" RelativeSize="34.883720930232556" />
+            </LayoutGroup>
+            <LayoutGroup Id="PurchaseInvoice" RelativeSize="100" Removed="True">
               <LayoutItem Id="TotalAmount" RelativeSize="27.272727272727273" Removed="True" />
             </LayoutGroup>
           </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="83.461538461538467">
+            <LayoutGroup Id="PurchaseInvoiceItems" RelativeSize="100" Direction="Vertical" Caption="Belge Satırları">
+              <LayoutItem Id="PurchaseInvoiceItems" RelativeSize="91.836734693877546" />
+              <LayoutGroup Id="Auto714fdcb4-fd5f-4060-9beb-e1dd3f21fb19" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="8.16326530612245" IsNewNode="True">
+                <LayoutItem Id="Item1" Index="0" RelativeSize="49.893390191897652" IsNewNode="True" />
+                <LayoutItem Id="TotalAmount" ViewItem="TotalAmount" Index="1" RelativeSize="50.106609808102348" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="FinancialMovements" RelativeSize="100">
+              <LayoutItem Id="FinancialMovements" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -214,7 +238,7 @@
         <ColumnInfo Id="TotalAmount" Width="194" Index="3" />
       </Columns>
     </ListView>
-    <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView" AllowEdit="True" NewItemRowPosition="Top" Criteria="" GroupSummary="Toplam" DetailViewID="" MasterDetailView="">
+    <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView" AllowEdit="True" NewItemRowPosition="Top" Criteria="" GroupSummary="Toplam" AllowDelete="False" AllowLink="False" AllowNew="True" DetailViewID="" MasterDetailView="">
       <Columns>
         <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" />
         <ColumnInfo Id="ProductName" Index="1" Width="0" MaxLength="0" SortOrder="None" SortIndex="-1" />
@@ -247,6 +271,12 @@
         <ColumnInfo Id="UnitCost" Width="0" Index="8" />
       </Columns>
     </ListView>
+    <ListView Id="PurchaseInvoiceItem_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Product.Code" PropertyName="Product.Code" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="ProductName" PropertyName="Product.Name" Index="1" />
+      </Columns>
+    </ListView>
     <DetailView Id="SalesInvoice_DetailView">
       <Items>
         <PropertyEditor Id="CustomerSupplier" LookupProperty="CustomerSupplierNameAndCode" AllowEdit="True" />
@@ -256,23 +286,40 @@
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="17.444219066937119">
-            <LayoutGroup Id="SalesInvoice" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="16.53846153846154">
+            <LayoutGroup Id="Invoice" Index="0" RelativeSize="100">
+              <LayoutItem Id="DocumentId" RelativeSize="37.2093023255814" />
+              <LayoutItem Id="Date" RelativeSize="27.906976744186046" />
+              <LayoutItem Id="CustomerSupplier" RelativeSize="34.883720930232556" />
+            </LayoutGroup>
+            <LayoutGroup Id="SalesInvoice" RelativeSize="100" Removed="True">
               <LayoutItem Id="TotalAmount" RelativeSize="27.272727272727273" Removed="True" />
             </LayoutGroup>
           </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="83.461538461538467">
+            <LayoutGroup Id="SalesInvoiceItems" RelativeSize="100" Caption="Sales Invoice Items">
+              <LayoutItem Id="SalesInvoiceItems" RelativeSize="91.836734693877546" />
+              <LayoutGroup Id="Autof7cad5b2-68dc-40b3-8916-eb5215aa3b3d" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="8.16326530612245" IsNewNode="True">
+                <LayoutItem Id="Item1" Index="0" RelativeSize="49.893390191897652" IsNewNode="True" />
+                <LayoutItem Id="TotalAmount" ViewItem="TotalAmount" Index="1" RelativeSize="50.106609808102348" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="FinancialMovements" RelativeSize="100">
+              <LayoutItem Id="FinancialMovements" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
     <ListView Id="SalesInvoice_ListView" ShowAutoFilterRow="True" AllowEdit="False" NewItemRowPosition="None">
       <Columns>
         <ColumnInfo Id="DocumentId" Index="0" Width="0" />
-        <ColumnInfo Id="Date" Index="1" Width="0" />
-        <ColumnInfo Id="CustomerSupplier" Index="2" Width="0" />
+        <ColumnInfo Id="CustomerSupplier" Index="1" Width="0" />
+        <ColumnInfo Id="Date" Index="2" Width="0" />
         <ColumnInfo Id="TotalAmount" Index="3" Width="0" />
       </Columns>
     </ListView>
-    <ListView Id="SalesInvoice_SalesInvoiceItems_ListView" AllowEdit="True" ShowAutoFilterRow="False" NewItemRowPosition="Top" DetailViewID="">
+    <ListView Id="SalesInvoice_SalesInvoiceItems_ListView" AllowEdit="True" ShowAutoFilterRow="False" NewItemRowPosition="Top" DetailViewID="" AllowLink="False" AllowDelete="False">
       <Columns>
         <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" />
         <ColumnInfo Id="ProductName" Index="1" Width="0" />
@@ -291,13 +338,19 @@
         <ColumnInfo Id="Product" Index="0" LookupProperty="Code" Width="0" />
         <ColumnInfo Id="ProductName" Index="1" Width="0" />
         <ColumnInfo Id="SalesInvoice" Index="2" Width="0" LookupProperty="DocumentId" />
-        <ColumnInfo Id="Quantity" Width="0" />
+        <ColumnInfo Id="Quantity" Width="0" EditMaskType="RegEx" />
         <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
         <ColumnInfo Id="Discount" Index="5" Width="0" />
         <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
         <ColumnInfo Id="UnitCost" Index="7" Width="0" />
         <ColumnInfo Id="Tax" Index="8" Width="0" />
         <ColumnInfo Id="Amount" Index="9" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesInvoiceItem_LookupListView" IsGroupPanelVisible="False">
+      <Columns>
+        <ColumnInfo Id="Product.Code" PropertyName="Product.Code" Width="0" Caption="Kod" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="ProductName" PropertyName="Product.Name" Index="1" SortOrder="Descending" Width="0" />
       </Columns>
     </ListView>
     <DetailView Id="UnitSet_DetailView">
@@ -311,8 +364,8 @@
         <ColumnInfo Id="Name" Index="1" Width="0" />
       </Columns>
     </ListView>
-    <ListView Id="UnitSet_Products_ListView" NewItemRowPosition="Top" AllowEdit="True" />
-    <ListView Id="UnitSet_UnitSetDetails_ListView" ShowAutoFilterRow="False" NewItemRowPosition="Top" AllowEdit="True">
+    <ListView Id="UnitSet_Products_ListView" NewItemRowPosition="Top" AllowEdit="True" AllowDelete="False" AllowLink="False" />
+    <ListView Id="UnitSet_UnitSetDetails_ListView" ShowAutoFilterRow="False" NewItemRowPosition="Top" AllowEdit="True" AllowDelete="False" AllowLink="False">
       <Columns>
         <ColumnInfo Id="UnitSet" Index="-1" Width="0" />
         <ColumnInfo Id="Code" Index="0" Width="0" AllowEdit="False" />
@@ -348,5 +401,7 @@
         <ColumnInfo Id="IsMaınUnit" Index="3" Width="0" />
       </Columns>
     </ListView>
+    <ListView Id="UnitSetDetail_PurchaseInvoiceItems_ListView" AllowLink="False" AllowDelete="False" />
+    <ListView Id="UnitSetDetail_SalesInvoiceItems_ListView" AllowLink="False" AllowDelete="False" />
   </Views>
 </Application>

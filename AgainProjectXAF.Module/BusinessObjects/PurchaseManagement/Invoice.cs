@@ -7,7 +7,7 @@ using System;
 
 namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
 {
-    [DefaultClassOptions]
+    //[DefaultClassOptions]
     public abstract class Invoice : BaseObject
     {
         public Invoice(Session session): base(session)

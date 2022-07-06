@@ -40,6 +40,7 @@
       <OwnMembers>
         <Member Name="Code" Caption="Kod" />
         <Member Name="FinancialMovements" Caption="Finansal Hareketler" />
+        <Member Name="Invoices" Caption="Fatura Belgesi" />
         <Member Name="IsApproved" Caption="Onaylandı" />
         <Member Name="Name" Caption="Ad" />
       </OwnMembers>
@@ -70,6 +71,7 @@
         <Member Name="Tax" Caption="Vergi" />
         <Member Name="UnitCost" Caption="Birim Miktar" />
         <Member Name="UnitPrice" Caption="Birim Fiyat" />
+        <Member Name="UnitSetDetail" Caption="Birim Set Detay" />
       </OwnMembers>
     </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.Invoice" Caption="Fatura">
@@ -98,6 +100,7 @@
         <Member Name="Tax" Caption="Vergi" />
         <Member Name="UnitCost" Caption="Birim Miktar" />
         <Member Name="UnitPrice" Caption="Birim Fiyat" />
+        <Member Name="UnitSetDetail" Caption="Birim Set Detay" />
       </OwnMembers>
     </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Brand" Caption="Marka">
@@ -208,15 +211,6 @@
       <LocalizationItem Name="Close" Value="Kapat" />
     </LocalizationGroup>
   </Localization>
-  <NavigationItems>
-    <Items>
-      <Item Id="Default">
-        <Items>
-          <Item Id="FinancialMovement_ListView" Caption="Finansal Hareketler" />
-        </Items>
-      </Item>
-    </Items>
-  </NavigationItems>
   <Validation>
     <ErrorMessageTemplates>
       <RuleRequiredField MessageTemplateMustNotBeEmpty="&quot;{TargetPropertyName}&quot; alanı boş olmamalıdır!" />
@@ -344,6 +338,16 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <ListView Id="Product_PurchaseInvoiceItems_ListView">
+      <Columns>
+        <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
+      </Columns>
+    </ListView>
+    <ListView Id="Product_SalesInvoiceItems_ListView">
+      <Columns>
+        <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
+      </Columns>
+    </ListView>
     <DetailView Id="PurchaseInvoice_DetailView">
       <Items>
         <PropertyEditor Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
@@ -378,6 +382,7 @@
     </ListView>
     <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView">
       <Columns>
+        <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
         <ColumnInfo Id="Discount" DisplayFormat="% {0:N0}" />
       </Columns>
     </ListView>
@@ -392,6 +397,7 @@
     </DetailView>
     <ListView Id="PurchaseInvoiceItem_ListView">
       <Columns>
+        <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
         <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" />
       </Columns>
     </ListView>
@@ -408,6 +414,7 @@
             <LayoutGroup Id="SalesInvoice" Caption="Satış Faturası" />
           </LayoutGroup>
           <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="SalesInvoiceItems" Caption="Satış Fatura Satırları" />
             <LayoutGroup Id="FinancialMovements" Caption="Finansal Hareketler" />
           </TabbedGroup>
         </LayoutGroup>
@@ -416,8 +423,8 @@
     <ListView Id="SalesInvoice_ListView">
       <Columns>
         <ColumnInfo Id="DocumentId" Caption="Belge No" />
-        <ColumnInfo Id="Date" Caption="Tarih" />
         <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <ColumnInfo Id="Date" Caption="Tarih" />
       </Columns>
     </ListView>
     <ListView Id="SalesInvoice_LookupListView">
@@ -452,7 +459,36 @@
     </DetailView>
     <ListView Id="SalesInvoiceItem_ListView">
       <Columns>
+        <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
         <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" />
+      </Columns>
+    </ListView>
+    <DetailView Id="UnitSet_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="UnitSet" Caption="Birim Set" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="UnitSetDetail_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="UnitSetDetail" Caption="Birim Set Detay" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="UnitSetDetail_PurchaseInvoiceItems_ListView">
+      <Columns>
+        <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
+      </Columns>
+    </ListView>
+    <ListView Id="UnitSetDetail_SalesInvoiceItems_ListView">
+      <Columns>
+        <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
       </Columns>
     </ListView>
     <ListView Id="ViewDashboardOrganizationItem_ListView" Caption="Görünüm" />

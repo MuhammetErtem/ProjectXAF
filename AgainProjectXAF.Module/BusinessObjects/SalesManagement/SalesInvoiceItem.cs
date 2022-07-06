@@ -7,8 +7,8 @@ using System;
 
 namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
 {
-    [ImageName("BO_Contact")]
-    [DefaultClassOptions]
+    //[ImageName("BO_Contact")]
+    //[DefaultClassOptions]
     public class SalesInvoiceItem : BaseObject
     {
         public SalesInvoiceItem(Session session)
@@ -37,7 +37,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
                     }
                 }
             }
@@ -57,8 +56,19 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
+                        foreach (var item in value.UnitSet.UnitSetDetails)
+                        {
+                            if (item != null)
+                            {
+                                if (item.IsMaınUnit)
+                                {
+                                    UnitSetDetail = item;
+                                }
+                            }
+                        }
+
+                        Quantity = 1;
                         // UnitPrice = (Product.Price)*(UnitSetDetail.Quantity)*(Quantity);*/ // Ürünü set ettiğimizde UnitPrice alanına ürünün fiyatını yazıyor.
-                                                                                              //Kod patlıyor. Buna bakılacak ? 
                     }
                 }
             }
@@ -80,6 +90,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
+                        UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
 
                     }
                 }
@@ -101,6 +112,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
+                        _UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
 
                     }
                 }
@@ -116,18 +128,33 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
 
 
 
-        [PersistentAlias("(Product.Price)*(UnitSetDetail.Quantity)*(Quantity)")]
-        [ImmediatePostData]
+        //[PersistentAlias("(Product.Price)*(UnitSetDetail.Quantity)*(Quantity)")]
+        //[ImmediatePostData]
+        //public decimal UnitPrice
+        //{
+        //    get { return Convert.ToDecimal(EvaluateAlias(nameof(UnitPrice))); }
+        //    //Açıklaması bakılacak. 
+        //    //Sadece get olduğu için okunabilir olur. Set kaldırılmasının nedeni ,yazılabilir bir veri istemediğimizdendir.
+        //}
+
+        private decimal _UnitPrice;
+        /// <summary>
+        ///
+        /// </summary>
         public decimal UnitPrice
         {
-            get { return Convert.ToDecimal(EvaluateAlias(nameof(UnitPrice))); }
+            get { return _UnitPrice; }
+            set
+            {
+                if (SetPropertyValue<decimal>(nameof(UnitPrice), ref _UnitPrice, value))
+                {
+                    if (!IsLoading && !IsSaving)
+                    {
 
-            //Açıklaması bakılacak. 
-            //Sadece get olduğu için okunabilir olur. Set kaldırılmasının nedeni ,yazılabilir bir veri istemediğimizdendir.
+                    }
+                }
+            }
         }
-
-
-
 
         //private decimal _UnitPrice;
         ///// <summary>
@@ -135,7 +162,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
         ///// </summary>
         //public decimal UnitPrice
         //{
-        //    get { return _UnitPrice; }
+        //    get { return _UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity); }
         //    set
         //    {
         //        if (SetPropertyValue<decimal>(nameof(UnitPrice), ref _UnitPrice, value))
@@ -168,8 +195,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
 
         private int _Discount;
         [ImmediatePostData]
-        [NonPersistent]
-
         /// <summary>
         ///
         /// </summary>
@@ -182,23 +207,27 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
+                        
                     }
                 }
             }
         }
 
-        [PersistentAlias("(UnitPrice)*(100-Discount)/100")]
-        [RuleRequiredField("RuleRequiredField for SalesInvoiceItem.DiscountedPrice", DefaultContexts.Save)]
+        //[PersistentAlias("(UnitPrice)*(100-Discount)/100")]
+        //[ImmediatePostData]
+        //public decimal DiscountedPrice
+        //{
+        //    get { return Convert.ToDecimal(EvaluateAlias(nameof(DiscountedPrice))); }
+        //}
+
+        private decimal _DiscountedPrice;
         [ImmediatePostData]
         public decimal DiscountedPrice
         {
-            get { return Convert.ToDecimal(EvaluateAlias(nameof(DiscountedPrice))); }
+            get { return _DiscountedPrice = (UnitPrice) * (100 - Discount) / 100; }
         }
 
-
         [PersistentAlias("(DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity)")]
-        [RuleRequiredField("RuleRequiredField for SalesInvoiceItem.UnitCost", DefaultContexts.Save)]
         [ImmediatePostData]
         public decimal UnitCost
         {

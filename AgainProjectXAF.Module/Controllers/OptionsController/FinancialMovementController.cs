@@ -70,6 +70,7 @@ namespace AgainProjectXAF.Module.Controllers.OptionsController
             IObjectSpace objectSpaceCreate = Application.CreateObjectSpace();
             e.View = Application.CreateDetailView(objectSpaceCreate, "CustomerSupplier_DetailView_FinMovs",
                 true, View.CurrentObject);
+            //Finansal hareketler tablosunu açıyor.
         }
     }
 }

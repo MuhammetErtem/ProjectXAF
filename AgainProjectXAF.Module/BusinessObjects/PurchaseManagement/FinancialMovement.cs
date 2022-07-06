@@ -8,7 +8,7 @@ using System;
 
 namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
 {
-    [DefaultClassOptions]
+    //[DefaultClassOptions]
     public class FinancialMovement : BaseObject
     {
         public FinancialMovement(Session session)
@@ -121,8 +121,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
         //    }
         //}
 
-
-        //PurchaseInvoice.Date
         private DateTime _Date;
         /// <summary>
         ///
@@ -141,47 +139,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
                 }
             }
         }
-
-        ////PurchaseInvoiceItem.Amount
-        //private decimal _PurchaseInvoiceAmount;
-        ///// <summary>
-        /////
-        ///// </summary>
-        //public decimal PurchaseInvoiceAmount
-        //{
-        //    get { return _PurchaseInvoiceAmount; }
-        //    set
-        //    {
-        //        if (SetPropertyValue<decimal>(nameof(PurchaseInvoiceAmount), ref _PurchaseInvoiceAmount, value))
-        //        {
-        //            if (!IsLoading && !IsSaving)
-        //            {
-
-        //            }
-        //        }
-        //    }
-        //}
-
-        ////SalesInvoiceItem.Amount
-        //private decimal _SalesInvoiceAmount;
-        ///// <summary>
-        /////
-        ///// </summary>
-        //public decimal SalesInvoiceAmount
-        //{
-        //    get { return _SalesInvoiceAmount; }
-        //    set
-        //    {
-        //        if (SetPropertyValue<decimal>(nameof(SalesInvoiceAmount), ref _SalesInvoiceAmount, value))
-        //        {
-        //            if (!IsLoading && !IsSaving)
-        //            {
-
-        //            }
-        //        }
-        //    }
-        //}
-
 
     }
 }

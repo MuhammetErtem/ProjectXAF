@@ -48,7 +48,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
 
         [PersistentAlias("PurchaseInvoiceItems.Sum(Amount)")]
         [ImmediatePostData]
-
         public decimal TotalAmount
         {
             get { return Convert.ToDecimal(EvaluateAlias(nameof(TotalAmount))); }
