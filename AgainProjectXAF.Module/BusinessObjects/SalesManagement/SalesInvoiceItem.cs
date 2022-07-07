@@ -76,6 +76,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
 
         private int _Quantity;
         [RuleRequiredField("RuleRequiredField for SalesInvoiceItem.Quantity", DefaultContexts.Save)]
+        [RuleValueComparison("SalesInvoice.Price.GreaterThanZero", DefaultContexts.Save, ValueComparisonType.GreaterThanOrEqual, 1)]
         [Persistent("Miktar")]
         [ImmediatePostData]
         /// <summary>
@@ -138,6 +139,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
         //}
 
         private decimal _UnitPrice;
+        [RuleValueComparison("SalesInvoice.UnitPrice.GreaterThanZero", DefaultContexts.Save, ValueComparisonType.GreaterThanOrEqual, 1)]
         /// <summary>
         ///
         /// </summary>

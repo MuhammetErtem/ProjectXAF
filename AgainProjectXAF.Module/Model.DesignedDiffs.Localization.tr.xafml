@@ -62,7 +62,7 @@
     <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.PurchaseInvoiceItem" Caption="Satın Alma Fatura Satırı">
       <OwnMembers>
         <Member Name="Amount" Caption="Tutar" />
-        <Member Name="Discount" Caption="İndirim" />
+        <Member Name="Discount" Caption="İndirim" EditMask="\d{0,2}" />
         <Member Name="DiscountedPrice" Caption="İndirimli Fiyat" />
         <Member Name="Product" Caption="Malzeme" />
         <Member Name="ProductName" Caption="Malzeme Adı" />
@@ -91,7 +91,7 @@
     <Class Name="AgainProjectXAF.Module.BusinessObjects.SalesManagement.SalesInvoiceItem" Caption="Satış Fatura Detay">
       <OwnMembers>
         <Member Name="Amount" Caption="Tutar" />
-        <Member Name="Discount" Caption="İndirim" />
+        <Member Name="Discount" Caption="İndirim" EditMask="\d{0,2}" />
         <Member Name="DiscountedPrice" Caption="İndirimli Fiyat" />
         <Member Name="Product" Caption="Malzeme" />
         <Member Name="ProductName" Caption="Malzeme Adı" />
@@ -214,6 +214,7 @@
   <Validation>
     <ErrorMessageTemplates>
       <RuleRequiredField MessageTemplateMustNotBeEmpty="&quot;{TargetPropertyName}&quot; alanı boş olmamalıdır!" />
+      <RuleValueComparison MessageTemplateMustBeGreaterThanOrEqualToOperand="&quot;{TargetPropertyName}&quot; &quot;{RightOperand}&quot; 'e eşit ya da daha büyük olmalıdır." />
     </ErrorMessageTemplates>
   </Validation>
   <Views>

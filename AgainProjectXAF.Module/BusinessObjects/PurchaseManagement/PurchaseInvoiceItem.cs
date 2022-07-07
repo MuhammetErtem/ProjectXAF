@@ -86,7 +86,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
         [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.Quantity", DefaultContexts.Save)]
         [Persistent("Miktar")]
         [ImmediatePostData]
-        [RuleValueComparison("AdditionalCost.Price.GreaterThanZero", DefaultContexts.Save, ValueComparisonType.GreaterThanOrEqual, 1)]
+        [RuleValueComparison("PurchaseInvoice.Price.GreaterThanZero", DefaultContexts.Save, ValueComparisonType.GreaterThanOrEqual, 1)]
         /// <summary>
         ///
         /// </summary>
@@ -120,7 +120,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
                     if (!IsLoading && !IsSaving)
                     {
                         _UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
-
                     }
                 }
             }
@@ -150,6 +149,8 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
         //    //Sadece get olduğu için okunabilir olur. Set kaldırılmasının nedeni ,yazılabilir bir veri istemediğimizdendir.
         //}
         private decimal _UnitPrice;
+        [RuleValueComparison("PurchaseInvoice.UnitPrice.GreaterThanZero", DefaultContexts.Save, ValueComparisonType.GreaterThanOrEqual, 1)]
+        [ImmediatePostData]
         /// <summary>
         ///
         /// </summary>

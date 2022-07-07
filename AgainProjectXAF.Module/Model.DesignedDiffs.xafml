@@ -9,6 +9,12 @@
     <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.PurchaseInvoiceItem">
       <OwnMembers>
         <Member Name="Amount" EditMaskType="RegEx" />
+        <Member Name="Discount" EditMaskType="RegEx" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.SalesManagement.SalesInvoiceItem">
+      <OwnMembers>
+        <Member Name="Discount" EditMaskType="RegEx" />
       </OwnMembers>
     </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Brand" IsVisibleInReports="True" />
@@ -172,7 +178,12 @@
         <Filter Id="Onaysız" Criteria="[IsApproved] = False" IsNewNode="True" />
       </Filters>
     </ListView>
-    <ListView Id="Product_LookupListView" ShowAutoFilterRow="True" />
+    <ListView Id="Product_LookupListView" ShowAutoFilterRow="True">
+      <Columns>
+        <ColumnInfo Id="Code" PropertyName="Code" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Name" Index="1" />
+      </Columns>
+    </ListView>
     <ListView Id="Product_PurchaseInvoiceItems_ListView" NewItemRowPosition="Top" AllowEdit="True" AllowDelete="False" AllowLink="False" AllowUnlink="False">
       <Columns>
         <ColumnInfo Id="PurchaseInvoice" Index="-1" />
