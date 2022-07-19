@@ -1,4 +1,4 @@
-﻿using AgainProjectXAF.Module.BusinessObjects.PurchaseManagament;
+﻿using AgainProjectXAF.Module.BusinessObjects.PurchaseManagement;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
 using DevExpress.Persistent.Base;

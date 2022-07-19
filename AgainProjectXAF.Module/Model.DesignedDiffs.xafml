@@ -6,10 +6,15 @@
     </Actions>
   </ActionDesign>
   <BOModel>
-    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.PurchaseInvoiceItem">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.PurchaseInvoiceItem">
       <OwnMembers>
         <Member Name="Amount" EditMaskType="RegEx" />
         <Member Name="Discount" EditMaskType="RegEx" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.RegulationManagement.Tax" DefaultListViewImage="Pie">
+      <OwnMembers>
+        <Member Name="Code" AllowEdit="False" />
       </OwnMembers>
     </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.SalesManagement.SalesInvoiceItem">
@@ -21,7 +26,6 @@
     <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Product">
       <OwnMembers>
         <Member Name="Image" Size="0" />
-        <Member Name="TaxRate" EditMask="\d{0,5}" EditMaskType="RegEx" DisplayFormat="%{0:N0}" />
       </OwnMembers>
     </Class>
     <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyUser" Caption="Base User" />
@@ -52,7 +56,7 @@
         <PropertyEditor Id="Code" AllowEdit="False" />
       </Items>
     </DetailView>
-    <DetailView Id="CustomerSupplier_DetailView_FinMovs" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.CustomerSupplier" IsNewNode="True">
+    <DetailView Id="CustomerSupplier_DetailView_FinMovs" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.CustomerSupplier" IsNewNode="True">
       <Items IsNewNode="True">
         <PropertyEditor Id="Code" PropertyName="Code" AllowEdit="False" IsNewNode="True" />
         <PropertyEditor Id="CustomerSupplierNameAndCode" PropertyName="CustomerSupplierNameAndCode" IsNewNode="True" />
@@ -138,26 +142,35 @@
         <PropertyEditor Id="Brand" PropertyName="Brand" IsNewNode="True" />
         <PropertyEditor Id="Code" AllowEdit="False" />
         <PropertyEditor Id="Image" MaxLength="100" />
+        <PropertyEditor Id="Tax" PropertyName="Tax" IsNewNode="True" />
         <PropertyEditor Id="UnitSet" PropertyName="UnitSet" IsNewNode="True" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="31.346153846153847">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="29.03846153846154">
             <LayoutGroup Id="Product" RelativeSize="100">
-              <LayoutGroup Id="Product_col1" RelativeSize="49.728752260397833">
-                <LayoutItem Id="Code" RelativeSize="25.806451612903224" />
-                <LayoutItem Id="Name" RelativeSize="19.35483870967742" Index="1" />
-                <LayoutItem Id="Brand" Index="2" ViewItem="Brand" RelativeSize="19.35483870967742" IsNewNode="True" />
-                <LayoutItem Id="Price" Index="3" RelativeSize="35.483870967741936" />
+              <LayoutGroup Id="Product_col1" RelativeSize="49.678800856531048">
+                <LayoutItem Id="Code" RelativeSize="28.571428571428573" />
+                <LayoutItem Id="Name" ViewItem="Name" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" Removed="True" />
+                <LayoutItem Id="Brand" ViewItem="Brand" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+                <LayoutItem Id="Price" ViewItem="Price" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" Removed="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Product_col2" RelativeSize="50.271247739602167">
-                <LayoutItem Id="TaxRate" RelativeSize="25.806451612903224" />
-                <LayoutItem Id="UnitSet" ViewItem="UnitSet" Index="0" RelativeSize="50" IsNewNode="True" />
-                <LayoutItem Id="Image" ViewItem="Image" Index="1" RelativeSize="50" IsNewNode="True" Removed="True" />
-                <LayoutItem Id="IsApproved" ViewItem="IsApproved" Index="2" RelativeSize="25" IsNewNode="True" Removed="True" />
+              <LayoutGroup Id="Product_col2" RelativeSize="50.321199143468952">
+                <LayoutItem Id="UnitSet" ViewItem="UnitSet" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                <LayoutItem Id="Tax" Index="1" ViewItem="Tax" RelativeSize="21.428571428571427" IsNewNode="True" />
+                <LayoutItem Id="IsApproved" ViewItem="IsApproved" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" Removed="True" />
+                <LayoutItem Id="Image" ViewItem="Image" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" Removed="True" />
               </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="70.961538461538467">
+            <LayoutGroup Id="PurchaseInvoiceItems" RelativeSize="100">
+              <LayoutItem Id="PurchaseInvoiceItems" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="SalesInvoiceItems" RelativeSize="100">
+              <LayoutItem Id="SalesInvoiceItems" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -168,7 +181,6 @@
         <ColumnInfo Id="UnitSet" Index="2" Width="0" />
         <ColumnInfo Id="Brand" Index="3" Width="0" />
         <ColumnInfo Id="Price" Index="4" Width="0" />
-        <ColumnInfo Id="TaxRate" Index="5" Width="0" />
         <ColumnInfo Id="Image" Index="6" Width="0" />
         <ColumnInfo Id="IsApproved" Index="7" Width="0" />
       </Columns>
@@ -180,23 +192,42 @@
     </ListView>
     <ListView Id="Product_LookupListView" ShowAutoFilterRow="True">
       <Columns>
-        <ColumnInfo Id="Code" PropertyName="Code" Index="0" IsNewNode="True" />
-        <ColumnInfo Id="Name" Index="1" />
+        <ColumnInfo Id="Code" PropertyName="Code" Index="0" Width="0" IsNewNode="True" />
+        <ColumnInfo Id="Name" Index="1" Width="0" />
       </Columns>
     </ListView>
     <ListView Id="Product_PurchaseInvoiceItems_ListView" NewItemRowPosition="Top" AllowEdit="True" AllowDelete="False" AllowLink="False" AllowUnlink="False">
       <Columns>
         <ColumnInfo Id="PurchaseInvoice" Index="-1" />
-        <ColumnInfo Id="Product" Index="0" Width="0" />
+        <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" />
         <ColumnInfo Id="ProductName" Index="1" Width="0" />
-        <ColumnInfo Id="UnitSetDetail" Index="2" Width="0" />
-        <ColumnInfo Id="UnitPrice" Index="3" Width="0" />
-        <ColumnInfo Id="Quantity" Index="4" Width="0" />
-        <ColumnInfo Id="Tax" Index="5" Width="0" />
-        <ColumnInfo Id="Amount" Index="6" Width="0" />
+        <ColumnInfo Id="Quantity" Index="2" Width="0" />
+        <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" />
+        <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
+        <ColumnInfo Id="Discount" Index="5" Width="0" />
+        <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
+        <ColumnInfo Id="UnitCost" Index="7" Width="0" />
+        <ColumnInfo Id="Tax" Index="8" Width="0" />
+        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
+        <ColumnInfo Id="Amount" Index="10" Width="0" />
       </Columns>
     </ListView>
-    <ListView Id="Product_SalesInvoiceItems_ListView" AllowDelete="False" AllowLink="False" />
+    <ListView Id="Product_SalesInvoiceItems_ListView" AllowDelete="False" AllowLink="False" NewItemRowPosition="Top" AllowEdit="True">
+      <Columns>
+        <ColumnInfo Id="SalesInvoice" Index="-1" />
+        <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" />
+        <ColumnInfo Id="ProductName" Index="1" Width="0" />
+        <ColumnInfo Id="Quantity" Index="2" Width="0" />
+        <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" />
+        <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
+        <ColumnInfo Id="Discount" Index="5" Width="0" />
+        <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
+        <ColumnInfo Id="UnitCost" Index="7" Width="0" />
+        <ColumnInfo Id="Tax" Index="8" Width="0" />
+        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
+        <ColumnInfo Id="Amount" Index="10" Width="0" />
+      </Columns>
+    </ListView>
     <DetailView Id="PurchaseInvoice_DetailView">
       <Items>
         <PropertyEditor Id="CustomerSupplier" LookupProperty="CustomerSupplierNameAndCode" />
@@ -260,7 +291,8 @@
         <ColumnInfo Id="DiscountedPrice" Caption="İndirimli Fiyat" Width="0" Index="6" />
         <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" Width="0" Index="7" />
         <ColumnInfo Id="Tax" Index="8" Width="0" />
-        <ColumnInfo Id="Amount" Index="9" Width="0" />
+        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
+        <ColumnInfo Id="Amount" Index="10" Width="0" />
       </Columns>
     </ListView>
     <DetailView Id="PurchaseInvoiceItem_DetailView" AllowEdit="False" />
@@ -330,7 +362,7 @@
         <ColumnInfo Id="TotalAmount" Index="3" Width="0" />
       </Columns>
     </ListView>
-    <ListView Id="SalesInvoice_SalesInvoiceItems_ListView" AllowEdit="True" ShowAutoFilterRow="False" NewItemRowPosition="Top" DetailViewID="" AllowLink="False" AllowDelete="False">
+    <ListView Id="SalesInvoice_SalesInvoiceItems_ListView" AllowEdit="True" ShowAutoFilterRow="False" NewItemRowPosition="Top" AllowLink="False" AllowDelete="False" DetailViewID="">
       <Columns>
         <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" />
         <ColumnInfo Id="ProductName" Index="1" Width="0" />
@@ -341,7 +373,8 @@
         <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
         <ColumnInfo Id="UnitCost" Index="7" Width="0" />
         <ColumnInfo Id="Tax" Index="8" Width="0" />
-        <ColumnInfo Id="Amount" Index="9" Width="0" />
+        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
+        <ColumnInfo Id="Amount" Index="10" Width="0" />
       </Columns>
     </ListView>
     <ListView Id="SalesInvoiceItem_ListView">
@@ -362,6 +395,71 @@
       <Columns>
         <ColumnInfo Id="Product.Code" PropertyName="Product.Code" Width="0" Caption="Kod" Index="0" IsNewNode="True" />
         <ColumnInfo Id="ProductName" PropertyName="Product.Name" Index="1" SortOrder="Descending" Width="0" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Tax_DetailView">
+      <Items>
+        <PropertyEditor Id="Rate" EditMaskType="RegEx" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="11.923076923076923">
+            <LayoutGroup Id="Tax" RelativeSize="100">
+              <LayoutItem Id="Code" RelativeSize="51.612903225806448" />
+              <LayoutGroup Id="Autoacf8a66b-a0e9-4968-997d-153ed63f2c3c" ShowCaption="False" Direction="Horizontal" Index="1" RelativeSize="48.387096774193552" IsNewNode="True">
+                <LayoutItem Id="Name" ViewItem="Name" Index="0" RelativeSize="49.897750511247445" IsNewNode="True" />
+                <LayoutItem Id="Rate" ViewItem="Rate" Index="1" RelativeSize="50.102249488752555" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Name" Removed="True" />
+              <LayoutItem Id="Rate" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Tax_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" Width="0" Index="0" />
+        <ColumnInfo Id="Name" Width="0" Index="1" />
+        <ColumnInfo Id="Rate" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="Tax_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Name" Index="0" Width="0" />
+        <ColumnInfo Id="Rate" PropertyName="Rate" Index="1" Width="0" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Tax_PurchaseInvoiceItems_ListView" AllowDelete="False" AllowLink="False" AllowNew="False">
+      <Columns>
+        <ColumnInfo Id="PurchaseInvoice" Index="-1" />
+        <ColumnInfo Id="Product" Index="0" Width="0" />
+        <ColumnInfo Id="ProductName" Index="1" Width="0" />
+        <ColumnInfo Id="Quantity" Index="2" Width="0" />
+        <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" />
+        <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
+        <ColumnInfo Id="Discount" Index="5" Width="0" />
+        <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
+        <ColumnInfo Id="UnitCost" Index="7" Width="0" />
+        <ColumnInfo Id="Tax" Index="8" Width="0" />
+        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
+        <ColumnInfo Id="Amount" Index="10" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="Tax_SalesInvoiceItems_ListView" AllowDelete="False" AllowLink="False" AllowNew="False" AllowEdit="True" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="SalesInvoice" Index="-1" />
+        <ColumnInfo Id="Product" Index="0" Width="0" />
+        <ColumnInfo Id="ProductName" Index="1" Width="0" />
+        <ColumnInfo Id="Quantity" Index="2" Width="0" />
+        <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" />
+        <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
+        <ColumnInfo Id="Discount" Index="5" Width="0" />
+        <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
+        <ColumnInfo Id="UnitCost" Index="7" Width="0" />
+        <ColumnInfo Id="PriceWithTax" Index="8" Width="0" EditMaskType="RegEx" />
+        <ColumnInfo Id="Tax" Index="9" Width="0" />
+        <ColumnInfo Id="Amount" Index="10" Width="0" />
       </Columns>
     </ListView>
     <DetailView Id="UnitSet_DetailView">

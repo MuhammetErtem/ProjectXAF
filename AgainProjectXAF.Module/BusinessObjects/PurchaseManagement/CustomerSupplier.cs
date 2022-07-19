@@ -1,12 +1,10 @@
-﻿using AgainProjectXAF.Module.BusinessObjects.PurchaseManagement;
-using AgainProjectXAF.Module.BusinessObjects.SalesManagement;
-using DevExpress.Persistent.Base;
+﻿using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
 using System;
 
-namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
+namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
 {
     [DefaultClassOptions]
     [ImageName("BO_Customer")]

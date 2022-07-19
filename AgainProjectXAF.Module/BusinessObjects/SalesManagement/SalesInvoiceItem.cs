@@ -1,4 +1,5 @@
-﻿using AgainProjectXAF.Module.BusinessObjects.StockManagement;
+﻿using AgainProjectXAF.Module.BusinessObjects.RegulationManagement;
+using AgainProjectXAF.Module.BusinessObjects.StockManagement;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
@@ -66,7 +67,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                                 }
                             }
                         }
-
+                        Tax = Product.Tax;
                         Quantity = 1;
                         // UnitPrice = (Product.Price)*(UnitSetDetail.Quantity)*(Quantity);*/ // Ürünü set ettiğimizde UnitPrice alanına ürünün fiyatını yazıyor.
                     }
@@ -124,7 +125,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
         [ImmediatePostData]
         public decimal Amount
         {
-            get { return _Amount = DiscountedPrice + Tax; }
+            get { return _Amount = DiscountedPrice + PriceWithTax; }
         }
 
 
@@ -187,12 +188,12 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
         }
 
 
-        [PersistentAlias("(UnitPrice)*((Product.TaxRate)*(0.01))")]
-        [RuleRequiredField("RuleRequiredField for SalesInvoiceItem.Tax", DefaultContexts.Save)]
+        [PersistentAlias("(UnitPrice)*((Tax.Rate)*(0.01))")]
+        [RuleRequiredField("RuleRequiredField for SalesInvoiceItem.PriceWithTax", DefaultContexts.Save)]
         [ImmediatePostData]
-        public decimal Tax
+        public decimal PriceWithTax
         {
-            get { return Convert.ToDecimal(EvaluateAlias(nameof(Tax))); }
+            get { return Convert.ToDecimal(EvaluateAlias(nameof(PriceWithTax))); }
         }
 
         private int _Discount;
@@ -235,5 +236,27 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
         {
             get { return Convert.ToDecimal(EvaluateAlias(nameof(UnitCost))); }
         }
+
+        private Tax _Tax;
+        [RuleRequiredField("RuleRequiredField for SalesInvoiceItem.Tax", DefaultContexts.Save)]
+        [Association("Tax-SalesInvoiceItems")]
+        /// <summary>
+        ///             REFERANS
+        /// </summary>
+        public Tax Tax
+        {
+            get { return _Tax; }
+            set
+            {
+                if (SetPropertyValue<Tax>(nameof(Tax), ref _Tax, value))
+                {
+                    if (!IsLoading && !IsSaving)
+                    {
+
+                    }
+                }
+            }
+        }
+
     }
 }

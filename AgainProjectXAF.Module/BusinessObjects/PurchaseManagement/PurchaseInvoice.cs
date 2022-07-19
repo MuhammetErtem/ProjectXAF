@@ -1,11 +1,8 @@
-﻿using AgainProjectXAF.Module.BusinessObjects.PurchaseManagement;
-using DevExpress.Persistent.Base;
-using DevExpress.Persistent.BaseImpl;
-using DevExpress.Persistent.Validation;
+﻿using DevExpress.Persistent.Base;
 using DevExpress.Xpo;
 using System;
 
-namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
+namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
 {
     [DefaultClassOptions]
     [ImageName("BO_Invoice")]
@@ -40,6 +37,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
         ///             COLLECTİON
         /// </summary>
         [Association("PurchaseInvoice-PurchaseInvoiceItem"), DevExpress.ExpressApp.DC.Aggregated]
+        [ImmediatePostData]
         public XPCollection<PurchaseInvoiceItem> PurchaseInvoiceItems
         {
             get { return GetCollection<PurchaseInvoiceItem>(nameof(PurchaseInvoiceItems)); }
@@ -52,6 +50,5 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
         {
             get { return Convert.ToDecimal(EvaluateAlias(nameof(TotalAmount))); }
         }
-
     }
 }

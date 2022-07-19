@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Product">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="TaxRate" EditMask="\d{0,5}" EditMaskType="RegEx" DisplayFormat="%{0:N0}" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Views Id="Views">
+    <DetailView Id="Product_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Product">
+              <LayoutGroup Id="Product_col2">
+                <LayoutItem Id="TaxRate" RelativeSize="25.806451612903224" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Product_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="TaxRate" Index="5" Width="0" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

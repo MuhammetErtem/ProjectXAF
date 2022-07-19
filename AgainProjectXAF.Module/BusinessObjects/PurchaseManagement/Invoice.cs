@@ -1,6 +1,4 @@
-﻿using AgainProjectXAF.Module.BusinessObjects.PurchaseManagament;
-using DevExpress.Persistent.Base;
-using DevExpress.Persistent.BaseImpl;
+﻿using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
 using System;

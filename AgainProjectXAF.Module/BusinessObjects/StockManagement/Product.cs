@@ -1,4 +1,5 @@
-﻿using AgainProjectXAF.Module.BusinessObjects.PurchaseManagament;
+﻿using AgainProjectXAF.Module.BusinessObjects.PurchaseManagement;
+using AgainProjectXAF.Module.BusinessObjects.RegulationManagement;
 using AgainProjectXAF.Module.BusinessObjects.SalesManagement;
 using DevExpress.ExpressApp.Model;
 using DevExpress.Persistent.Base;
@@ -93,25 +94,25 @@ namespace AgainProjectXAF.Module.BusinessObjects.StockManagement
             }
         }
 
-        private decimal _TaxRate;
-        [RuleRequiredField("RuleRequiredField for Product.TaxRate", DefaultContexts.Save)]
-        /// <summary>
-        ///
-        /// </summary>
-        public decimal TaxRate
-        {
-            get { return _TaxRate; }
-            set
-            {
-                if (SetPropertyValue<decimal>(nameof(TaxRate), ref _TaxRate, value))
-                {
-                    if (!IsLoading && !IsSaving)
-                    {
+        //private decimal _TaxRate;
+        //[RuleRequiredField("RuleRequiredField for Product.TaxRate", DefaultContexts.Save)]
+        ///// <summary>
+        /////
+        ///// </summary>
+        //public decimal TaxRate
+        //{
+        //    get { return _TaxRate; }
+        //    set
+        //    {
+        //        if (SetPropertyValue<decimal>(nameof(TaxRate), ref _TaxRate, value))
+        //        {
+        //            if (!IsLoading && !IsSaving)
+        //            {
 
-                    }
-                }
-            }
-        }
+        //            }
+        //        }
+        //    }
+        //}
 
         private bool _IsApproved;
         [RuleRequiredField("RuleRequiredField for Product.IsApproved", DefaultContexts.Save)]
@@ -195,6 +196,27 @@ namespace AgainProjectXAF.Module.BusinessObjects.StockManagement
             set
             {
                 if (SetPropertyValue<Brand>(nameof(Brand), ref _Brand, value))
+                {
+                    if (!IsLoading && !IsSaving)
+                    {
+
+                    }
+                }
+            }
+        }
+
+        private Tax _Tax;
+        [RuleRequiredField("RuleRequiredField for Product.Tax", DefaultContexts.Save)]
+        [Association("Tax-Products")]
+        /// <summary>
+        ///             REFERANS
+        /// </summary>
+        public Tax Tax
+        {
+            get { return _Tax; }
+            set
+            {
+                if (SetPropertyValue<Tax>(nameof(Tax), ref _Tax, value))
                 {
                     if (!IsLoading && !IsSaving)
                     {

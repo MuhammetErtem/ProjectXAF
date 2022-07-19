@@ -26,7 +26,9 @@ namespace AgainProjectXAF.Module.Controllers.OptionsController
                 || View.Id == "CustomerSupplier_Invoices_ListView"
                 || View.Id == "CustomerSupplier_FinancialMovements_ListView"
                 || View.Id == "Invoice_FinancialMovements_ListView"
-                || View.Id == "Product_SalesInvoiceItems_ListView")
+                || View.Id == "Product_SalesInvoiceItems_ListView"
+                || View.Id == "Tax_SalesInvoiceItems_ListView"
+                || View.Id == "Tax_PurchaseInvoiceItems_ListView")
             {
                 DevExpress.ExpressApp.Win.SystemModule.WinNewObjectViewController winNewObjectViewController = Frame.GetController<DevExpress.ExpressApp.Win.SystemModule.WinNewObjectViewController>();
                 // Frame = çerçeve , Nested = İç içe 

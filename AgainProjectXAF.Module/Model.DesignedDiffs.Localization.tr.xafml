@@ -36,7 +36,7 @@
         <Member Name="User" Caption="Kullanıcı" />
       </OwnMembers>
     </Class>
-    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.CustomerSupplier" Caption="Müşteri / Satıcı">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.CustomerSupplier" Caption="Müşteri / Satıcı">
       <OwnMembers>
         <Member Name="Code" Caption="Kod" />
         <Member Name="FinancialMovements" Caption="Finansal Hareketler" />
@@ -45,7 +45,7 @@
         <Member Name="Name" Caption="Ad" />
       </OwnMembers>
     </Class>
-    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.FinancialMovement" Caption="Finansal Hareketler">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.FinancialMovement" Caption="Finansal Hareketler">
       <OwnMembers>
         <Member Name="Credit" Caption="Alacak" />
         <Member Name="CustomerSupplier" Caption="Müşteri / Satıcı" />
@@ -54,12 +54,12 @@
         <Member Name="Invoice" Caption="Fatura Bilgisi" />
       </OwnMembers>
     </Class>
-    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.PurchaseInvoice" Caption="Satın Alma Faturası">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.PurchaseInvoice" Caption="Satın Alma Faturası">
       <OwnMembers>
         <Member Name="TotalAmount" Caption="Toplam Tutar" />
       </OwnMembers>
     </Class>
-    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.PurchaseInvoiceItem" Caption="Satın Alma Fatura Satırı">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.PurchaseInvoiceItem" Caption="Satın Alma Fatura Satırı">
       <OwnMembers>
         <Member Name="Amount" Caption="Tutar" />
         <Member Name="Discount" Caption="İndirim" EditMask="\d{0,2}" />
@@ -80,6 +80,14 @@
         <Member Name="Date" Caption="Tarih" />
         <Member Name="DocumentId" Caption="Belge No" />
         <Member Name="FinancialMovements" Caption="Finansal Hareketler" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.RegulationManagement.Tax" Caption="Vergi">
+      <OwnMembers>
+        <Member Name="Code" Caption="Kod" />
+        <Member Name="Name" Caption="Ad" />
+        <Member Name="PurchaseInvoiceItems" Caption="Satın Alma Fatura Satırları" />
+        <Member Name="Rate" Caption="Oran" />
       </OwnMembers>
     </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.SalesManagement.SalesInvoice" Caption="Satış Faturası">
@@ -120,7 +128,6 @@
         <Member Name="Price" Caption="Fiyat" />
         <Member Name="PurchaseInvoiceItems" Caption="Satın Alma Fatura Satırları" />
         <Member Name="SalesInvoiceItems" Caption="Satış Fatura Satırları" />
-        <Member Name="TaxRate" Caption="Vergi Oranı" />
         <Member Name="UnitSet" Caption="Birim Set" />
       </OwnMembers>
     </Class>
@@ -201,7 +208,7 @@
     </Class>
   </BOModel>
   <CreatableItems>
-    <CreatableItem ClassName="AgainProjectXAF.Module.BusinessObjects.PurchaseManagament.CustomerSupplier" Caption="Müşteri / Satıcı" />
+    <CreatableItem ClassName="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.CustomerSupplier" Caption="Müşteri / Satıcı" />
   </CreatableItems>
   <Localization>
     <LocalizationGroup Name="DashboardOrganizationItems">
@@ -329,10 +336,14 @@
       </Columns>
     </ListView>
     <DetailView Id="Product_DetailView">
+      <Items>
+        <PropertyEditor Id="Tax" Caption="Vergi" />
+      </Items>
       <Layout>
         <LayoutGroup Id="Main">
           <LayoutGroup Id="SimpleEditors">
-            <LayoutGroup Id="Product">
+            <LayoutGroup Id="Product" Caption="Malzeme">
+              <LayoutGroup Id="Product_col1" Caption="Product_col1" />
               <LayoutGroup Id="Product_col2" Caption="Product_col2" />
             </LayoutGroup>
           </LayoutGroup>
@@ -342,11 +353,14 @@
     <ListView Id="Product_PurchaseInvoiceItems_ListView">
       <Columns>
         <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
+        <ColumnInfo Id="Discount" DisplayFormat="% {0:N0}" />
+        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
       </Columns>
     </ListView>
     <ListView Id="Product_SalesInvoiceItems_ListView">
       <Columns>
         <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
+        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
       </Columns>
     </ListView>
     <DetailView Id="PurchaseInvoice_DetailView">
@@ -385,6 +399,7 @@
       <Columns>
         <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
         <ColumnInfo Id="Discount" DisplayFormat="% {0:N0}" />
+        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
       </Columns>
     </ListView>
     <DetailView Id="PurchaseInvoiceItem_DetailView">
@@ -442,10 +457,11 @@
         <ColumnInfo Id="Quantity" Caption="Miktar" />
         <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
         <ColumnInfo Id="UnitPrice" Caption="Birim Fiyat" />
-        <ColumnInfo Id="Discount" Caption="İndirim" />
+        <ColumnInfo Id="Discount" Caption="İndirim" DisplayFormat="% {0:N0}" />
         <ColumnInfo Id="DiscountedPrice" Caption="İndirimli Fiyatı" />
         <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" />
         <ColumnInfo Id="Tax" Caption="Vergi" />
+        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
         <ColumnInfo Id="Amount" Caption="Tutar" />
       </Columns>
     </ListView>
@@ -462,6 +478,40 @@
       <Columns>
         <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
         <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Tax_DetailView">
+      <Items>
+        <PropertyEditor Id="Rate" EditMask="\d{0,2}" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Tax" Caption="Tax">
+              <LayoutGroup Id="Autoacf8a66b-a0e9-4968-997d-153ed63f2c3c" Caption="" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Tax_ListView">
+      <Columns>
+        <ColumnInfo Id="Rate" DisplayFormat="% {0:N0}" />
+      </Columns>
+    </ListView>
+    <ListView Id="Tax_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Rate" DisplayFormat="% {0:N0}" />
+      </Columns>
+    </ListView>
+    <ListView Id="Tax_PurchaseInvoiceItems_ListView">
+      <Columns>
+        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
+      </Columns>
+    </ListView>
+    <ListView Id="Tax_SalesInvoiceItems_ListView">
+      <Columns>
+        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
       </Columns>
     </ListView>
     <DetailView Id="UnitSet_DetailView">

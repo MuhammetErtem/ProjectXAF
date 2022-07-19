@@ -1,11 +1,12 @@
-﻿using AgainProjectXAF.Module.BusinessObjects.StockManagement;
+﻿using AgainProjectXAF.Module.BusinessObjects.RegulationManagement;
+using AgainProjectXAF.Module.BusinessObjects.StockManagement;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
 using System;
 
-namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
+namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
 {
     //[RuleCombinationOfPropertiesIsUnique("OneIsMainUnit", DefaultContexts.Save, "UnitSet, IsMainUnit", TargetCriteria = "IsMainUnit==True")] 
     //Yanlızca bir tane veri true olabilir yaptık.
@@ -74,9 +75,8 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
                                 }
                             }
                         }
-
+                        Tax = Product.Tax;
                         Quantity = 1;
-
                     }
                 }
             }
@@ -130,15 +130,15 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
         [ImmediatePostData]
         public decimal Amount
         {
-            get { return _Amount = DiscountedPrice + Tax;}
+            get { return _Amount = DiscountedPrice + PriceWithTax; }
         }
 
-        [PersistentAlias("(UnitPrice)*((Product.TaxRate)*(0.01))")]
-        [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.Tax", DefaultContexts.Save)]
+        [PersistentAlias("(UnitPrice)*((Tax.Rate)*(0.01))")]
+        [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.PriceWithTax", DefaultContexts.Save)]
         [ImmediatePostData]
-        public decimal Tax
+        public decimal PriceWithTax
         {
-            get { return Convert.ToDecimal(EvaluateAlias(nameof(Tax))); }
+            get { return Convert.ToDecimal(EvaluateAlias(nameof(PriceWithTax))); }
         }
 
         //[PersistentAlias("(Product.Price)*(UnitSetDetail.Quantity)*(Quantity)")]
@@ -214,6 +214,27 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagament
         public decimal DiscountedPrice
         {
             get { return Convert.ToDecimal(EvaluateAlias(nameof(DiscountedPrice))); }
+        }
+
+        private Tax _Tax;
+        [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.Tax", DefaultContexts.Save)]
+        [Association("Tax-PurchaseInvoiceItems")]
+        /// <summary>
+        ///             REFERANS
+        /// </summary>
+        public Tax Tax
+        {
+            get { return _Tax; }
+            set
+            {
+                if (SetPropertyValue<Tax>(nameof(Tax), ref _Tax, value))
+                {
+                    if (!IsLoading && !IsSaving)
+                    {
+
+                    }
+                }
+            }
         }
     }
 }

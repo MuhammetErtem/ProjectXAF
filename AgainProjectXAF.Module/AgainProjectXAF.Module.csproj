@@ -133,6 +133,7 @@
     <Compile Include="BusinessObjects\PurchaseManagement\Invoice.cs" />
     <Compile Include="BusinessObjects\PurchaseManagement\PurchaseInvoice.cs" />
     <Compile Include="BusinessObjects\PurchaseManagement\PurchaseInvoiceItem.cs" />
+    <Compile Include="BusinessObjects\RegulationManagement\Tax.cs" />
     <Compile Include="BusinessObjects\SalesManagement\SalesInvoice.cs" />
     <Compile Include="BusinessObjects\SalesManagement\SalesInvoiceItem.cs" />
     <Compile Include="Controllers\MyViewManagement\FinancialMovementSalesInvoiceController.cs" />
@@ -250,7 +251,24 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="UnusableNodes.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes1.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes1_tr.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
