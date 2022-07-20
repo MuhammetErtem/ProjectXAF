@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.SalesManagement.SalesInvoiceItem">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="PriceWithTax" Caption="Vergi Tutarı" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Views Id="Views">
+    <ListView Id="Product_PurchaseInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
+      </Columns>
+    </ListView>
+    <ListView Id="Product_SalesInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
+      </Columns>
+    </ListView>
+    <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesInvoice_SalesInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
+      </Columns>
+    </ListView>
+    <ListView Id="Tax_PurchaseInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
+      </Columns>
+    </ListView>
+    <ListView Id="Tax_SalesInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

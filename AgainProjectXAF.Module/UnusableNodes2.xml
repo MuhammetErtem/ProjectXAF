@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="SalesInvoiceItem_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Index="8" />
+      </Columns>
+    </ListView>
+    <ListView Id="Product_PurchaseInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="Product_SalesInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesInvoice_SalesInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="Tax_PurchaseInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
+      </Columns>
+    </ListView>
+    <ListView Id="Tax_SalesInvoiceItems_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PriceWithTax" Index="8" Width="0" EditMaskType="RegEx" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

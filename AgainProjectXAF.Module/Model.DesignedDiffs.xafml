@@ -208,7 +208,6 @@
         <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
         <ColumnInfo Id="UnitCost" Index="7" Width="0" />
         <ColumnInfo Id="Tax" Index="8" Width="0" />
-        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
         <ColumnInfo Id="Amount" Index="10" Width="0" />
       </Columns>
     </ListView>
@@ -224,7 +223,6 @@
         <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
         <ColumnInfo Id="UnitCost" Index="7" Width="0" />
         <ColumnInfo Id="Tax" Index="8" Width="0" />
-        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
         <ColumnInfo Id="Amount" Index="10" Width="0" />
       </Columns>
     </ListView>
@@ -288,11 +286,12 @@
         <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" DataSourceCriteriaProperty="" DataSourcePropertyIsNullCriteria="" />
         <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
         <ColumnInfo Id="Discount" Width="0" Caption="İndirim Oranı" DisplayFormat="% {0:C}" Index="5" />
-        <ColumnInfo Id="DiscountedPrice" Caption="İndirimli Fiyat" Width="0" Index="6" />
-        <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" Width="0" Index="7" />
-        <ColumnInfo Id="Tax" Index="8" Width="0" />
-        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
-        <ColumnInfo Id="Amount" Index="10" Width="0" />
+        <ColumnInfo Id="DiscountAmount" Width="0" Index="6" />
+        <ColumnInfo Id="DiscountedPrice" Caption="İndirimli Fiyat" Width="0" Index="7" />
+        <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" Width="0" Index="8" />
+        <ColumnInfo Id="Tax" Index="9" Width="0" />
+        <ColumnInfo Id="TaxAmount" Index="10" Width="0" />
+        <ColumnInfo Id="Amount" Index="11" Width="0" />
       </Columns>
     </ListView>
     <DetailView Id="PurchaseInvoiceItem_DetailView" AllowEdit="False" />
@@ -370,11 +369,12 @@
         <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" />
         <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
         <ColumnInfo Id="Discount" Index="5" Width="0" />
-        <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
-        <ColumnInfo Id="UnitCost" Index="7" Width="0" />
-        <ColumnInfo Id="Tax" Index="8" Width="0" />
-        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
-        <ColumnInfo Id="Amount" Index="10" Width="0" />
+        <ColumnInfo Id="DiscountAmount" Index="6" Width="0" />
+        <ColumnInfo Id="DiscountedPrice" Index="7" Width="0" />
+        <ColumnInfo Id="UnitCost" Index="8" Width="0" />
+        <ColumnInfo Id="Tax" Index="9" Width="0" />
+        <ColumnInfo Id="TaxAmount" Index="10" Width="0" />
+        <ColumnInfo Id="Amount" Index="11" Width="0" />
       </Columns>
     </ListView>
     <ListView Id="SalesInvoiceItem_ListView">
@@ -385,10 +385,12 @@
         <ColumnInfo Id="Quantity" Width="0" EditMaskType="RegEx" />
         <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
         <ColumnInfo Id="Discount" Index="5" Width="0" />
-        <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
-        <ColumnInfo Id="UnitCost" Index="7" Width="0" />
-        <ColumnInfo Id="Tax" Index="8" Width="0" />
-        <ColumnInfo Id="Amount" Index="9" Width="0" />
+        <ColumnInfo Id="DiscountAmount" Index="6" />
+        <ColumnInfo Id="DiscountedPrice" Index="7" Width="0" />
+        <ColumnInfo Id="UnitCost" Index="8" Width="0" />
+        <ColumnInfo Id="Tax" Index="9" Width="0" />
+        <ColumnInfo Id="TaxAmount" Index="10" />
+        <ColumnInfo Id="Amount" Index="11" Width="0" />
       </Columns>
     </ListView>
     <ListView Id="SalesInvoiceItem_LookupListView" IsGroupPanelVisible="False">
@@ -442,7 +444,6 @@
         <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
         <ColumnInfo Id="UnitCost" Index="7" Width="0" />
         <ColumnInfo Id="Tax" Index="8" Width="0" />
-        <ColumnInfo Id="PriceWithTax" Index="9" Width="0" />
         <ColumnInfo Id="Amount" Index="10" Width="0" />
       </Columns>
     </ListView>
@@ -457,7 +458,6 @@
         <ColumnInfo Id="Discount" Index="5" Width="0" />
         <ColumnInfo Id="DiscountedPrice" Index="6" Width="0" />
         <ColumnInfo Id="UnitCost" Index="7" Width="0" />
-        <ColumnInfo Id="PriceWithTax" Index="8" Width="0" EditMaskType="RegEx" />
         <ColumnInfo Id="Tax" Index="9" Width="0" />
         <ColumnInfo Id="Amount" Index="10" Width="0" />
       </Columns>

@@ -54,6 +54,14 @@
         <Member Name="Invoice" Caption="Fatura Bilgisi" />
       </OwnMembers>
     </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.Invoice" Caption="Fatura">
+      <OwnMembers>
+        <Member Name="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <Member Name="Date" Caption="Tarih" />
+        <Member Name="DocumentId" Caption="Belge No" />
+        <Member Name="FinancialMovements" Caption="Finansal Hareketler" />
+      </OwnMembers>
+    </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.PurchaseInvoice" Caption="Satın Alma Faturası">
       <OwnMembers>
         <Member Name="TotalAmount" Caption="Toplam Tutar" />
@@ -74,14 +82,6 @@
         <Member Name="UnitSetDetail" Caption="Birim Set Detay" />
       </OwnMembers>
     </Class>
-    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.Invoice" Caption="Fatura">
-      <OwnMembers>
-        <Member Name="CustomerSupplier" Caption="Müşteri / Satıcı" />
-        <Member Name="Date" Caption="Tarih" />
-        <Member Name="DocumentId" Caption="Belge No" />
-        <Member Name="FinancialMovements" Caption="Finansal Hareketler" />
-      </OwnMembers>
-    </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.RegulationManagement.Tax" Caption="Vergi">
       <OwnMembers>
         <Member Name="Code" Caption="Kod" />
@@ -100,12 +100,14 @@
       <OwnMembers>
         <Member Name="Amount" Caption="Tutar" />
         <Member Name="Discount" Caption="İndirim" EditMask="\d{0,2}" />
+        <Member Name="DiscountAmount" Caption="İndirim Tutarı" />
         <Member Name="DiscountedPrice" Caption="İndirimli Fiyat" />
         <Member Name="Product" Caption="Malzeme" />
         <Member Name="ProductName" Caption="Malzeme Adı" />
         <Member Name="Quantity" Caption="Miktar" />
         <Member Name="SalesInvoice" Caption="Satış Faturası" />
         <Member Name="Tax" Caption="Vergi" />
+        <Member Name="TaxAmount" Caption="Vergi Tutarı" />
         <Member Name="UnitCost" Caption="Birim Miktar" />
         <Member Name="UnitPrice" Caption="Birim Fiyat" />
         <Member Name="UnitSetDetail" Caption="Birim Set Detay" />
@@ -354,13 +356,11 @@
       <Columns>
         <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
         <ColumnInfo Id="Discount" DisplayFormat="% {0:N0}" />
-        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
       </Columns>
     </ListView>
     <ListView Id="Product_SalesInvoiceItems_ListView">
       <Columns>
         <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
-        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
       </Columns>
     </ListView>
     <DetailView Id="PurchaseInvoice_DetailView">
@@ -399,7 +399,8 @@
       <Columns>
         <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
         <ColumnInfo Id="Discount" DisplayFormat="% {0:N0}" />
-        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
+        <ColumnInfo Id="DiscountAmount" Caption="İndirim Tutarı" />
+        <ColumnInfo Id="TaxAmount" Caption="Vergi Tutarı" />
       </Columns>
     </ListView>
     <DetailView Id="PurchaseInvoiceItem_DetailView">
@@ -461,7 +462,6 @@
         <ColumnInfo Id="DiscountedPrice" Caption="İndirimli Fiyatı" />
         <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" />
         <ColumnInfo Id="Tax" Caption="Vergi" />
-        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
         <ColumnInfo Id="Amount" Caption="Tutar" />
       </Columns>
     </ListView>
@@ -502,16 +502,6 @@
     <ListView Id="Tax_LookupListView">
       <Columns>
         <ColumnInfo Id="Rate" DisplayFormat="% {0:N0}" />
-      </Columns>
-    </ListView>
-    <ListView Id="Tax_PurchaseInvoiceItems_ListView">
-      <Columns>
-        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
-      </Columns>
-    </ListView>
-    <ListView Id="Tax_SalesInvoiceItems_ListView">
-      <Columns>
-        <ColumnInfo Id="PriceWithTax" Caption="Vergi Tutarı" />
       </Columns>
     </ListView>
     <DetailView Id="UnitSet_DetailView">

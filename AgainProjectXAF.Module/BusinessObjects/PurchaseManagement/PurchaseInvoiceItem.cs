@@ -130,15 +130,15 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
         [ImmediatePostData]
         public decimal Amount
         {
-            get { return _Amount = DiscountedPrice + PriceWithTax; }
+            get { return _Amount = DiscountedPrice + TaxAmount; }
         }
 
         [PersistentAlias("(UnitPrice)*((Tax.Rate)*(0.01))")]
-        [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.PriceWithTax", DefaultContexts.Save)]
+        [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.TaxAmount", DefaultContexts.Save)]
         [ImmediatePostData]
-        public decimal PriceWithTax
+        public decimal TaxAmount
         {
-            get { return Convert.ToDecimal(EvaluateAlias(nameof(PriceWithTax))); }
+            get { return Convert.ToDecimal(EvaluateAlias(nameof(TaxAmount))); }
         }
 
         //[PersistentAlias("(Product.Price)*(UnitSetDetail.Quantity)*(Quantity)")]
@@ -149,11 +149,9 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
         //    //Sadece get olduğu için okunabilir olur. Set kaldırılmasının nedeni ,yazılabilir bir veri istemediğimizdendir.
         //}
         private decimal _UnitPrice;
-        [RuleValueComparison("PurchaseInvoice.UnitPrice.GreaterThanZero", DefaultContexts.Save, ValueComparisonType.GreaterThanOrEqual, 1)]
+        [Persistent("Birim Fiyat")]
         [ImmediatePostData]
-        /// <summary>
-        ///
-        /// </summary>
+        [RuleValueComparison("PurchaseInvoice.UnitPrice.GreaterThanZero", DefaultContexts.Save, ValueComparisonType.GreaterThanOrEqual, 1)]
         public decimal UnitPrice
         {
             get { return _UnitPrice; }
@@ -172,7 +170,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
 
         [PersistentAlias("(DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity)")]
         //[PersistentAlias("iif(Quantity == 0)(UnitCost = 0) (DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity)")]
-        [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.UnitCost", DefaultContexts.Save)]
         [ImmediatePostData]
         public decimal UnitCost
         {
@@ -188,10 +185,8 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
         }
 
         private int _Discount;
+        [Persistent("İndirim Oranı")]
         [ImmediatePostData]
-        /// <summary>
-        ///
-        /// </summary>
         public int Discount
         {
             get { return _Discount; }
@@ -208,20 +203,33 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
         }
 
 
-        [PersistentAlias("(UnitPrice)*(100-Discount)/100")]
-        [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.DiscountedPrice", DefaultContexts.Save)]
+        //[PersistentAlias("(UnitPrice)*(100-Discount)/100")]
+        //[RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.DiscountedPrice", DefaultContexts.Save)]
+        //[ImmediatePostData]
+        //public decimal DiscountedPrice
+        //{
+        //    get { return Convert.ToDecimal(EvaluateAlias(nameof(DiscountedPrice))); }
+        //}
+
+        private decimal _DiscountedPrice;
         [ImmediatePostData]
         public decimal DiscountedPrice
         {
-            get { return Convert.ToDecimal(EvaluateAlias(nameof(DiscountedPrice))); }
+            get { return _DiscountedPrice = (UnitPrice) * (100 - Discount) / 100; }
+        }
+
+        private decimal _DiscountAmount;
+        [ImmediatePostData]
+        [Persistent("İndirim Tutarı")]
+        [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.DiscountAmount", DefaultContexts.Save)]
+        public decimal DiscountAmount
+        {
+            get { return _DiscountAmount = UnitPrice - DiscountedPrice; }
         }
 
         private Tax _Tax;
         [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.Tax", DefaultContexts.Save)]
         [Association("Tax-PurchaseInvoiceItems")]
-        /// <summary>
-        ///             REFERANS
-        /// </summary>
         public Tax Tax
         {
             get { return _Tax; }
