@@ -41,14 +41,24 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
         public XPCollection<PurchaseInvoiceItem> PurchaseInvoiceItems
         {
             get { return GetCollection<PurchaseInvoiceItem>(nameof(PurchaseInvoiceItems)); }
-
         }
 
-        [PersistentAlias("PurchaseInvoiceItems.Sum(Amount)")]
+        private decimal _TotalAmount;
         [ImmediatePostData]
+        [PersistentAlias("PurchaseInvoiceItems.Sum(Amount)")]
         public decimal TotalAmount
         {
             get { return Convert.ToDecimal(EvaluateAlias(nameof(TotalAmount))); }
+            set
+            {
+                if (SetPropertyValue<decimal>(nameof(TotalAmount), ref _TotalAmount, value))
+                {
+                    if (!IsLoading && !IsSaving)
+                    {
+
+                    }
+                }
+            }
         }
     }
 }

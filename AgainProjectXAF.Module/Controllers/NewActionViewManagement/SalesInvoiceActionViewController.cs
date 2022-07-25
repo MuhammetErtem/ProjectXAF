@@ -1,4 +1,5 @@
 ﻿using AgainProjectXAF.Module.BusinessObjects.PurchaseManagement;
+using AgainProjectXAF.Module.BusinessObjects.RegulationManagement;
 using AgainProjectXAF.Module.BusinessObjects.SalesManagement;
 using AgainProjectXAF.Module.BusinessObjects.StockManagement;
 using DevExpress.ExpressApp;
@@ -54,6 +55,10 @@ namespace AgainProjectXAF.Module.Controllers.NewActionViewManagement
                     unusableTypes.Add(item);
                 }
                 if (item == typeof(Product))
+                {
+                    unusableTypes.Add(item);
+                }
+                if (item == typeof(Tax))
                 {
                     unusableTypes.Add(item);
                 }

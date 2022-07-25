@@ -168,6 +168,10 @@
     <Compile Include="Controllers\NewActionViewManagement\SalesInvoiceActionViewController.Designer.cs">
       <DependentUpon>SalesInvoiceActionViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\NewActionViewManagement\TaxNewActionViewController.cs" />
+    <Compile Include="Controllers\NewActionViewManagement\TaxNewActionViewController.Designer.cs">
+      <DependentUpon>TaxNewActionViewController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\NewActionViewManagement\UnitSetActionViewController.cs" />
     <Compile Include="Controllers\NewActionViewManagement\UnitSetActionViewController.Designer.cs">
       <DependentUpon>UnitSetActionViewController.cs</DependentUpon>

@@ -25,13 +25,11 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
             base.AfterConstruction();
         }
 
-
         private PurchaseInvoice _PurchaseInvoice;
         [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.PurchaseInvoice", DefaultContexts.Save)]
         [Association("PurchaseInvoice-PurchaseInvoiceItem")]
         [Persistent("Satın Alma Faturası")]
         [ImmediatePostData]
-
         /// <summary>
         ///               REFERANS
         /// </summary>
@@ -64,19 +62,23 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
-                        foreach (var item in value.UnitSet.UnitSetDetails)
+                        if (Product != null)
                         {
-                            if (item != null)
+
+                            foreach (var item in value.UnitSet.UnitSetDetails)
                             {
-                                if (item.IsMaınUnit)
+                                if (item != null)
                                 {
-                                    UnitSetDetail = item;
+                                    if (item.IsMaınUnit)
+                                    {
+                                        UnitSetDetail = item;
+                                    }
                                 }
                             }
+                            Tax = Product.Tax;
+                            Quantity = 1;
+                            PurchaseInvoice.TotalAmount = (Amount);
                         }
-                        Tax = Product.Tax;
-                        Quantity = 1;
                     }
                 }
             }
@@ -100,16 +102,19 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                     if (!IsLoading && !IsSaving)
                     {
                         UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
+                        PurchaseInvoice.TotalAmount = (Amount);
                     }
                 }
             }
         }
+
         private UnitSetDetail _UnitSetDetail;
         [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.UnitSetDetail", DefaultContexts.Save)]
         [Association("UnitSetDetail-PurchaseInvoiceItems")]
         [VisibleInListView(false)]
         [Persistent("Birim Set")]
         [ImmediatePostData]
+        [DataSourceCriteria("UnitSet.Oid = '@Product.UnitSet.Oid'")] // Product.unitset ine göre filtreli şekilde getiriyor. Modelde de var.
         public UnitSetDetail UnitSetDetail
         {
             get { return _UnitSetDetail; }
@@ -119,7 +124,11 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-                        _UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
+                        if (_UnitSetDetail != null)
+                        {
+                            _UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
+                            PurchaseInvoice.TotalAmount = (Amount);
+                        }
                     }
                 }
             }
@@ -161,14 +170,13 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
+                        PurchaseInvoice.TotalAmount = (Amount);
                     }
                 }
             }
         }
 
-
-        [PersistentAlias("(DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity)")]
+        [PersistentAlias("iif((Quantity) = 0, 0, (DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity))")] //0'a bölme işlemlerinde hata almamak için kullanıyoruz.
         //[PersistentAlias("iif(Quantity == 0)(UnitCost = 0) (DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity)")]
         [ImmediatePostData]
         public decimal UnitCost
@@ -196,12 +204,11 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
+                        PurchaseInvoice.TotalAmount = (Amount);
                     }
                 }
             }
         }
-
 
         //[PersistentAlias("(UnitPrice)*(100-Discount)/100")]
         //[RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.DiscountedPrice", DefaultContexts.Save)]
@@ -239,7 +246,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
+                        PurchaseInvoice.TotalAmount = (Amount);
                     }
                 }
             }

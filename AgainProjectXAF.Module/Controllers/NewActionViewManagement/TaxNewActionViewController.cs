@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace AgainProjectXAF.Module.Controllers.NewActionViewManagement
 {
-    public partial class PurchaseInvoiceActionViewController : ObjectViewController<ObjectView, PurchaseInvoice>
+    public partial class TaxNewActionViewController : ObjectViewController<ObjectView, Tax>
     {
         protected override void OnActivated()
         {
@@ -46,11 +46,11 @@ namespace AgainProjectXAF.Module.Controllers.NewActionViewManagement
                 {
                     unusableTypes.Add(item);
                 }
-                if (item == typeof(CustomerSupplier))
+                if (item == typeof(Product))
                 {
                     unusableTypes.Add(item);
                 }
-                if (item == typeof(Product))
+                if (item == typeof(PurchaseInvoice))
                 {
                     unusableTypes.Add(item);
                 }
@@ -58,7 +58,7 @@ namespace AgainProjectXAF.Module.Controllers.NewActionViewManagement
                 {
                     unusableTypes.Add(item);
                 }
-                if (item == typeof(Tax))
+                if (item == typeof(CustomerSupplier))
                 {
                     unusableTypes.Add(item);
                 }

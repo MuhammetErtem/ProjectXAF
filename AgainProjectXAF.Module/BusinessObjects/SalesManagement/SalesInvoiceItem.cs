@@ -53,19 +53,24 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-                        foreach (var item in value.UnitSet.UnitSetDetails)
+                        if (Product != null)
                         {
-                            if (item != null)
+
+                            foreach (var item in value.UnitSet.UnitSetDetails)
                             {
-                                if (item.IsMaınUnit)
+                                if (item != null)
                                 {
-                                    UnitSetDetail = item;
+                                    if (item.IsMaınUnit)
+                                    {
+                                        UnitSetDetail = item;
+                                    }
                                 }
                             }
+                            Tax = Product.Tax;
+                            Quantity = 1;
+                            SalesInvoice.TotalAmount = (Amount);
+                            // UnitPrice = (Product.Price)*(UnitSetDetail.Quantity)*(Quantity);*/ // Ürünü set ettiğimizde UnitPrice alanına ürünün fiyatını yazıyor.
                         }
-                        Tax = Product.Tax;
-                        Quantity = 1;
-                        // UnitPrice = (Product.Price)*(UnitSetDetail.Quantity)*(Quantity);*/ // Ürünü set ettiğimizde UnitPrice alanına ürünün fiyatını yazıyor.
                     }
                 }
             }
@@ -86,6 +91,12 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                     if (!IsLoading && !IsSaving)
                     {
                         UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
+                        SalesInvoice.TotalAmount = (Amount);
+
+                        //if (value == 0)
+                        //{
+                        //    value = 1;
+                        //}
                     }
                 }
             }
@@ -97,6 +108,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
         [VisibleInListView(false)]
         [Persistent("Birim Set")]
         [ImmediatePostData]
+        [DataSourceCriteria("UnitSet.Oid = '@Product.UnitSet.Oid'")]// Product.unitset ine göre filtreli şekilde getiriyor. Modelde de var.
         public UnitSetDetail UnitSetDetail
         {
             get { return _UnitSetDetail; }
@@ -106,7 +118,12 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-                        _UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
+                        if (_UnitSetDetail != null)
+                        {
+                            _UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
+                            SalesInvoice.TotalAmount = (Amount);
+                        }
+
                     }
                 }
             }
@@ -115,6 +132,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
         private decimal _Amount;
         [Persistent("Tutar")]
         [ImmediatePostData]
+
         public decimal Amount
         {
             get { return _Amount = DiscountedPrice + TaxAmount; }
@@ -142,7 +160,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
+                        SalesInvoice.TotalAmount = (Amount);
                     }
                 }
             }
@@ -195,7 +213,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-                        
+                        SalesInvoice.TotalAmount = (Amount);
                     }
                 }
             }
@@ -222,7 +240,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
         //    get { return _UnitCost = (DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity); }
         //}
 
-        [PersistentAlias("(DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity)")]
+        [PersistentAlias("iif((Quantity) = 0, 0, (DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity))")]//0'a bölme işlemlerinde hata almamak için kullanıyoruz.
         [ImmediatePostData]
         public decimal UnitCost
         {
@@ -250,11 +268,10 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
+                        SalesInvoice.TotalAmount = (Amount);
                     }
                 }
             }
         }
-
     }
 }

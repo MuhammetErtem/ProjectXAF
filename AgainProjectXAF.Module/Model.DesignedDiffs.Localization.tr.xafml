@@ -400,6 +400,7 @@
         <ColumnInfo Id="UnitSetDetail" Caption="Birim Set Detay" />
         <ColumnInfo Id="Discount" DisplayFormat="% {0:N0}" />
         <ColumnInfo Id="DiscountAmount" Caption="İndirim Tutarı" />
+        <ColumnInfo Id="Tax" DisplayFormat="% {0:N0}" EditMask="\d{0,2}" />
         <ColumnInfo Id="TaxAmount" Caption="Vergi Tutarı" />
       </Columns>
     </ListView>
@@ -461,7 +462,7 @@
         <ColumnInfo Id="Discount" Caption="İndirim" DisplayFormat="% {0:N0}" />
         <ColumnInfo Id="DiscountedPrice" Caption="İndirimli Fiyatı" />
         <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" />
-        <ColumnInfo Id="Tax" Caption="Vergi" />
+        <ColumnInfo Id="Tax" Caption="Vergi" EditMask="\d{0,2}" DisplayFormat="% {0:N0}" />
         <ColumnInfo Id="Amount" Caption="Tutar" />
       </Columns>
     </ListView>

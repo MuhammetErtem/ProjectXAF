@@ -20,6 +20,7 @@
     <Class Name="AgainProjectXAF.Module.BusinessObjects.SalesManagement.SalesInvoiceItem">
       <OwnMembers>
         <Member Name="Discount" EditMaskType="RegEx" />
+        <Member Name="UnitSetDetail" DataSourcePropertyIsNullMode="SelectAll" />
       </OwnMembers>
     </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.StockManagement.Brand" IsVisibleInReports="True" />
@@ -278,23 +279,23 @@
         <ColumnInfo Id="TotalAmount" Width="194" Index="3" />
       </Columns>
     </ListView>
-    <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView" AllowEdit="True" NewItemRowPosition="Top" Criteria="" GroupSummary="Toplam" AllowDelete="False" AllowLink="False" AllowNew="True" DetailViewID="" MasterDetailView="">
+    <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView" AllowEdit="True" NewItemRowPosition="Top" Criteria="" GroupSummary="Toplam" AllowDelete="True" AllowLink="False" AllowNew="True" DetailViewID="" MasterDetailView="">
       <Columns>
         <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" />
         <ColumnInfo Id="ProductName" Index="1" Width="0" MaxLength="0" SortOrder="None" SortIndex="-1" />
         <ColumnInfo Id="Quantity" Index="2" Width="0" />
-        <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" DataSourceCriteriaProperty="" DataSourcePropertyIsNullCriteria="" />
+        <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" />
         <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
         <ColumnInfo Id="Discount" Width="0" Caption="İndirim Oranı" DisplayFormat="% {0:C}" Index="5" />
         <ColumnInfo Id="DiscountAmount" Width="0" Index="6" />
         <ColumnInfo Id="DiscountedPrice" Caption="İndirimli Fiyat" Width="0" Index="7" />
         <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" Width="0" Index="8" />
-        <ColumnInfo Id="Tax" Index="9" Width="0" />
+        <ColumnInfo Id="Tax" Index="9" Width="0" LookupProperty="Rate" />
         <ColumnInfo Id="TaxAmount" Index="10" Width="0" />
         <ColumnInfo Id="Amount" Index="11" Width="0" />
       </Columns>
     </ListView>
-    <DetailView Id="PurchaseInvoiceItem_DetailView" AllowEdit="False" />
+    <DetailView Id="PurchaseInvoiceItem_DetailView" AllowEdit="False" AllowDelete="True" />
     <ListView Id="PurchaseInvoiceItem_ListView" DetailViewID="PurchaseInvoiceItem_DetailView">
       <Columns>
         <ColumnInfo Id="Amount" Index="-1" Width="0">
@@ -361,18 +362,18 @@
         <ColumnInfo Id="TotalAmount" Index="3" Width="0" />
       </Columns>
     </ListView>
-    <ListView Id="SalesInvoice_SalesInvoiceItems_ListView" AllowEdit="True" ShowAutoFilterRow="False" NewItemRowPosition="Top" AllowLink="False" AllowDelete="False" DetailViewID="">
+    <ListView Id="SalesInvoice_SalesInvoiceItems_ListView" AllowEdit="True" ShowAutoFilterRow="False" NewItemRowPosition="Top" AllowLink="False" AllowDelete="True" Criteria="" DetailViewID="">
       <Columns>
-        <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" />
+        <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" DataSourceCriteria="" />
         <ColumnInfo Id="ProductName" Index="1" Width="0" />
         <ColumnInfo Id="Quantity" Index="2" Width="0" />
-        <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" />
+        <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" LookupProperty="Name" ImmediatePostData="True" />
         <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
         <ColumnInfo Id="Discount" Index="5" Width="0" />
         <ColumnInfo Id="DiscountAmount" Index="6" Width="0" />
         <ColumnInfo Id="DiscountedPrice" Index="7" Width="0" />
         <ColumnInfo Id="UnitCost" Index="8" Width="0" />
-        <ColumnInfo Id="Tax" Index="9" Width="0" />
+        <ColumnInfo Id="Tax" Index="9" Width="0" LookupProperty="Rate" />
         <ColumnInfo Id="TaxAmount" Index="10" Width="0" />
         <ColumnInfo Id="Amount" Index="11" Width="0" />
       </Columns>
@@ -473,7 +474,7 @@
         <ColumnInfo Id="Name" Index="1" Width="0" />
       </Columns>
     </ListView>
-    <ListView Id="UnitSet_Products_ListView" NewItemRowPosition="Top" AllowEdit="True" AllowDelete="False" AllowLink="False" />
+    <ListView Id="UnitSet_Products_ListView" NewItemRowPosition="Top" AllowEdit="True" AllowDelete="False" AllowLink="False" Criteria="[UnitSet.UnitSetDetails][]" />
     <ListView Id="UnitSet_UnitSetDetails_ListView" ShowAutoFilterRow="False" NewItemRowPosition="Top" AllowEdit="True" AllowDelete="False" AllowLink="False">
       <Columns>
         <ColumnInfo Id="UnitSet" Index="-1" Width="0" />
@@ -509,6 +510,9 @@
         <ColumnInfo Id="UnitSet" Index="2" Width="0" />
         <ColumnInfo Id="IsMaınUnit" Index="3" Width="0" />
       </Columns>
+    </ListView>
+    <ListView Id="UnitSetDetail_LookupListView">
+      <BandsLayout Index="1" />
     </ListView>
     <ListView Id="UnitSetDetail_PurchaseInvoiceItems_ListView" AllowLink="False" AllowDelete="False" />
     <ListView Id="UnitSetDetail_SalesInvoiceItems_ListView" AllowLink="False" AllowDelete="False" />
