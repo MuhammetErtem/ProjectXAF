@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="SalesInvoice_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalAmount" PropertyName="TotalAmount" Removed="True" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Auto09f80b9d-6c3b-4994-9892-34112b4d880f">
+            <LayoutItem Id="TotalAmount" ViewItem="TotalAmount" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="SalesInvoice" Caption="Total Amount" RelativeSize="27.586206896551722" Removed="True">
+              <LayoutItem Id="TotalAmount" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesInvoice_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="TotalAmount" Index="3" Width="0" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

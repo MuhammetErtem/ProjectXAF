@@ -93,7 +93,6 @@
     <Class Name="AgainProjectXAF.Module.BusinessObjects.SalesManagement.SalesInvoice" Caption="Satış Faturası">
       <OwnMembers>
         <Member Name="SalesInvoiceItems" Caption="Satış Fatura Satırları" />
-        <Member Name="TotalAmount" Caption="Toplam Tutar" />
       </OwnMembers>
     </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.SalesManagement.SalesInvoiceItem" Caption="Satış Fatura Detay">
@@ -426,17 +425,6 @@
         <PropertyEditor Id="DocumentId" Caption="Belge No" />
         <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
       </Items>
-      <Layout>
-        <LayoutGroup Id="Main">
-          <LayoutGroup Id="SimpleEditors">
-            <LayoutGroup Id="SalesInvoice" Caption="Satış Faturası" />
-          </LayoutGroup>
-          <TabbedGroup Id="Tabs">
-            <LayoutGroup Id="SalesInvoiceItems" Caption="Satış Fatura Satırları" />
-            <LayoutGroup Id="FinancialMovements" Caption="Finansal Hareketler" />
-          </TabbedGroup>
-        </LayoutGroup>
-      </Layout>
     </DetailView>
     <ListView Id="SalesInvoice_ListView">
       <Columns>

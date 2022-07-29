@@ -17,6 +17,13 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
             base.AfterConstruction();
         }
 
+
+
+        public void UpdateTotals()
+        {
+            OnChanged("TotalAmount");
+        }
+
         //protected override void OnSaved()
         //{
         //    base.OnSaved();
@@ -31,7 +38,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
 
         //}
 
-        
+
 
         /// <summary>
         ///             COLLECTİON

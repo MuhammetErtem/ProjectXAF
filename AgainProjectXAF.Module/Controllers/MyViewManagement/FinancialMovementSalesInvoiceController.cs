@@ -18,14 +18,14 @@ namespace AgainProjectXAF.Module.Controllers.MyViewManagement
         {
             IObjectSpace objectSpace = View.ObjectSpace;
             SalesInvoice salesInvoice = View.CurrentObject as SalesInvoice;
-            bool financialX = false;
+            bool financialX = false; //boolen bir alan belirleyip false verdim.
 
             IList<FinancialMovement> financial = objectSpace.GetObjects<FinancialMovement>();
             foreach (var item in financial)
             {
                 if (salesInvoice.Oid == item.Invoice.Oid)
                 {
-                    financialX = true;
+                    financialX = true; // burada alan true ya çevirdim.
                     item.Date = salesInvoice.Date;
                     item.CustomerSupplier = salesInvoice.CustomerSupplier;
                     item.Credit = salesInvoice.TotalAmount;
@@ -33,7 +33,7 @@ namespace AgainProjectXAF.Module.Controllers.MyViewManagement
                 }
             }
 
-            if (financialX == false)
+            if (financialX == false) // true olmadığı için buraya girmedi.
             {
                 FinancialMovement financialMovement = objectSpace.CreateObject<FinancialMovement>();
 
@@ -41,11 +41,7 @@ namespace AgainProjectXAF.Module.Controllers.MyViewManagement
                 financialMovement.CustomerSupplier = salesInvoice.CustomerSupplier;
                 financialMovement.Credit = salesInvoice.TotalAmount;
                 financialMovement.Invoice = salesInvoice;
-
             }
-
-
-
         }
         protected override void OnDeactivated()
         {

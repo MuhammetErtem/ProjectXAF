@@ -17,6 +17,11 @@
         <Member Name="Code" AllowEdit="False" />
       </OwnMembers>
     </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.SalesManagement.SalesInvoice">
+      <OwnMembers>
+        <Member Name="TotalAmount" Caption="Toplam Tutar" ImmediatePostData="False" AllowEdit="False" />
+      </OwnMembers>
+    </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.SalesManagement.SalesInvoiceItem">
       <OwnMembers>
         <Member Name="Discount" EditMaskType="RegEx" />
@@ -31,6 +36,15 @@
     </Class>
     <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyUser" Caption="Base User" />
   </BOModel>
+  <NavigationItems>
+    <Items>
+      <Item Id="Reports">
+        <Items>
+          <DashboardNavigationItem Id="Hareketler" Caption="Hareketler" DashboardTitle="Hareketler" ImageName="ChartType_Pie3D" IsNewNode="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
   <Options>
     <LayoutManagerOptions RequiredFieldMark="*" />
   </Options>
@@ -191,7 +205,7 @@
         <Filter Id="Onaysız" Criteria="[IsApproved] = False" IsNewNode="True" />
       </Filters>
     </ListView>
-    <ListView Id="Product_LookupListView" ShowAutoFilterRow="True">
+    <ListView Id="Product_LookupListView">
       <Columns>
         <ColumnInfo Id="Code" PropertyName="Code" Index="0" Width="0" IsNewNode="True" />
         <ColumnInfo Id="Name" Index="1" Width="0" />
@@ -281,16 +295,16 @@
     </ListView>
     <ListView Id="PurchaseInvoice_PurchaseInvoiceItems_ListView" AllowEdit="True" NewItemRowPosition="Top" Criteria="" GroupSummary="Toplam" AllowDelete="True" AllowLink="False" AllowNew="True" DetailViewID="" MasterDetailView="">
       <Columns>
-        <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" />
+        <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" LookupEditorMode="AllItemsWithSearch" />
         <ColumnInfo Id="ProductName" Index="1" Width="0" MaxLength="0" SortOrder="None" SortIndex="-1" />
         <ColumnInfo Id="Quantity" Index="2" Width="0" />
-        <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" />
+        <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" LookupEditorMode="AllItemsWithSearch" />
         <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
         <ColumnInfo Id="Discount" Width="0" Caption="İndirim Oranı" DisplayFormat="% {0:C}" Index="5" />
         <ColumnInfo Id="DiscountAmount" Width="0" Index="6" />
         <ColumnInfo Id="DiscountedPrice" Caption="İndirimli Fiyat" Width="0" Index="7" />
         <ColumnInfo Id="UnitCost" Caption="Birim Maliyet" Width="0" Index="8" />
-        <ColumnInfo Id="Tax" Index="9" Width="0" LookupProperty="Rate" />
+        <ColumnInfo Id="Tax" Index="9" Width="0" LookupProperty="Rate" LookupEditorMode="AllItemsWithSearch" />
         <ColumnInfo Id="TaxAmount" Index="10" Width="0" />
         <ColumnInfo Id="Amount" Index="11" Width="0" />
       </Columns>
@@ -326,31 +340,33 @@
         <PropertyEditor Id="Date" AllowEdit="False" />
         <PropertyEditor Id="DocumentId" AllowEdit="False" />
         <PropertyEditor Id="SalesInvoiceItems" AllowEdit="True" />
+        <PropertyEditor Id="TotalAmount" AllowEdit="False" />
       </Items>
       <Layout>
-        <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="16.53846153846154">
+        <LayoutGroup Id="Main" RelativeSize="93.269230769230774">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="17.7319587628866">
             <LayoutGroup Id="Invoice" Index="0" RelativeSize="100">
               <LayoutItem Id="DocumentId" RelativeSize="37.2093023255814" />
               <LayoutItem Id="Date" RelativeSize="27.906976744186046" />
               <LayoutItem Id="CustomerSupplier" RelativeSize="34.883720930232556" />
             </LayoutGroup>
-            <LayoutGroup Id="SalesInvoice" RelativeSize="100" Removed="True">
-              <LayoutItem Id="TotalAmount" RelativeSize="27.272727272727273" Removed="True" />
+            <LayoutGroup Id="SalesInvoice" Index="1" RelativeSize="28.925619834710744" Caption="Total Amount" Removed="True">
+              <LayoutItem Id="TotalAmount" RelativeSize="100" Removed="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" RelativeSize="83.461538461538467">
-            <LayoutGroup Id="SalesInvoiceItems" RelativeSize="100" Caption="Sales Invoice Items">
-              <LayoutItem Id="SalesInvoiceItems" RelativeSize="91.836734693877546" />
-              <LayoutGroup Id="Autof7cad5b2-68dc-40b3-8916-eb5215aa3b3d" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="8.16326530612245" IsNewNode="True">
-                <LayoutItem Id="Item1" Index="0" RelativeSize="49.893390191897652" IsNewNode="True" />
-                <LayoutItem Id="TotalAmount" ViewItem="TotalAmount" Index="1" RelativeSize="50.106609808102348" IsNewNode="True" />
-              </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="82.268041237113408">
+            <LayoutGroup Id="SalesInvoiceItems" RelativeSize="100">
+              <LayoutItem Id="SalesInvoiceItems" RelativeSize="100" />
             </LayoutGroup>
             <LayoutGroup Id="FinancialMovements" RelativeSize="100">
               <LayoutItem Id="FinancialMovements" RelativeSize="100" />
             </LayoutGroup>
           </TabbedGroup>
+        </LayoutGroup>
+        <LayoutGroup Id="Auto15bc0d09-e395-4c2f-9c48-50449a270111" ShowCaption="False" Caption="Auto15bc0d09-e395-4c2f-9c48-50449a270111(14)" Direction="Horizontal" Index="1" RelativeSize="6.7307692307692308" IsNewNode="True">
+          <LayoutItem Id="A" ViewItem="A" Index="0" RelativeSize="24.89177489177489" IsNewNode="True" />
+          <LayoutItem Id="Test" ViewItem="Test" Index="1" RelativeSize="35.714285714285715" IsNewNode="True" />
+          <LayoutItem Id="TotalAmount" ViewItem="TotalAmount" Index="2" RelativeSize="39.393939393939391" IsNewNode="True" />
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -359,21 +375,21 @@
         <ColumnInfo Id="DocumentId" Index="0" Width="0" />
         <ColumnInfo Id="CustomerSupplier" Index="1" Width="0" />
         <ColumnInfo Id="Date" Index="2" Width="0" />
-        <ColumnInfo Id="TotalAmount" Index="3" Width="0" />
+        <ColumnInfo Id="TotalAmount" Index="3" Width="0" AllowEdit="False" />
       </Columns>
     </ListView>
     <ListView Id="SalesInvoice_SalesInvoiceItems_ListView" AllowEdit="True" ShowAutoFilterRow="False" NewItemRowPosition="Top" AllowLink="False" AllowDelete="True" Criteria="" DetailViewID="">
       <Columns>
-        <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" DataSourceCriteria="" />
+        <ColumnInfo Id="Product" Index="0" Width="0" LookupProperty="Code" DataSourceCriteria="" LookupEditorMode="AllItemsWithSearch" />
         <ColumnInfo Id="ProductName" Index="1" Width="0" />
         <ColumnInfo Id="Quantity" Index="2" Width="0" />
-        <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" LookupProperty="Name" ImmediatePostData="True" />
+        <ColumnInfo Id="UnitSetDetail" Index="3" Width="0" LookupProperty="Name" LookupEditorMode="AllItemsWithSearch" />
         <ColumnInfo Id="UnitPrice" Index="4" Width="0" />
         <ColumnInfo Id="Discount" Index="5" Width="0" />
         <ColumnInfo Id="DiscountAmount" Index="6" Width="0" />
         <ColumnInfo Id="DiscountedPrice" Index="7" Width="0" />
         <ColumnInfo Id="UnitCost" Index="8" Width="0" />
-        <ColumnInfo Id="Tax" Index="9" Width="0" LookupProperty="Rate" />
+        <ColumnInfo Id="Tax" Index="9" Width="0" LookupProperty="Rate" LookupEditorMode="AllItemsWithSearch" />
         <ColumnInfo Id="TaxAmount" Index="10" Width="0" />
         <ColumnInfo Id="Amount" Index="11" Width="0" />
       </Columns>

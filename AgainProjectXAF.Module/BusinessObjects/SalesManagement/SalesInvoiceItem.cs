@@ -1,10 +1,12 @@
 ﻿using AgainProjectXAF.Module.BusinessObjects.RegulationManagement;
 using AgainProjectXAF.Module.BusinessObjects.StockManagement;
+using DevExpress.ExpressApp;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
 using System;
+using System.Linq;
 
 namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
 {
@@ -12,14 +14,55 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
     //[DefaultClassOptions]
     public class SalesInvoiceItem : BaseObject
     {
-        public SalesInvoiceItem(Session session)
-            : base(session)
+        public SalesInvoiceItem(Session session) : base(session)
         {
+
         }
         public override void AfterConstruction()
         {
             base.AfterConstruction();
         }
+
+
+
+        protected override void OnDeleting()
+        {
+            UpdatedSalesInvoice = SalesInvoice;
+
+            base.OnDeleting();
+        }
+
+        protected override void OnDeleted()
+        {
+            if (UpdatedSalesInvoice != null)
+            {
+                UpdatedSalesInvoice.UpdateTotals();
+            }
+            base.OnDeleted();
+
+            //if (this.SalesInvoice.SalesInvoiceItems.Count > 0)
+            //{
+            //    if (this.SalesInvoice.SalesInvoiceItems.ClearCount > 0)
+            //    {
+            //        this.SalesInvoice.TotalAmount = 0;
+            //    }
+            //    for (int i = 0; i < this.SalesInvoice.SalesInvoiceItems.Count; i++)
+            //    {
+            //        if (!this.SalesInvoice.SalesInvoiceItems[i].IsDeleted)
+            //        {
+            //            this.SalesInvoice.TotalAmount += this.SalesInvoice.SalesInvoiceItems[i].Amount;
+            //        }
+            //    }
+            //}
+        }
+
+        SalesInvoice UpdatedSalesInvoice = null;
+
+
+
+
+
+
         private SalesInvoice _SalesInvoice;
         [RuleRequiredField("RuleRequiredField for SalesInvoiceItem.SalesInvoice", DefaultContexts.Save)]
         [Association("SalesInvoice-SalesInvoiceItem")]
@@ -34,7 +77,19 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
+
                     }
+                    //if (IsDeleted)
+                    //{
+                    //    value.TotalAmount = (Amount);
+                    //    if (value.SalesInvoiceItems.Count > 0)
+                    //    {
+                    //        for (int i = 0; i < value.SalesInvoiceItems.Count; i++)
+                    //        {
+                    //            _SalesInvoice.TotalAmount -= Amount;
+                    //        }
+                    //    }
+                    //}
                 }
             }
         }
@@ -68,7 +123,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                             }
                             Tax = Product.Tax;
                             Quantity = 1;
-                            SalesInvoice.TotalAmount = (Amount);
                             // UnitPrice = (Product.Price)*(UnitSetDetail.Quantity)*(Quantity);*/ // Ürünü set ettiğimizde UnitPrice alanına ürünün fiyatını yazıyor.
                         }
                     }
@@ -79,7 +133,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
         private int _Quantity;
         [RuleRequiredField("RuleRequiredField for SalesInvoiceItem.Quantity", DefaultContexts.Save)]
         [Persistent("Miktar")]
-        [ImmediatePostData]
+        //[ImmediatePostData]
         [RuleValueComparison("SalesInvoice.Price.GreaterThanZero", DefaultContexts.Save, ValueComparisonType.GreaterThanOrEqual, 1)] // Girilen sayı 1 den küçük olamaz.
         public int Quantity
         {
@@ -91,12 +145,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                     if (!IsLoading && !IsSaving)
                     {
                         UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
-                        SalesInvoice.TotalAmount = (Amount);
-
-                        //if (value == 0)
-                        //{
-                        //    value = 1;
-                        //}
                     }
                 }
             }
@@ -107,7 +155,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
         [Association("UnitSetDetail-SalesInvoiceItems")]
         [VisibleInListView(false)]
         [Persistent("Birim Set")]
-        [ImmediatePostData]
+        //[ImmediatePostData]
         [DataSourceCriteria("UnitSet.Oid = '@Product.UnitSet.Oid'")]// Product.unitset ine göre filtreli şekilde getiriyor. Modelde de var.
         public UnitSetDetail UnitSetDetail
         {
@@ -121,9 +169,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                         if (_UnitSetDetail != null)
                         {
                             _UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
-                            SalesInvoice.TotalAmount = (Amount);
                         }
-
                     }
                 }
             }
@@ -131,25 +177,16 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
 
         private decimal _Amount;
         [Persistent("Tutar")]
-        [ImmediatePostData]
+        //[ImmediatePostData]
 
         public decimal Amount
         {
             get { return _Amount = DiscountedPrice + TaxAmount; }
         }
 
-        //[PersistentAlias("(Product.Price)*(UnitSetDetail.Quantity)*(Quantity)")]
-        //[ImmediatePostData]
-        //public decimal UnitPrice
-        //{
-        //    get { return Convert.ToDecimal(EvaluateAlias(nameof(UnitPrice))); }
-        //    //Açıklaması bakılacak. 
-        //    //Sadece get olduğu için okunabilir olur. Set kaldırılmasının nedeni ,yazılabilir bir veri istemediğimizdendir.
-        //}
-
         private decimal _UnitPrice;
         [Persistent("Birim Fiyat")]
-        [ImmediatePostData]
+        //[ImmediatePostData]
         [RuleValueComparison("SalesInvoice.UnitPrice.GreaterThanZero", DefaultContexts.Save, ValueComparisonType.GreaterThanOrEqual, 1)]
         public decimal UnitPrice
         {
@@ -165,25 +202,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
                 }
             }
         }
-
-        //private decimal _UnitPrice;
-        ///// <summary>
-        /////
-        ///// </summary>
-        //public decimal UnitPrice
-        //{
-        //    get { return _UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity); }
-        //    set
-        //    {
-        //        if (SetPropertyValue<decimal>(nameof(UnitPrice), ref _UnitPrice, value))
-        //        {
-        //            if (!IsLoading && !IsSaving)
-        //            {
-
-        //            }
-        //        }
-        //    }
-        //}
 
         [ImmediatePostData]
         [PersistentAlias("(Product.Name)")]
@@ -203,7 +221,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
 
         private int _Discount;
         [Persistent("İndirim Oranı")]
-        [ImmediatePostData]
+        //[ImmediatePostData]
         public int Discount
         {
             get { return _Discount; }
@@ -211,7 +229,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
             {
                 if (SetPropertyValue<int>(nameof(Discount), ref _Discount, value))
                 {
-                    if (!IsLoading && !IsSaving)
+                    if (!IsLoading && !IsSaving && !IsDeleted)
                     {
                         SalesInvoice.TotalAmount = (Amount);
                     }
@@ -219,27 +237,12 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
             }
         }
 
-        //[PersistentAlias("(UnitPrice)*(100-Discount)/100")]
-        //[ImmediatePostData]
-        //public decimal DiscountedPrice
-        //{
-        //    get { return Convert.ToDecimal(EvaluateAlias(nameof(DiscountedPrice))); }
-        //}
-
         private decimal _DiscountedPrice;
         [ImmediatePostData]
         public decimal DiscountedPrice
         {
             get { return _DiscountedPrice = (UnitPrice) * (100 - Discount) / 100; }
         }
-
-        //private decimal _UnitCost;
-        //[Persistent("Birim Maliyet")]
-        //public decimal UnitCost
-        //{
-        //    get { return _UnitCost = (DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity); }
-        //}
-
         [PersistentAlias("iif((Quantity) = 0, 0, (DiscountedPrice)/(UnitSetDetail.Quantity)/(Quantity))")]//0'a bölme işlemlerinde hata almamak için kullanıyoruz.
         [ImmediatePostData]
         public decimal UnitCost
@@ -266,9 +269,10 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
             {
                 if (SetPropertyValue<Tax>(nameof(Tax), ref _Tax, value))
                 {
-                    if (!IsLoading && !IsSaving)
+                    if (!IsLoading && !IsSaving && !IsDeleted)
                     {
-                        SalesInvoice.TotalAmount = (Amount);
+
+                        //SalesInvoice.TotalAmount = Amount;
                     }
                 }
             }

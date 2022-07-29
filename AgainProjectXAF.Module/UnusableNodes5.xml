@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="SalesInvoice_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalAmount" PropertyName="TotalAmount" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="SalesInvoiceItems">
+              <LayoutGroup Id="Autof7cad5b2-68dc-40b3-8916-eb5215aa3b3d">
+                <LayoutItem Id="TotalAmount" ViewItem="TotalAmount" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

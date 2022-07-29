@@ -25,6 +25,41 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
             base.AfterConstruction();
         }
 
+        protected override void OnDeleting()
+        {
+            UpdatedSalesInvoice = PurchaseInvoice;
+
+            base.OnDeleting();
+        }
+
+        protected override void OnDeleted()
+        {
+            if (UpdatedSalesInvoice != null)
+            {
+                UpdatedSalesInvoice.UpdateTotals();
+            }
+            base.OnDeleted();
+
+            //if (this.SalesInvoice.SalesInvoiceItems.Count > 0)
+            //{
+            //    if (this.SalesInvoice.SalesInvoiceItems.ClearCount > 0)
+            //    {
+            //        this.SalesInvoice.TotalAmount = 0;
+            //    }
+            //    for (int i = 0; i < this.SalesInvoice.SalesInvoiceItems.Count; i++)
+            //    {
+            //        if (!this.SalesInvoice.SalesInvoiceItems[i].IsDeleted)
+            //        {
+            //            this.SalesInvoice.TotalAmount += this.SalesInvoice.SalesInvoiceItems[i].Amount;
+            //        }
+            //    }
+            //}
+        }
+
+        PurchaseInvoice UpdatedSalesInvoice = null;
+
+
+
         private PurchaseInvoice _PurchaseInvoice;
         [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.PurchaseInvoice", DefaultContexts.Save)]
         [Association("PurchaseInvoice-PurchaseInvoiceItem")]
@@ -60,7 +95,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
             {
                 if (SetPropertyValue<Product>(nameof(Product), ref _Product, value))
                 {
-                    if (!IsLoading && !IsSaving)
+                    if (!IsLoading && !IsSaving && !IsDeleted)
                     {
                         if (Product != null)
                         {
@@ -87,7 +122,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
         private int _Quantity;
         [RuleRequiredField("RuleRequiredField for PurchaseInvoiceItem.Quantity", DefaultContexts.Save)]
         [Persistent("Miktar")]
-        [ImmediatePostData]
+        //[ImmediatePostData]
         [RuleValueComparison("PurchaseInvoice.Price.GreaterThanZero", DefaultContexts.Save, ValueComparisonType.GreaterThanOrEqual, 1)]
         /// <summary>
         ///
@@ -99,7 +134,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
             {
                 if (SetPropertyValue<int>(nameof(Quantity), ref _Quantity, value))
                 {
-                    if (!IsLoading && !IsSaving)
+                    if (!IsLoading && !IsSaving && !IsDeleted)
                     {
                         UnitPrice = (Product.Price) * (UnitSetDetail.Quantity) * (Quantity);
                         PurchaseInvoice.TotalAmount = (Amount);
@@ -113,7 +148,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
         [Association("UnitSetDetail-PurchaseInvoiceItems")]
         [VisibleInListView(false)]
         [Persistent("Birim Set")]
-        [ImmediatePostData]
+        //[ImmediatePostData]
         [DataSourceCriteria("UnitSet.Oid = '@Product.UnitSet.Oid'")] // Product.unitset ine göre filtreli şekilde getiriyor. Modelde de var.
         public UnitSetDetail UnitSetDetail
         {
@@ -122,7 +157,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
             {
                 if (SetPropertyValue<UnitSetDetail>(nameof(UnitSetDetail), ref _UnitSetDetail, value))
                 {
-                    if (!IsLoading && !IsSaving)
+                    if (!IsLoading && !IsSaving && !IsDeleted)
                     {
                         if (_UnitSetDetail != null)
                         {
@@ -159,7 +194,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
         //}
         private decimal _UnitPrice;
         [Persistent("Birim Fiyat")]
-        [ImmediatePostData]
+        //[ImmediatePostData]
         [RuleValueComparison("PurchaseInvoice.UnitPrice.GreaterThanZero", DefaultContexts.Save, ValueComparisonType.GreaterThanOrEqual, 1)]
         public decimal UnitPrice
         {
@@ -168,7 +203,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
             {
                 if (SetPropertyValue<decimal>(nameof(UnitPrice), ref _UnitPrice, value))
                 {
-                    if (!IsLoading && !IsSaving)
+                    if (!IsLoading && !IsSaving && !IsDeleted)
                     {
                         PurchaseInvoice.TotalAmount = (Amount);
                     }
@@ -194,7 +229,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
 
         private int _Discount;
         [Persistent("İndirim Oranı")]
-        [ImmediatePostData]
+        //[ImmediatePostData]
         public int Discount
         {
             get { return _Discount; }
@@ -202,7 +237,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
             {
                 if (SetPropertyValue<int>(nameof(Discount), ref _Discount, value))
                 {
-                    if (!IsLoading && !IsSaving)
+                    if (!IsLoading && !IsSaving && !IsDeleted)
                     {
                         PurchaseInvoice.TotalAmount = (Amount);
                     }
@@ -244,7 +279,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
             {
                 if (SetPropertyValue<Tax>(nameof(Tax), ref _Tax, value))
                 {
-                    if (!IsLoading && !IsSaving)
+                    if (!IsLoading && !IsSaving && !IsDeleted)
                     {
                         PurchaseInvoice.TotalAmount = (Amount);
                     }

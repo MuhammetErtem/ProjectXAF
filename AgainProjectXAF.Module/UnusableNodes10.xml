@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="SalesInvoice_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Auto09f80b9d-6c3b-4994-9892-34112b4d880f">
+            <LayoutItem Id="TotalAmount" ViewItem="TotalAmount" />
+            <LayoutItem Id="A" ViewItem="A" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>
