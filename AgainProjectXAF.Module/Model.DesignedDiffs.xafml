@@ -66,6 +66,7 @@
       </Columns>
     </ListView>
     <ListView Id="Brand_Products_ListView" ShowAutoFilterRow="True" AllowEdit="True" NewItemRowPosition="Top" AllowUnlink="False" AllowLink="False" AllowDelete="False" />
+    <ListView Id="CustomerSupplier_DefaultSalesPersons_ListView" AllowEdit="True" AllowLink="False" NewItemRowPosition="Top" />
     <DetailView Id="CustomerSupplier_DetailView">
       <Items>
         <PropertyEditor Id="Code" AllowEdit="False" />
@@ -90,7 +91,7 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="CustomerSupplier_FinancialMovements_ListView" AllowLink="False" AllowDelete="False">
+    <ListView Id="CustomerSupplier_FinancialMovements_ListView" AllowLink="False" AllowDelete="True" AllowEdit="True" NewItemRowPosition="Top">
       <Columns>
         <ColumnInfo Id="Invoice" Index="1" Width="0" LookupProperty="DocumentId" />
         <ColumnInfo Id="CustomerSupplier" Index="2" Caption="Müşteri / Satıcı" Width="0" />
@@ -99,7 +100,7 @@
         <ColumnInfo Id="Credit" Index="5" Width="0" />
       </Columns>
     </ListView>
-    <ListView Id="CustomerSupplier_Invoices_ListView" AllowNew="True" AllowUnlink="False" AllowLink="False" AllowDelete="False" />
+    <ListView Id="CustomerSupplier_Invoices_ListView" AllowNew="True" AllowUnlink="True" AllowLink="False" AllowDelete="True" AllowEdit="True" NewItemRowPosition="Top" />
     <ListView Id="CustomerSupplier_ListView" ShowAutoFilterRow="True">
       <Columns>
         <ColumnInfo Id="Code" Index="0" Width="0" />

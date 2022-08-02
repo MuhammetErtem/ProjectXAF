@@ -1,4 +1,6 @@
-﻿using DevExpress.Persistent.BaseImpl;
+﻿using AgainProjectXAF.Module.BusinessObjects.CRManagement;
+using DevExpress.Persistent.Base;
+using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
 using System;
@@ -60,7 +62,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                     {
 
                     }
-
                 }
             }
         }
@@ -68,6 +69,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
         private CustomerSupplier _CustomerSupplier;
         [RuleRequiredField("RuleRequiredField for Invoice.CustomerSupplier", DefaultContexts.Save)]
         [Association("CustomerSupplier-Invoices")]
+        [ImmediatePostData]
         /// <summary>
         ///             REFERANS
         /// </summary>
@@ -77,6 +79,37 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
             set
             {
                 if (SetPropertyValue<CustomerSupplier>(nameof(CustomerSupplier), ref _CustomerSupplier, value))
+                {
+                    if (!IsLoading && !IsSaving)
+                    {
+                        foreach (var item in value.DefaultSalesPersons)
+                        {
+                            if (item != null)
+                            {
+                                if (item.IsMainUnit)
+                                {
+                                    DefaultSalesPerson = item;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private DefaultSalesPerson _DefaultSalesPerson;
+        [RuleRequiredField("RuleRequiredField for Invoice.DefaultSalesPerson", DefaultContexts.Save)]
+        [Association("DefaultSalesPerson-Invoices")]
+        [DataSourceCriteria("CustomerSupplier.Oid = '@DefaultSalesPerson.CustomerSupplier.Oid'")]
+        [ImmediatePostData]
+        /// <summary>
+        ///             REFERANS
+        /// </summary>
+        public DefaultSalesPerson DefaultSalesPerson
+        {
+            get { return _DefaultSalesPerson; }
+            set
+            {
+                if (SetPropertyValue<DefaultSalesPerson>(nameof(DefaultSalesPerson), ref _DefaultSalesPerson, value))
                 {
                     if (!IsLoading && !IsSaving)
                     {

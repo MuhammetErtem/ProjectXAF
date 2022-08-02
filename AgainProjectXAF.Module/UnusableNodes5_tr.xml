@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.CustomerSupplier">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="DefaultSalesPerson" Caption="Pazarlamacı" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Views Id="Views">
+    <DetailView Id="CustomerSupplier_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="DefaultSalesPerson" Caption="Pazarlamacı" />
+      </Items>
+    </DetailView>
+    <ListView Id="CustomerSupplier_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="DefaultSalesPerson" Caption="Pazarlamacı" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

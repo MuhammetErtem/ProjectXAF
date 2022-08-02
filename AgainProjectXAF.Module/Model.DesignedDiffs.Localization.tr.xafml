@@ -36,11 +36,18 @@
         <Member Name="User" Caption="Kullanıcı" />
       </OwnMembers>
     </Class>
+    <Class Name="AgainProjectXAF.Module.BusinessObjects.CRManagement.DefaultSalesPerson" Caption="Pazarlamacı">
+      <OwnMembers>
+        <Member Name="Code" Caption="Kod" />
+        <Member Name="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <Member Name="Invoices" Caption="Faturalar" />
+        <Member Name="IsMainUnit" Caption="Ana Birim" />
+        <Member Name="Name" Caption="Ad" />
+      </OwnMembers>
+    </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.CustomerSupplier" Caption="Müşteri / Satıcı">
       <OwnMembers>
         <Member Name="Code" Caption="Kod" />
-        <Member Name="FinancialMovements" Caption="Finansal Hareketler" />
-        <Member Name="Invoices" Caption="Fatura Belgesi" />
         <Member Name="IsApproved" Caption="Onaylandı" />
         <Member Name="Name" Caption="Ad" />
       </OwnMembers>
@@ -58,6 +65,7 @@
       <OwnMembers>
         <Member Name="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <Member Name="Date" Caption="Tarih" />
+        <Member Name="DefaultSalesPerson" Caption="Pazarlamacı" />
         <Member Name="DocumentId" Caption="Belge No" />
         <Member Name="FinancialMovements" Caption="Finansal Hareketler" />
       </OwnMembers>
@@ -228,20 +236,18 @@
   <Views>
     <DetailView Id="CustomerSupplier_DetailView" Caption="Müşteri / Satıcı">
       <Items>
+        <PropertyEditor Id="Code" Caption="Kod" />
         <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
+        <PropertyEditor Id="IsApproved" Caption="Onaylandı" />
         <PropertyEditor Id="Name" Caption="Ad" />
       </Items>
-      <Layout>
-        <LayoutGroup Id="Main">
-          <TabbedGroup Id="Tabs">
-            <LayoutGroup Id="FinancialMovements" Caption="Finansal Hareketler" />
-          </TabbedGroup>
-        </LayoutGroup>
-      </Layout>
     </DetailView>
     <DetailView Id="CustomerSupplier_DetailView_FinMovs" Caption="Müşteri / Satıcı">
       <Items>
+        <PropertyEditor Id="Code" Caption="Kod" />
         <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
+        <PropertyEditor Id="IsApproved" Caption="Onaylandı" />
+        <PropertyEditor Id="Name" Caption="Ad" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main">
@@ -262,13 +268,60 @@
         <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <ColumnInfo Id="DocumentId" Caption="Belge No" />
         <ColumnInfo Id="Date" Caption="Tarih" />
+        <ColumnInfo Id="DefaultSalesPerson" Caption="Pazarlamacı" />
       </Columns>
     </ListView>
-    <ListView Id="CustomerSupplier_ListView" Caption="Müşteri / Satıcı" />
-    <ListView Id="CustomerSupplier_LookupListView" Caption="Müşteri / Satıcı" />
+    <ListView Id="CustomerSupplier_ListView" Caption="Müşteri / Satıcı">
+      <Columns>
+        <ColumnInfo Id="Code" Caption="Kod" />
+        <ColumnInfo Id="Name" Caption="Ad" />
+        <ColumnInfo Id="IsApproved" Caption="Onaylandı" />
+      </Columns>
+    </ListView>
+    <ListView Id="CustomerSupplier_LookupListView" Caption="Müşteri / Satıcı">
+      <Columns>
+        <ColumnInfo Id="Code" Caption="Kod" />
+        <ColumnInfo Id="Name" Caption="Ad" />
+      </Columns>
+    </ListView>
     <ListView Id="DashboardCreationInfo_ListView">
       <Columns>
         <ColumnInfo Id="DashboardName" Caption="Ad" />
+      </Columns>
+    </ListView>
+    <DetailView Id="DefaultSalesPerson_DetailView" Caption="Pazarlamacı">
+      <Items>
+        <PropertyEditor Id="Code" Caption="Kod" />
+        <PropertyEditor Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <PropertyEditor Id="Invoices" Caption="Faturalar" />
+        <PropertyEditor Id="IsMainUnit" Caption="Ana Birim" />
+        <PropertyEditor Id="Name" Caption="Ad" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="DefaultSalesPerson" Caption="Pazarlamacı" />
+          </LayoutGroup>
+          <LayoutGroup Id="Invoices_Group" Caption="Faturalar" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="DefaultSalesPerson_Invoices_ListView">
+      <Columns>
+        <ColumnInfo Id="DefaultSalesPerson" Caption="Pazarlamacı" />
+      </Columns>
+    </ListView>
+    <ListView Id="DefaultSalesPerson_ListView" Caption="Pazarlamacı">
+      <Columns>
+        <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <ColumnInfo Id="Name" Caption="Ad" />
+        <ColumnInfo Id="Code" Caption="Kod" />
+        <ColumnInfo Id="IsMainUnit" Caption="Ana Birim" />
+      </Columns>
+    </ListView>
+    <ListView Id="DefaultSalesPerson_LookupListView" Caption="Pazarlamacı">
+      <Columns>
+        <ColumnInfo Id="Name" Caption="Ad" />
       </Columns>
     </ListView>
     <DetailView Id="FinancialMovement_DetailView" Caption="Finansal Hareketler">
@@ -303,6 +356,7 @@
       <Items>
         <PropertyEditor Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <PropertyEditor Id="Date" Caption="Tarih" />
+        <PropertyEditor Id="DefaultSalesPerson" Caption="Pazarlamacı" />
         <PropertyEditor Id="DocumentId" Caption="Belge No" />
         <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
       </Items>
@@ -322,6 +376,7 @@
         <ColumnInfo Id="DocumentId" Caption="Belge No" />
         <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <ColumnInfo Id="Date" Caption="Tarih" />
+        <ColumnInfo Id="DefaultSalesPerson" Caption="Pazarlamacı" />
       </Columns>
     </ListView>
     <ListView Id="Invoice_LookupListView">
@@ -329,6 +384,7 @@
         <ColumnInfo Id="DocumentId" Caption="Belge No" />
         <ColumnInfo Id="Date" Caption="Tarih" />
         <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <ColumnInfo Id="DefaultSalesPerson" Caption="Pazarlamacı" />
       </Columns>
     </ListView>
     <ListView Id="ModelDifference_Aspects_ListView">
@@ -365,7 +421,9 @@
     <DetailView Id="PurchaseInvoice_DetailView">
       <Items>
         <PropertyEditor Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
+        <PropertyEditor Id="CustomerSupplier.Name" Caption="Ad" />
         <PropertyEditor Id="Date" Caption="Tarih" />
+        <PropertyEditor Id="DefaultSalesPerson" Caption="Pazarlamacı" />
         <PropertyEditor Id="DocumentId" Caption="Belge No" />
         <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
       </Items>
@@ -382,6 +440,7 @@
     </DetailView>
     <ListView Id="PurchaseInvoice_ListView">
       <Columns>
+        <ColumnInfo Id="DefaultSalesPerson" Caption="Pazarlamacı" />
         <ColumnInfo Id="DocumentId" Caption="Belge No" />
         <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <ColumnInfo Id="Date" Caption="Tarih" />
@@ -389,6 +448,7 @@
     </ListView>
     <ListView Id="PurchaseInvoice_LookupListView">
       <Columns>
+        <ColumnInfo Id="DefaultSalesPerson" Caption="Pazarlamacı" />
         <ColumnInfo Id="DocumentId" Caption="Belge No" />
         <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <ColumnInfo Id="Date" Caption="Tarih" />
@@ -422,12 +482,14 @@
       <Items>
         <PropertyEditor Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <PropertyEditor Id="Date" Caption="Tarih" />
+        <PropertyEditor Id="DefaultSalesPerson" Caption="Pazarlamacı" />
         <PropertyEditor Id="DocumentId" Caption="Belge No" />
         <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
       </Items>
     </DetailView>
     <ListView Id="SalesInvoice_ListView">
       <Columns>
+        <ColumnInfo Id="DefaultSalesPerson" Caption="Pazarlamacı" />
         <ColumnInfo Id="DocumentId" Caption="Belge No" />
         <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <ColumnInfo Id="Date" Caption="Tarih" />
@@ -437,6 +499,7 @@
       <Columns>
         <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <ColumnInfo Id="Date" Caption="Tarih" />
+        <ColumnInfo Id="DefaultSalesPerson" Caption="Pazarlamacı" />
         <ColumnInfo Id="DocumentId" Caption="Belge No" />
       </Columns>
     </ListView>

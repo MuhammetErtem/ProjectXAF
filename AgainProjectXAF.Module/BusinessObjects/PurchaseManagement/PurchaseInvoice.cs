@@ -1,4 +1,5 @@
 ﻿using DevExpress.Persistent.Base;
+using DevExpress.Persistent.BaseImpl;
 using DevExpress.Xpo;
 using System;
 
@@ -6,6 +7,8 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
 {
     [DefaultClassOptions]
     [ImageName("BO_Invoice")]
+    //[FileAttachment("File")]
+    //[FileAttachmentAttribute(nameof(File))]
     public class PurchaseInvoice : Invoice
     {
         public PurchaseInvoice(Session session)
@@ -67,5 +70,12 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                 }
             }
         }
+
+        //[Aggregated, ExpandObjectMembers(ExpandObjectMembers.Never)]
+        //public FileData File
+        //{
+        //    get { return GetPropertyValue<FileData>("File"); }
+        //    set { SetPropertyValue<FileData>("File", value); }
+        //}
     }
 }

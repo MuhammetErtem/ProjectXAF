@@ -1,4 +1,5 @@
-﻿using DevExpress.Persistent.Base;
+﻿using AgainProjectXAF.Module.BusinessObjects.CRManagement;
+using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
@@ -9,10 +10,11 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
     [DefaultClassOptions]
     [ImageName("BO_Customer")]
     public class CustomerSupplier : BaseObject
-    { 
+    {
         public CustomerSupplier(Session session)
             : base(session)
         {
+
         }
         public override void AfterConstruction()
         {
@@ -47,7 +49,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
 
         [Size(120)]
         private string _Name;
-        [RuleRequiredField("RuleRequiredField for CustomerSupplier.Name", DefaultContexts.Save )]
+        [RuleRequiredField("RuleRequiredField for CustomerSupplier.Name", DefaultContexts.Save)]
         /// <summary>
         ///
         /// </summary>
@@ -67,7 +69,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
         }
 
         private bool _IsApproved;
-        [RuleRequiredField("RuleRequiredField for CustomerSupplier.IsApproved", DefaultContexts.Save )]
+        [RuleRequiredField("RuleRequiredField for CustomerSupplier.IsApproved", DefaultContexts.Save)]
         /// <summary>
         ///
         /// </summary>
@@ -85,6 +87,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                 }
             }
         }
+
         [VisibleInListView(false)]
         [VisibleInDetailView(false)]
         [PersistentAlias("Concat(Name + ' ' + Code)")]
@@ -109,5 +112,53 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
             get { return GetCollection<FinancialMovement>("FinancialMovements"); }
         }
 
+        [ImmediatePostData]
+        [Association("CustomerSupplier-DefaultSalesPersons"), DevExpress.ExpressApp.DC.Aggregated]
+        public XPCollection<DefaultSalesPerson> DefaultSalesPersons
+        {
+            get { return GetCollection<DefaultSalesPerson>("DefaultSalesPersons"); }
+        }
+
+        //private DefaultSalesPerson _DefaultSalesPerson;
+        //[DataSourceCriteria("CustomerSupplier.Oid = '@DefaultSalesPerson.CustomerSupplier.Oid'")]
+        //[ImmediatePostData]
+        //public DefaultSalesPerson DefaultSalesPerson
+        //{
+        //    get
+        //    {
+        //        foreach (var item in DefaultSalesPersons)
+        //        {
+        //            if (item != null)
+        //            {
+        //                if (item.IsMainUnit)
+        //                {
+        //                    _DefaultSalesPerson = item;
+        //                }
+        //            }
+        //        }
+        //        return _DefaultSalesPerson;
+        //    }
+        //}
+
+        private DefaultSalesPerson _DefaultSalesPerson;
+        [DataSourceCriteria("CustomerSupplier.Oid = '@DefaultSalesPerson.CustomerSupplier.Oid'")]
+        [ImmediatePostData]
+        public DefaultSalesPerson DefaultSalesPerson
+        {
+            get
+            {
+                return _DefaultSalesPerson;
+            }
+            set
+            {
+                if (SetPropertyValue<DefaultSalesPerson>(nameof(DefaultSalesPerson), ref _DefaultSalesPerson, value))
+                {
+                    if (!IsLoading && !IsSaving)
+                    {
+                        
+                    }
+                }
+            }
+        }
     }
 }

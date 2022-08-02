@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <CreatableItems Id="CreatableItems">
+    <CreatableItem ClassName="AgainProjectXAF.Module.BusinessObjects.CRManagement.DefaultSalesPerson" Caption="Pazarlamacı" />
+  </CreatableItems>
+</Application>

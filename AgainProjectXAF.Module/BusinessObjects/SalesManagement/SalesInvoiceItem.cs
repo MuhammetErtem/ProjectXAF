@@ -12,6 +12,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.SalesManagement
 {
     //[ImageName("BO_Contact")]
     //[DefaultClassOptions]
+
     public class SalesInvoiceItem : BaseObject
     {
         public SalesInvoiceItem(Session session) : base(session)

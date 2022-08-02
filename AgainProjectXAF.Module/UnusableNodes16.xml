@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="CustomerSupplier_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="DefaultSalesPerson" DataSourceCriteria="[IsMainUnit] = True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="SalesInvoice_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Auto15bc0d09-e395-4c2f-9c48-50449a270111">
+          <LayoutItem Id="Test" ViewItem="Test" />
+          <LayoutItem Id="A" ViewItem="A" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>
