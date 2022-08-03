@@ -80,18 +80,9 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
             {
                 if (SetPropertyValue<CustomerSupplier>(nameof(CustomerSupplier), ref _CustomerSupplier, value))
                 {
-                    if (!IsLoading && !IsSaving)
+                    if (!IsLoading && !IsSaving && !IsDeleted)
                     {
-                        foreach (var item in value.DefaultSalesPersons)
-                        {
-                            if (item != null)
-                            {
-                                if (item.IsMainUnit)
-                                {
-                                    DefaultSalesPerson = item;
-                                }
-                            }
-                        }
+                        DefaultSalesPerson = CustomerSupplier.DefaultSalesPerson;
                     }
                 }
             }

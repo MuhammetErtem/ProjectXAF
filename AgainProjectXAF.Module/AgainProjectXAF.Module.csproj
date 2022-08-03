@@ -136,6 +136,7 @@
   <ItemGroup>
     <Compile Include="BusinessObjects\CRManagement\DefaultSalesPerson.cs" />
     <Compile Include="BusinessObjects\PurchaseManagement\CustomerSupplier.cs" />
+    <Compile Include="BusinessObjects\PurchaseManagement\FileAttachments.cs" />
     <Compile Include="BusinessObjects\PurchaseManagement\FinancialMovement.cs" />
     <Compile Include="BusinessObjects\PurchaseManagement\Invoice.cs" />
     <Compile Include="BusinessObjects\PurchaseManagement\PurchaseInvoice.cs" />
@@ -183,6 +184,12 @@
     <Compile Include="Controllers\OptionsController\CtrlViewNested.Designer.cs">
       <DependentUpon>CtrlViewNested.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\OptionsController\FileAttachmentController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\OptionsController\FileAttachmentController.Designer.cs">
+      <DependentUpon>FileAttachmentController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\OptionsController\FinancialMovementController.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -221,6 +228,9 @@
     <Compile Include="BusinessObjects\StockManagement\UnitSetDetail.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controllers\OptionsController\FileAttachmentController.resx">
+      <DependentUpon>FileAttachmentController.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controllers\OptionsController\FinancialMovementController.resx">
       <DependentUpon>FinancialMovementController.cs</DependentUpon>
     </EmbeddedResource>
@@ -424,7 +434,42 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="UnusableNodes22.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes6_tr.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes23.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes24.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes25.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes26.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

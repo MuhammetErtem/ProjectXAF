@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="CustomerSupplier_DetailView_File">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="DefaultSalesPersons">
+              <LayoutItem Id="DefaultSalesPersons" ViewItem="DefaultSalesPersons" />
+            </LayoutGroup>
+            <LayoutGroup Id="FinancialMovements">
+              <LayoutItem Id="FinancialMovements" ViewItem="FinancialMovements" />
+            </LayoutGroup>
+            <LayoutGroup Id="Invoices">
+              <LayoutItem Id="Invoices" ViewItem="Invoices" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="CustomerSupplier">
+              <LayoutGroup Id="CustomerSupplier_col2">
+                <LayoutItem Id="DefaultSalesPerson" ViewItem="DefaultSalesPerson" />
+              </LayoutGroup>
+              <LayoutGroup Id="CustomerSupplier_col1">
+                <LayoutItem Id="IsApproved" ViewItem="IsApproved" />
+                <LayoutItem Id="Name" ViewItem="Name" />
+                <LayoutItem Id="Code" ViewItem="Code" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="SalesInvoice_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Auto15bc0d09-e395-4c2f-9c48-50449a270111">
+          <LayoutItem Id="Test" ViewItem="Test" />
+          <LayoutItem Id="A" ViewItem="A" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

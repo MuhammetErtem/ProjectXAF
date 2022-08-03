@@ -24,6 +24,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                 int code = DistributedIdGeneratorHelper.Generate(Session.DataLayer, this.GetType().FullName, "CustomerSupplierServerPrefix");
                 Code = string.Format("Kod-{0:D10}", code);
             }
+
             IsApproved = true;  //Varsayılan olarak true gelecek diye ayarlamış olduk.
         }
 
@@ -147,6 +148,20 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
         {
             get
             {
+                if (_DefaultSalesPerson == null)
+                {
+                    foreach (var item in DefaultSalesPersons)
+                    {
+                        if (item != null)
+                        {
+                            if (item.IsMainUnit)
+                            {
+                                _DefaultSalesPerson = item;
+                            }
+                        }
+                    }
+                }
+                
                 return _DefaultSalesPerson;
             }
             set
@@ -155,10 +170,22 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-                        
                     }
                 }
             }
+        }
+
+        FileData _File;
+        public FileData File
+        {
+            get { return _File; }
+            set { SetPropertyValue(nameof(File), ref _File, value); }
+        }
+
+        [Association("CustomerSupplier-FileAttachmentss"), DevExpress.ExpressApp.DC.Aggregated]
+        public XPCollection<FileAttachments> FileAttachmentss
+        {
+            get { return GetCollection<FileAttachments>("FileAttachmentss"); }
         }
     }
 }

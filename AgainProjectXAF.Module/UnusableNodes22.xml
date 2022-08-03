@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="CustomerSupplier_DetailView_File">
+      <Items Id="Items">
+        <PropertyEditor Id="Name" PropertyName="Name" />
+        <PropertyEditor Id="IsApproved" PropertyName="IsApproved" />
+        <PropertyEditor Id="Invoices" PropertyName="Invoices" View="CustomerSupplier_Invoices_ListView" />
+        <PropertyEditor Id="FinancialMovements" PropertyName="FinancialMovements" View="CustomerSupplier_FinancialMovements_ListView" />
+        <PropertyEditor Id="FileAttachmentss" PropertyName="FileAttachmentss" View="CustomerSupplier_FileAttachmentss_ListView" />
+        <PropertyEditor Id="DefaultSalesPersons" PropertyName="DefaultSalesPersons" View="CustomerSupplier_DefaultSalesPersons_ListView" />
+        <PropertyEditor Id="DefaultSalesPerson" PropertyName="DefaultSalesPerson" />
+        <PropertyEditor Id="CustomerSupplierNameAndCode" PropertyName="CustomerSupplierNameAndCode" />
+        <PropertyEditor Id="Code" PropertyName="Code" AllowEdit="False" />
+      </Items>
+    </DetailView>
+    <DetailView Id="SalesInvoice_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Auto15bc0d09-e395-4c2f-9c48-50449a270111">
+          <LayoutItem Id="Test" ViewItem="Test" />
+          <LayoutItem Id="A" ViewItem="A" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

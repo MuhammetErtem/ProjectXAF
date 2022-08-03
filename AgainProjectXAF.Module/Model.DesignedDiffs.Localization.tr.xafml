@@ -41,13 +41,16 @@
         <Member Name="Code" Caption="Kod" />
         <Member Name="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <Member Name="Invoices" Caption="Faturalar" />
-        <Member Name="IsMainUnit" Caption="Ana Birim" />
+        <Member Name="IsMainUnit" Caption="Onaylı" />
         <Member Name="Name" Caption="Ad" />
       </OwnMembers>
     </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.CustomerSupplier" Caption="Müşteri / Satıcı">
       <OwnMembers>
         <Member Name="Code" Caption="Kod" />
+        <Member Name="DefaultSalesPerson" Caption="Pazarlamacılar" />
+        <Member Name="DefaultSalesPersons" Caption="Pazarlamacılar" />
+        <Member Name="Invoices" Caption="Faturalar" />
         <Member Name="IsApproved" Caption="Onaylandı" />
         <Member Name="Name" Caption="Ad" />
       </OwnMembers>
@@ -234,13 +237,41 @@
     </ErrorMessageTemplates>
   </Validation>
   <Views>
+    <ListView Id="CustomerSupplier_DefaultSalesPersons_ListView">
+      <Columns>
+        <ColumnInfo Id="IsMainUnit" Caption="Onaylı" />
+      </Columns>
+    </ListView>
     <DetailView Id="CustomerSupplier_DetailView" Caption="Müşteri / Satıcı">
       <Items>
         <PropertyEditor Id="Code" Caption="Kod" />
+        <PropertyEditor Id="DefaultSalesPerson" Caption="Pazarlamacılar" />
+        <PropertyEditor Id="DefaultSalesPersons" Caption="Pazarlamacılar" />
         <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
         <PropertyEditor Id="IsApproved" Caption="Onaylandı" />
         <PropertyEditor Id="Name" Caption="Ad" />
       </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="DefaultSalesPersons" Caption="Pazarlamacılar" />
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="CustomerSupplier_DetailView_File" CaptionColon=":" RequiredFieldMark="*">
+      <Items>
+        <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="CustomerSupplier">
+              <LayoutGroup Id="CustomerSupplier_col2" Caption="CustomerSupplier_col2" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
     </DetailView>
     <DetailView Id="CustomerSupplier_DetailView_FinMovs" Caption="Müşteri / Satıcı">
       <Items>
@@ -276,6 +307,7 @@
         <ColumnInfo Id="Code" Caption="Kod" />
         <ColumnInfo Id="Name" Caption="Ad" />
         <ColumnInfo Id="IsApproved" Caption="Onaylandı" />
+        <ColumnInfo Id="DefaultSalesPerson" Caption="Pazarlamacılar" />
       </Columns>
     </ListView>
     <ListView Id="CustomerSupplier_LookupListView" Caption="Müşteri / Satıcı">
@@ -294,7 +326,7 @@
         <PropertyEditor Id="Code" Caption="Kod" />
         <PropertyEditor Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <PropertyEditor Id="Invoices" Caption="Faturalar" />
-        <PropertyEditor Id="IsMainUnit" Caption="Ana Birim" />
+        <PropertyEditor Id="IsMainUnit" Caption="Onaylı" />
         <PropertyEditor Id="Name" Caption="Ad" />
       </Items>
       <Layout>
@@ -316,7 +348,7 @@
         <ColumnInfo Id="CustomerSupplier" Caption="Müşteri / Satıcı" />
         <ColumnInfo Id="Name" Caption="Ad" />
         <ColumnInfo Id="Code" Caption="Kod" />
-        <ColumnInfo Id="IsMainUnit" Caption="Ana Birim" />
+        <ColumnInfo Id="IsMainUnit" Caption="Onaylı" />
       </Columns>
     </ListView>
     <ListView Id="DefaultSalesPerson_LookupListView" Caption="Pazarlamacı">

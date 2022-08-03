@@ -66,11 +66,76 @@
       </Columns>
     </ListView>
     <ListView Id="Brand_Products_ListView" ShowAutoFilterRow="True" AllowEdit="True" NewItemRowPosition="Top" AllowUnlink="False" AllowLink="False" AllowDelete="False" />
-    <ListView Id="CustomerSupplier_DefaultSalesPersons_ListView" AllowEdit="True" AllowLink="False" NewItemRowPosition="Top" />
+    <ListView Id="CustomerSupplier_DefaultSalesPersons_ListView" AllowEdit="True" AllowLink="False" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="Code" Width="0" Index="0" AllowEdit="False" />
+        <ColumnInfo Id="Name" Width="0" Index="1" />
+        <ColumnInfo Id="IsMainUnit" Width="0" AllowEdit="False" />
+      </Columns>
+    </ListView>
     <DetailView Id="CustomerSupplier_DetailView">
       <Items>
         <PropertyEditor Id="Code" AllowEdit="False" />
       </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="24.423076923076923">
+            <LayoutGroup Id="CustomerSupplier" RelativeSize="100">
+              <LayoutGroup Id="CustomerSupplier_col1" RelativeSize="49.886621315192741">
+                <LayoutItem Id="Code" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="Name" RelativeSize="27.272727272727273" />
+                <LayoutItem Id="IsApproved" RelativeSize="36.363636363636367" />
+              </LayoutGroup>
+              <LayoutGroup Id="CustomerSupplier_col2" RelativeSize="50.113378684807259">
+                <LayoutItem Id="DefaultSalesPerson" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="File" RelativeSize="63.636363636363633" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="75.57692307692308">
+            <LayoutGroup Id="Invoices" RelativeSize="100">
+              <LayoutItem Id="Invoices" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="FinancialMovements" RelativeSize="100">
+              <LayoutItem Id="FinancialMovements" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="DefaultSalesPersons" RelativeSize="100">
+              <LayoutItem Id="DefaultSalesPersons" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="FileAttachmentss" Removed="True" />
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="CustomerSupplier_DetailView_File" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" ClassName="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.CustomerSupplier" DefaultFocusedItem="FileAttachmentss" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="Code" PropertyName="Code" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="CustomerSupplierNameAndCode" PropertyName="CustomerSupplierNameAndCode" IsNewNode="True" />
+        <PropertyEditor Id="DefaultSalesPerson" PropertyName="DefaultSalesPerson" IsNewNode="True" />
+        <PropertyEditor Id="DefaultSalesPersons" PropertyName="DefaultSalesPersons" View="CustomerSupplier_DefaultSalesPersons_ListView" IsNewNode="True" />
+        <PropertyEditor Id="File" PropertyName="File" IsNewNode="True" />
+        <PropertyEditor Id="FileAttachmentss" PropertyName="FileAttachmentss" View="CustomerSupplier_FileAttachmentss_ListView" IsNewNode="True" />
+        <PropertyEditor Id="FinancialMovements" PropertyName="FinancialMovements" View="CustomerSupplier_FinancialMovements_ListView" IsNewNode="True" />
+        <PropertyEditor Id="Invoices" PropertyName="Invoices" View="CustomerSupplier_Invoices_ListView" IsNewNode="True" />
+        <PropertyEditor Id="IsApproved" PropertyName="IsApproved" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="Name" PropertyName="Name" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="24.423076923076923" IsNewNode="True">
+            <LayoutGroup Id="CustomerSupplier" Index="0" Direction="Horizontal" ShowCaption="True" Caption="Customer Supplier" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="CustomerSupplier_col1" Index="0" ShowCaption="False" RelativeSize="99.76580796252928" IsNewNode="True">
+                <LayoutItem Id="Code" ViewItem="Code" ShowCaption="" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+                <LayoutItem Id="Name" ViewItem="Name" ShowCaption="" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+                <LayoutItem Id="IsApproved" ViewItem="IsApproved" ShowCaption="" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="CustomerSupplier_col2" Index="1" ShowCaption="False" RelativeSize="0.234192037470726" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutItem Id="FileAttachmentss" ViewItem="FileAttachmentss" Index="1" RelativeSize="75.57692307692308" IsNewNode="True" />
+        </LayoutGroup>
+      </Layout>
     </DetailView>
     <DetailView Id="CustomerSupplier_DetailView_FinMovs" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.CustomerSupplier" IsNewNode="True">
       <Items IsNewNode="True">
@@ -91,6 +156,12 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <ListView Id="CustomerSupplier_FileAttachmentss_ListView" AllowEdit="True" AllowLink="False" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="Title" Width="205" Index="0" />
+        <ColumnInfo Id="File" Width="317" Index="1" SortOrder="Descending" />
+      </Columns>
+    </ListView>
     <ListView Id="CustomerSupplier_FinancialMovements_ListView" AllowLink="False" AllowDelete="True" AllowEdit="True" NewItemRowPosition="Top">
       <Columns>
         <ColumnInfo Id="Invoice" Index="1" Width="0" LookupProperty="DocumentId" />

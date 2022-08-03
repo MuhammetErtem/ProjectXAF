@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="CustomerSupplier_DetailView_File">
+      <Items Id="Items">
+        <PropertyEditor Id="FinancialMovements" Caption="Finansal Hareketler" />
+      </Items>
+    </DetailView>
+  </Views>
+</Application>
