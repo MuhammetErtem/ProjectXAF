@@ -187,5 +187,22 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
         {
             get { return GetCollection<FileAttachments>("FileAttachmentss"); }
         }
+
+        private decimal _Balance;
+        [ImmediatePostData]
+        [PersistentAlias("FinancialMovements.Sum(Debt)-FinancialMovements.Sum(Credit)")]
+        public decimal Balance
+        {
+            get { return Convert.ToDecimal(EvaluateAlias(nameof(Balance))); }
+            set
+            {
+                if (SetPropertyValue<decimal>(nameof(Balance), ref _Balance, value))
+                {
+                    if (!IsLoading && !IsSaving)
+                    {
+                    }
+                }
+            }
+        }
     }
 }

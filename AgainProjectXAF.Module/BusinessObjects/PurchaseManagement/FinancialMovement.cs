@@ -31,7 +31,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
                     }
                 }
             }
@@ -71,12 +70,10 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
                     }
                 }
             }
         }
-
 
         private decimal _Credit;
         /// <summary>
@@ -91,7 +88,6 @@ namespace AgainProjectXAF.Module.BusinessObjects.PurchaseManagement
                 {
                     if (!IsLoading && !IsSaving)
                     {
-
                     }
                 }
             }

@@ -206,6 +206,12 @@
     <Compile Include="Controllers\OptionsController\NewButtonController.Designer.cs">
       <DependentUpon>NewButtonController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\OptionsController\OverrideDeleteActionViewController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\OptionsController\OverrideDeleteActionViewController.Designer.cs">
+      <DependentUpon>OverrideDeleteActionViewController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ProductManagement\ProductViewController.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -176,7 +176,10 @@
       <Columns>
         <ColumnInfo Id="Code" Index="0" Width="0" />
         <ColumnInfo Id="Name" Index="1" Width="0" />
-        <ColumnInfo Id="IsApproved" Width="0" />
+        <ColumnInfo Id="DefaultSalesPerson" Index="2" Width="0" />
+        <ColumnInfo Id="Balance" Width="0" Index="3" />
+        <ColumnInfo Id="File" Index="4" Width="0" />
+        <ColumnInfo Id="IsApproved" Width="0" Index="5" />
       </Columns>
     </ListView>
     <ListView Id="CustomerSupplier_LookupListView" ShowAutoFilterRow="True">

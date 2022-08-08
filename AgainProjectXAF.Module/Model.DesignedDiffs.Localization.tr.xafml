@@ -4,8 +4,9 @@
     <Actions>
       <Action Id="Cancel" Caption="İptal Et" />
       <Action Id="CancelAction" Caption="İptal Et" />
-      <Action Id="Delete" Caption="Sil" />
+      <Action Id="Delete" Caption="Sil" ConfirmationMessage="Seçili kayıtları silmek üzeresiniz. Devam etmek istiyor musunuz?" />
       <Action Id="DialogClose" Caption="Kapat" />
+      <Action Id="DialogOK" ToolTip="Tamam" ShortCaption="Tamam" Caption="Tamam" />
       <Action Id="FullTextSearch" NullValuePrompt="Arama..." />
       <Action Id="ListViewShowObject" Caption="Aç" />
       <Action Id="NavigateBack" Caption="Geri" />
@@ -47,6 +48,7 @@
     </Class>
     <Class Name="AgainProjectXAF.Module.BusinessObjects.PurchaseManagement.CustomerSupplier" Caption="Müşteri / Satıcı">
       <OwnMembers>
+        <Member Name="Balance" Caption="Bakiye" />
         <Member Name="Code" Caption="Kod" />
         <Member Name="DefaultSalesPerson" Caption="Pazarlamacılar" />
         <Member Name="DefaultSalesPersons" Caption="Pazarlamacılar" />
@@ -229,6 +231,17 @@
     <LocalizationGroup Name="DialogButtons">
       <LocalizationItem Name="Close" Value="Kapat" />
     </LocalizationGroup>
+    <LocalizationGroup Name="Enums">
+      <LocalizationGroup Name="DevExpress.Persistent.Validation.ValidationOutcome">
+        <LocalizationItem Name="Error" Value="Hata !" />
+      </LocalizationGroup>
+      <LocalizationGroup Name="DevExpress.Persistent.Validation.ValidationResultType">
+        <LocalizationItem Name="Error" Value="Hata !" />
+      </LocalizationGroup>
+    </LocalizationGroup>
+    <LocalizationGroup Name="Texts">
+      <LocalizationItem Name="Error" Value="Hata !" />
+    </LocalizationGroup>
   </Localization>
   <Validation>
     <ErrorMessageTemplates>
@@ -244,6 +257,7 @@
     </ListView>
     <DetailView Id="CustomerSupplier_DetailView" Caption="Müşteri / Satıcı">
       <Items>
+        <PropertyEditor Id="Balance" Caption="Bakiye" />
         <PropertyEditor Id="Code" Caption="Kod" />
         <PropertyEditor Id="DefaultSalesPerson" Caption="Pazarlamacılar" />
         <PropertyEditor Id="DefaultSalesPersons" Caption="Pazarlamacılar" />
@@ -306,8 +320,10 @@
       <Columns>
         <ColumnInfo Id="Code" Caption="Kod" />
         <ColumnInfo Id="Name" Caption="Ad" />
+        <ColumnInfo Id="DefaultSalesPerson" Caption="Pazarlamacı" />
+        <ColumnInfo Id="Balance" Caption="Bakiye" />
+        <ColumnInfo Id="File" Caption="Görsel" />
         <ColumnInfo Id="IsApproved" Caption="Onaylandı" />
-        <ColumnInfo Id="DefaultSalesPerson" Caption="Pazarlamacılar" />
       </Columns>
     </ListView>
     <ListView Id="CustomerSupplier_LookupListView" Caption="Müşteri / Satıcı">

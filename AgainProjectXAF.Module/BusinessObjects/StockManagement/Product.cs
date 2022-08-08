@@ -1,11 +1,13 @@
 ﻿using AgainProjectXAF.Module.BusinessObjects.PurchaseManagement;
 using AgainProjectXAF.Module.BusinessObjects.RegulationManagement;
 using AgainProjectXAF.Module.BusinessObjects.SalesManagement;
+using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Model;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
+using System.Collections.Generic;
 
 namespace AgainProjectXAF.Module.BusinessObjects.StockManagement
 {
@@ -29,6 +31,25 @@ namespace AgainProjectXAF.Module.BusinessObjects.StockManagement
             }
 
             IsApproved = true; // Varsayılan olarak true getirdik.
+        }
+
+        protected override void OnDeleting()
+        {
+            
+            base.OnDeleting();
+            //foreach (var item in this.PurchaseInvoiceItems)
+            //{
+            //    if (this.Oid == item.Product.Oid)
+            //    {
+            //        MessageOptions msg = new MessageOptions();
+            //        msg.Duration = 3000;
+            //        msg.Type = InformationType.Error;
+            //        msg.Message = "Bu Malzemeye Ait Fatura Bulunmuştur! ";
+            //        throw new UserFriendlyException("Bu Malzemeye Ait Fatura Bulunmuştur!");
+
+            //    }
+            //}
+
         }
 
         private string _Code;
@@ -167,8 +188,8 @@ namespace AgainProjectXAF.Module.BusinessObjects.StockManagement
         /// <summary>
         ///             COLLECTİON
         /// </summary>
-        [Association("Product-PurchaseInvoiceItems"), Aggregated]
-        [VisibleInListView(false)]
+        [Association("Product-PurchaseInvoiceItems")]
+        [Aggregated]
         public XPCollection<PurchaseInvoiceItem> PurchaseInvoiceItems
         {
             get { return GetCollection<PurchaseInvoiceItem>(nameof(PurchaseInvoiceItems)); }
@@ -178,8 +199,8 @@ namespace AgainProjectXAF.Module.BusinessObjects.StockManagement
         /// <summary>
         ///             COLLECTİON
         /// </summary>
-        [Association("Product-SalesInvoiceItems"), Aggregated]
-        [VisibleInListView(false)]
+        [Association("Product-SalesInvoiceItems")]
+        [Aggregated]
         public XPCollection<SalesInvoiceItem> SalesInvoiceItems
         {
             get { return GetCollection<SalesInvoiceItem>(nameof(SalesInvoiceItems)); }
@@ -187,9 +208,7 @@ namespace AgainProjectXAF.Module.BusinessObjects.StockManagement
         }
 
         private Brand _Brand;
-
         [Association("Brand-Products")] //Association = Bağlantılı
-
         public Brand Brand
         {
             get { return _Brand; }
